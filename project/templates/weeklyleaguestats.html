@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<label>Select Week:<select name="form" onchange="location = this.value;">
+    <option value="{{ url_for('main.weeklyleaguestats', week=0) }}">None</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=1) }}">1</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=2) }}">2</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=3) }}">3</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=4) }}">4</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=5) }}">5</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=6) }}}">6</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=7) }}">7</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=8) }}">8</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=9) }}">9</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=10) }}">10</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=11) }}">11</option>
+    <option value="{{ url_for('main.weeklyleaguestats', week=12) }}">12</option>
+</select>
+</label>
+<br>
+<h2>Week {{week}} Stats</h2>
+<div class="weekly-scores"></div>
+{% endblock %}

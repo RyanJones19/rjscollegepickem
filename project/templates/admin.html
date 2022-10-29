@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4 class="title">
+  Hello Admin {{ name }}, please select the games for the week:
+</h4>
+<label>Select Week:<select name="form" onchange="location = this.value;">
+    <option value="{{ url_for('main.admin', week=0) }}">None</option>
+    <option value="{{ url_for('main.admin', week=1) }}" selected>1</option>
+    <option value="{{ url_for('main.admin', week=2) }}">2</option>
+    <option value="{{ url_for('main.admin', week=3) }}">3</option>
+    <option value="{{ url_for('main.admin', week=4) }}">4</option>
+    <option value="{{ url_for('main.admin', week=5) }}">5</option>
+    <option value="{{ url_for('main.admin', week=6) }}">6</option>
+    <option value="{{ url_for('main.admin', week=7) }}">7</option>
+    <option value="{{ url_for('main.admin', week=8) }}">8</option>
+    <option value="{{ url_for('main.admin', week=9) }}">9</option>
+    <option value="{{ url_for('main.admin', week=10) }}">10</option>
+    <option value="{{ url_for('main.admin', week=11) }}">11</option>
+    <option value="{{ url_for('main.admin', week=12) }}">12</option>
+</select>
+</label>
+<br>
+<br>
+<h3>{{weekText}}</h3>
+<div class="game-selection"></div>
+{% endblock %}

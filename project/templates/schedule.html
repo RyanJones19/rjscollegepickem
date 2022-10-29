@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<label>Select Week:<select name="form" onchange="location = this.value;">
+    <option value="{{ url_for('main.schedule', week=0) }}">None</option>
+    <option value="{{ url_for('main.schedule', week=1) }}" selected>1</option>
+    <option value="{{ url_for('main.schedule', week=2) }}">2</option>
+    <option value="{{ url_for('main.schedule', week=3) }}">3</option>
+    <option value="{{ url_for('main.schedule', week=4) }}">4</option>
+    <option value="{{ url_for('main.schedule', week=5) }}">5</option>
+    <option value="{{ url_for('main.schedule', week=6) }}">6</option>
+    <option value="{{ url_for('main.schedule', week=7) }}">7</option>
+    <option value="{{ url_for('main.schedule', week=8) }}">8</option>
+    <option value="{{ url_for('main.schedule', week=9) }}">9</option>
+    <option value="{{ url_for('main.schedule', week=10) }}">10</option>
+    <option value="{{ url_for('main.schedule', week=11) }}">11</option>
+    <option value="{{ url_for('main.schedule', week=12) }}">12</option>
+</select>
+</label>
+<div class="games-list"></div>
+{% endblock %}
