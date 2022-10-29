@@ -1,0 +1,46 @@
+# IDE
+*.idea
+*.iml
+*.swp
+*.vscode/
+
+# Python
+venv/
+__pycache__/
+
+# Runtime artifacts
+out.plan
+*.terraform
+
+# *tfstate*
+*.terraform.*
+*.out
+*tfstate*
+
+# Mac OS
+.DS_Store
+
+# Lambda archiving
+*.zip
+*.tfstate
+*.backup
+**builds/
+**node_modules/
+
+# Rendered Jinja2 templates
+providers.tf
+.terraform.lock.hcl
+
+#Temp
+terraform-poc/
+/yarn.lock
+/notes.md
+/coverage/
+/package-lock.json
+/globalConfig.json
+/.serverless/
+/test-report/
+*notes*
+/junit.xml
+/test-report.xml
+debug.json
