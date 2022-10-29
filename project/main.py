@@ -43,8 +43,9 @@ def myscores(week=1):
         s3_object = s3_client.get_object(Bucket='pickem-test-ryan', Key=f"2022/week{week}/games.json")
         data = s3_object['Body'].read().decode('utf-8')
         data=data.split(',')
-    except:
-        return render_template('profile.html', name=str(current_user.name) + ", you have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+    except Exception as e:
+        return render_template('profile.html', name=str(e), games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        #return render_template('profile.html', name=str(current_user.name) + ", you have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
     if data is not None:
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
     else:

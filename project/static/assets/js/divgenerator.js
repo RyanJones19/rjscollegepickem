@@ -529,7 +529,7 @@ function populateAdminPage(games,week){
         if(arraylen != 25){
             alert("Please select 25 games, you selected: " + arraylen.toString());
         }else {
-            var url = `http://localhost:5000/selectweeklygames/${week}?selections=${selections}`;
+            var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/selectweeklygames/${week}?selections=${selections}`;
             location.replace(url);
         }
     };
@@ -1348,7 +1348,7 @@ function populateDivs(games, userid, selections=null, week) {
                 picks = picks + selectionValue
             }
         }
-        var url = `http://localhost:5000/submitpicks/${week}?picks=${picks}`;
+        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}?picks=${picks}`;
         location.replace(url);
     };
     gamesList.appendChild(button);
