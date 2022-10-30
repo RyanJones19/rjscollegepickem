@@ -1,17 +1,15 @@
 from flask import Blueprint, render_template, Flask, request, redirect, url_for, render_template_string
 from flask_login import login_required, current_user
 from .ncaa.lib.ncaa import NCAAAPI
-from .models import User, Scores
+from .models import User, Scores, Adminselections
 from datetime import datetime
 from . import db
-import boto3
 import json
 
 main = Blueprint('main', __name__)
 
 ncaa_api_client = NCAAAPI()
 
-s3_client = boto3.client('s3')
 
 week="1"
 totalWeeks=12
@@ -40,12 +38,9 @@ def profile():
 @login_required
 def myscores(week=1):
     try:
-        s3_object = s3_client.get_object(Bucket='pickem-test-ryan', Key=f"2022/week{week}/games.json")
-        data = s3_object['Body'].read().decode('utf-8')
-        data=data.split(',')
-    except Exception as e:
-        return render_template('profile.html', name=str(e), games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
-        #return render_template('profile.html', name=str(current_user.name) + ", you have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
+    except:
+        return render_template('profile.html', name=str(current_user.name) + ", you have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
     if data is not None:
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
     else:
@@ -88,9 +83,7 @@ def myscores(week=1):
 @login_required
 def schedule(week=1):
     try:
-        s3_object = s3_client.get_object(Bucket='pickem-test-ryan', Key=f"2022/week{week}/games.json")
-        data = s3_object['Body'].read().decode('utf-8')
-        data=data.split(',')
+        data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
         userSelectedScores=getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
         return render_template('schedule.html', games=games, userid=current_user.id, selections=userSelectedScores, selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
@@ -110,18 +103,16 @@ def submit_picks(week):
 @login_required
 def select_games(week):
     args = request.args
-    selections = args.get("selections")
-    uploadData = bytes(str(selections), 'utf-8')
-    s3_client.put_object(Body=uploadData, Bucket='pickem-test-ryan', Key=f"2022/week{week}/games.json")
+    adminSelections = Adminselections.query.filter_by(year=1).first()
+    setattr(adminSelections, "week" + week, str(args.get("selections")))
+    db.session.commit()
     return redirect(url_for('main.profile'))
 
 @main.route('/weeklyleaguestats/<week>')
 @login_required
 def weeklyleaguestats(week):
     try:
-        s3_object = s3_client.get_object(Bucket='pickem-test-ryan', Key=f"2022/week{week}/games.json")
-        data = s3_object['Body'].read().decode('utf-8')
-        data=data.split(',')
+        data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
     except:
         return render_template('profile.html', name=str(current_user.name) + ", an error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
     if data is not None:
