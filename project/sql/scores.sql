@@ -24,5 +24,7 @@ CREATE TABLE scores (
     week11score INT,
     week12picks VARCHAR(255),
     week12score INT,
+    week13picks VARCHAR(255),
+    week13score INT,
     PRIMARY KEY (id)
 );

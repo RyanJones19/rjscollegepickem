@@ -22,6 +22,7 @@ class Adminselections(UserMixin, db.Model):
     week10 = db.Column(db.String(255))
     week11 = db.Column(db.String(255))
     week12 = db.Column(db.String(255))
+    week13 = db.Column(db.String(255))
 
 class Scores(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,4 +50,5 @@ class Scores(UserMixin, db.Model):
     week11score = db.Column(db.Integer)
     week12picks = db.Column(db.String(255))
     week12score = db.Column(db.Integer)
-
+    week13picks = db.Column(db.String(255))
+    week13score = db.Column(db.Integer)

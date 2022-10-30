@@ -12,5 +12,6 @@ CREATE TABLE adminselections (
     week10 VARCHAR(255),
     week11 VARCHAR(255),
     week12 VARCHAR(255),
+    week13 VARCHAR(255),
     PRIMARY KEY (year)
 );
