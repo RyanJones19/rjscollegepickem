@@ -72,10 +72,6 @@ def myscores(week=1):
         for winner in correctSelections:
             if winner in selectionDisplay:
                 totalScore = totalScore + int(selectionDisplay[winner])
-        print(totalScore)
-        print(selectionDisplay)
-        print(correctSelections)
-        print(incorrectSelections)
         scores = Scores.query.filter_by(id=current_user.id).first()
         setattr(scores, "week" + week + "score", str(totalScore))
         db.session.commit()

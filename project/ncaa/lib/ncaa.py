@@ -33,11 +33,10 @@ class NCAAAPI(BaseClient):
         if scheduleSelections is not None:
             for game in schedule.__root__:
                 if str(game.GameID) in scheduleSelections:
-                    print(game)
                     scheduleParsed.append(game)
             try:
                 scheduleParsed = sorted(scheduleParsed, key=lambda d: d.DateTime)
-            except:
+            except Exception as e:
                 scheduleParsed = scheduleParsed
         else:
             scheduleParsed = schedule.__root__
