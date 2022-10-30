@@ -54,9 +54,12 @@ class NCAAAPI(BaseClient):
             startTime = game.DateTime
             details = ""
             if game.Status == "Scheduled":
-                d = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S') - timedelta(hours=3)
-                s = d.strftime('%m/%d/%Y %I:%M %p')
-                status = s
+                if (game.DateTime is not None):
+                    d = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S') - timedelta(hours=3)
+                    s = d.strftime('%m/%d/%Y %I:%M %p')
+                    status = s
+                else:
+                    status = "Scheduled - Time TBD"
             if game.HomeTeamScore is not None:
                 home_team = game.HomeTeam + ": " + str(game.HomeTeamScore)
             else:

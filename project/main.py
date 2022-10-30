@@ -72,6 +72,10 @@ def myscores(week=1):
         for winner in correctSelections:
             if winner in selectionDisplay:
                 totalScore = totalScore + int(selectionDisplay[winner])
+        print(totalScore)
+        print(selectionDisplay)
+        print(correctSelections)
+        print(incorrectSelections)
         scores = Scores.query.filter_by(id=current_user.id).first()
         setattr(scores, "week" + week + "score", str(totalScore))
         db.session.commit()
@@ -166,7 +170,6 @@ def weeklyleaguestats(week):
                 'selections': userSelectionDisplay,
                 'score': totalScore
             }
-            #print(groupSelectionDisplay.items())
         groupSelectionDisplay = sorted(groupSelectionDisplay.items(), key=lambda x: x[1]['score'], reverse=True)
         return render_template('weeklyleaguestats.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(groupSelectionDisplay), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={})
     else:
