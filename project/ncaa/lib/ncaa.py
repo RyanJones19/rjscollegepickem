@@ -31,8 +31,10 @@ class NCAAAPI(BaseClient):
         schedule = pydantic.parse_obj_as(ScheduleResponseModel, response.json())
 
         if scheduleSelections is not None:
-            for selection in scheduleSelections:
-                scheduleParsed.append(schedule.__root__[int(selection)])
+            for game in schedule.__root__:
+                if str(game.GameID) in scheduleSelections:
+                    print(game)
+                    scheduleParsed.append(game)
             try:
                 scheduleParsed = sorted(scheduleParsed, key=lambda d: d.DateTime)
             except:
@@ -50,6 +52,7 @@ class NCAAAPI(BaseClient):
             teamMap[team.TeamID] = team
 
         for game in scheduleParsed:
+            game_id = game.GameID
             status = game.Status
             startTime = game.DateTime
             details = ""
@@ -109,6 +112,7 @@ class NCAAAPI(BaseClient):
                 details = details + " - " + str(game.Stadium.Name) + " - " + str(game.Stadium.City) + ", " + str(game.Stadium.State)
 
             matchups.append({\
+            "game_id": game_id, \
             "home_team_details": home_team, \
             "away_team_details": away_team, \
             "game_details": details, \

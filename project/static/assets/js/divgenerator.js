@@ -105,7 +105,13 @@ var teamLogos = {
     "MSPST":"/static/images/MSPST.jpg",
     "WMICH":"/static/images/WMICH.jpg",
     "WISC":"/static/images/WISC.jpg",
-    "MPHS":"/static/images/MPHS.jpg"
+    "MPHS":"/static/images/MPHS.jpg",
+    "IND":"/static/images/IND.jpg",
+    "SDKST":"/static/images/SDKST.jpg",
+    "SMHO":"/static/images/SMHO.jpg",
+    "NIOWA":"/static/images/NIOWA.jpg",
+    "ARMY":"/static/images/ARMY.jpg",
+    "UTAHST":"/static/images/UTAHST.jpg"
 }
 
 function updateDropdowns(optiontext, appendedText) {
@@ -771,14 +777,14 @@ function populateAdminPage(games,week){
         var selections = [];
         for(var i = 0; i < games.length; i++) {
             if(document.getElementById("checkbox"+ (i + 1).toString()).checked){
-                selections.push(i);
+                selections.push(games[i].game_id);
             }
         }
         var arraylen = selections.length;
         if(arraylen != 25){
             alert("Please select 25 games, you selected: " + arraylen.toString());
         }else {
-            var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/selectweeklygames/${week}?selections=${selections}`;
+            var url = `http://localhost:5000/selectweeklygames/${week}?selections=${selections}`;//`http://testcomms-1812807762.us-west-2.elb.amazonaws.com/selectweeklygames/${week}?selections=${selections}`;
             location.replace(url);
         }
     };
@@ -898,7 +904,13 @@ function populateDivs(games, userid, selections=null, week) {
         "MSPST":"https://www.espn.com/college-football/team/_/id/344/mississippi-state-bulldogs",
         "WMICH":"https://www.espn.com/college-football/team/_/id/2711/western-michigan-broncos",
         "WISC":"https://www.espn.com/college-football/team/_/id/275/wisconsin-badgers",
-        "MPHS":"https://www.espn.com/college-football/team/_/id/235/memphis-tigers"
+        "MPHS":"https://www.espn.com/college-football/team/_/id/235/memphis-tigers",
+        "IND":"https://www.espn.com/college-football/team/_/id/84/indiana-hoosiers",
+        "SDKST":"https://www.espn.com/college-football/team/_/id/2571/south-dakota-state-jackrabbits",
+        "SMHO":"https://www.espn.com/college-football/team/_/id/2534/sam-houston-bearkats",
+        "NIOWA":"https://www.espn.com/college-football/team/_/id/2460/northern-iowa-panthers",
+        "ARMY":"https://www.espn.com/college-football/team/_/id/349/army-black-knights",
+        "UTAHST":"https://www.espn.com/college-football/team/_/id/328/utah-state-aggies"
     }
 
     for(var i = 0; i < games.length; i++) {
@@ -919,8 +931,15 @@ function populateDivs(games, userid, selections=null, week) {
 
         var home_team_details = document.createElement("a");
         var home_team_text = games[i].home_team_details.split(':')[0];
-        var home_team_details_link_text = document.createTextNode(games[i].home_team_details);
-        home_team_details.appendChild(home_team_details_link_text);
+        var home_team_score = document.createElement("t");
+        var home_team_score_text = games[i].home_team_details.split(':')[1];
+        home_team_score.innerHTML = " : " + home_team_score_text;
+        var home_team_image = document.createElement("img");
+        home_team_image.src = teamLogos[home_team_text];
+        home_team_image.style.height = '40px';
+        home_team_image.style.width = '40px';
+        home_team_details.appendChild(home_team_image);
+        home_team_details.appendChild(home_team_score);
         home_team_details.href = espnTeamLinkDict[home_team_text];
         gamesList.appendChild(home_team_details);
         var br = document.createElement("br");
@@ -928,10 +947,19 @@ function populateDivs(games, userid, selections=null, week) {
 
         var away_team_details = document.createElement("a");
         var away_team_text = games[i].away_team_details.split(':')[0];
-        var away_team_details_link_text = document.createTextNode(games[i].away_team_details);
-        away_team_details.appendChild(away_team_details_link_text);
+        var away_team_score = document.createElement("t");
+        var away_team_score_text = games[i].away_team_details.split(':')[1];
+        away_team_score.innerHTML = " : " + away_team_score_text;
+        var away_team_image = document.createElement("img");
+        away_team_image.src = teamLogos[away_team_text];
+        away_team_image.style.height = '40px';
+        away_team_image.style.width = '40px';
+        away_team_details.appendChild(away_team_image);
+        away_team_details.appendChild(away_team_score);
         away_team_details.href = espnTeamLinkDict[away_team_text];
         gamesList.appendChild(away_team_details);
+        var br = document.createElement("br");
+        gamesList.appendChild(br);
 
         var game_details = document.createElement("p");
         game_details.innerHTML = games[i].game_details;
