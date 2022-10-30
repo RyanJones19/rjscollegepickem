@@ -92,7 +92,7 @@ def schedule(week=1):
         userSelectedScores=getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
         return render_template('schedule.html', games=games, userid=current_user.id, selections=userSelectedScores, selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
     except:
-        return render_template('profile.html', name=" game choices for week " + week + " have not been chosen by an admin yet, please check back later.", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('profile.html', name=" game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
 
 @main.route('/submitpicks/<week>', methods=['GET'])
 @login_required
