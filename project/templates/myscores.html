@@ -2,8 +2,8 @@
 
 {% block content %}
 <label>Select Week:<select name="form" onchange="location = this.value;">
-    <option value="{{ url_for('main.myscores', week=0) }}">None</option>
-    <option value="{{ url_for('main.myscores', week=1) }}" selected>1</option>
+    <option value="{{ url_for('main.myscores', week=0) }}" selected>None</option>
+    <option value="{{ url_for('main.myscores', week=1) }}">1</option>
     <option value="{{ url_for('main.myscores', week=2) }}">2</option>
     <option value="{{ url_for('main.myscores', week=3) }}">3</option>
     <option value="{{ url_for('main.myscores', week=4) }}">4</option>

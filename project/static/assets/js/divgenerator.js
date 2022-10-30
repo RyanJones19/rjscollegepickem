@@ -343,157 +343,406 @@ function resetDropdowns(games) {
     }
 }
 
-function populateDropdown(games) {
+function populateDropdown(games, newSelectedValue, selectedList) {
     if(document.getElementById("home1").checked){
-        updateDropdowns($('#confidencepoints1 option:selected').val(), " - " + games[0].home);
+        if ($('#confidencepoints1 option:selected').val() == newSelectedValue && selectedList != "1"){
+            document.getElementById("home1").checked = false;
+            alert("Deselected Game 1, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints1 option:selected').val(), " - " + games[0].home);
+        }
     }
     if(document.getElementById("away1").checked){
-        updateDropdowns($('#confidencepoints1 option:selected').val(), " - " + games[0].away);
+        if ($('#confidencepoints1 option:selected').val() == newSelectedValue && selectedList != "1"){
+            document.getElementById("away1").checked = false;
+            alert("Deselected Game 1, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints1 option:selected').val(), " - " + games[0].away);
+        }
     }
     if(document.getElementById("home2").checked){
-        updateDropdowns($('#confidencepoints2 option:selected').val(), " - " + games[1].home);
+        if ($('#confidencepoints2 option:selected').val() == newSelectedValue && selectedList != "2"){
+            document.getElementById("home2").checked = false;
+            alert("Deselected Game 2, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints2 option:selected').val(), " - " + games[1].home);
+        }
     }
     if(document.getElementById("away2").checked){
-        updateDropdowns($('#confidencepoints2 option:selected').val(), " - " + games[1].away);
+        if ($('#confidencepoints2 option:selected').val() == newSelectedValue && selectedList != "2"){
+            document.getElementById("away2").checked = false;
+            alert("Deselected Game 2, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints2 option:selected').val(), " - " + games[1].away);
+        }
     }
     if(document.getElementById("home3").checked){
-        updateDropdowns($('#confidencepoints3 option:selected').val(), " - " + games[2].home);
+        if ($('#confidencepoints3option:selected').val() == newSelectedValue && selectedList != "3"){
+            document.getElementById("home3").checked = false;
+            alert("Deselected Game 3, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints3 option:selected').val(), " - " + games[2].home);
+        }
     }
     if(document.getElementById("away3").checked){
-        updateDropdowns($('#confidencepoints3 option:selected').val(), " - " + games[2].away);
+        if ($('#confidencepoints3 option:selected').val() == newSelectedValue && selectedList != "3"){
+            document.getElementById("away3").checked = false;
+            alert("Deselected Game 3, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints3 option:selected').val(), " - " + games[2].away);
+        }
     }
     if(document.getElementById("home4").checked){
-        updateDropdowns($('#confidencepoints4 option:selected').val(), " - " + games[3].home);
+        if ($('#confidencepoints4 option:selected').val() == newSelectedValue && selectedList != "4"){
+            document.getElementById("home4").checked = false;
+            alert("Deselected Game 4, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints4 option:selected').val(), " - " + games[3].home);
+        }
     }
     if(document.getElementById("away4").checked){
-        updateDropdowns($('#confidencepoints4 option:selected').val(), " - " + games[3].away);
+        if ($('#confidencepoints4 option:selected').val() == newSelectedValue && selectedList != "4"){
+            document.getElementById("away4").checked = false;
+            alert("Deselected Game 4, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints4 option:selected').val(), " - " + games[3].away);
+        }
     }
     if(document.getElementById("home5").checked){
-        updateDropdowns($('#confidencepoints5 option:selected').val(), " - " + games[4].home);
+        if ($('#confidencepoints5 option:selected').val() == newSelectedValue && selectedList != "5"){
+            document.getElementById("home5").checked = false;
+            alert("Deselected Game 5, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints5 option:selected').val(), " - " + games[4].home);
+        }
     }
     if(document.getElementById("away5").checked){
-        updateDropdowns($('#confidencepoints5 option:selected').val(), " - " + games[4].away);
+        if ($('#confidencepoints5 option:selected').val() == newSelectedValue && selectedList != "5"){
+            document.getElementById("away5").checked = false;
+            alert("Deselected Game 5, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints5 option:selected').val(), " - " + games[4].away);
+        }
     }
     if(document.getElementById("home6").checked){
-        updateDropdowns($('#confidencepoints6 option:selected').val(), " - " + games[5].home);
+        if ($('#confidencepoints6 option:selected').val() == newSelectedValue && selectedList != "6"){
+            document.getElementById("home6").checked = false;
+            alert("Deselected Game 6, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints6 option:selected').val(), " - " + games[5].home);
+        }
     }
     if(document.getElementById("away6").checked){
-        updateDropdowns($('#confidencepoints6 option:selected').val(), " - " + games[5].away);
+        if ($('#confidencepoints6 option:selected').val() == newSelectedValue && selectedList != "6"){
+            document.getElementById("away6").checked = false;
+            alert("Deselected Game 6, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints6 option:selected').val(), " - " + games[5].away);
+        }
     }
     if(document.getElementById("home7").checked){
-        updateDropdowns($('#confidencepoints7 option:selected').val(), " - " + games[6].home);
+        if ($('#confidencepoints7 option:selected').val() == newSelectedValue && selectedList != "7"){
+            document.getElementById("home7").checked = false;
+            alert("Deselected Game 7, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints7 option:selected').val(), " - " + games[6].home);
+        }
     }
     if(document.getElementById("away7").checked){
-        updateDropdowns($('#confidencepoints7 option:selected').val(), " - " + games[6].away);
+        if ($('#confidencepoints7 option:selected').val() == newSelectedValue && selectedList != "7"){
+            document.getElementById("away7").checked = false;
+            alert("Deselected Game 7, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints7 option:selected').val(), " - " + games[6].away);
+        }
     }
     if(document.getElementById("home8").checked){
-        updateDropdowns($('#confidencepoints8 option:selected').val(), " - " + games[7].home);
+        if ($('#confidencepoints8 option:selected').val() == newSelectedValue && selectedList != "8"){
+            document.getElementById("home8").checked = false;
+            alert("Deselected Game 8, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints8 option:selected').val(), " - " + games[7].home);
+        }
     }
     if(document.getElementById("away8").checked){
-        updateDropdowns($('#confidencepoints8 option:selected').val(), " - " + games[7].away);
+        if ($('#confidencepoints8 option:selected').val() == newSelectedValue && selectedList != "8"){
+            document.getElementById("away8").checked = false;
+            alert("Deselected Game 8, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints8 option:selected').val(), " - " + games[7].away);
+        }
     }
     if(document.getElementById("home9").checked){
-        updateDropdowns($('#confidencepoints9 option:selected').val(), " - " + games[8].home);
+        if ($('#confidencepoints9 option:selected').val() == newSelectedValue && selectedList != "9"){
+            document.getElementById("home9").checked = false;
+            alert("Deselected Game 9, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints9 option:selected').val(), " - " + games[8].home);
+        }
     }
     if(document.getElementById("away9").checked){
-        updateDropdowns($('#confidencepoints9 option:selected').val(), " - " + games[8].away);
+        if ($('#confidencepoints9 option:selected').val() == newSelectedValue && selectedList != "9"){
+            document.getElementById("away9").checked = false;
+            alert("Deselected Game 9, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints9 option:selected').val(), " - " + games[8].away);
+        }
     }
     if(document.getElementById("home10").checked){
-        updateDropdowns($('#confidencepoints10 option:selected').val(), " - " + games[9].home);
+        if ($('#confidencepoints10 option:selected').val() == newSelectedValue && selectedList != "10"){
+            document.getElementById("home10").checked = false;
+            alert("Deselected Game 10, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints10 option:selected').val(), " - " + games[9].home);
+        }
     }
     if(document.getElementById("away10").checked){
-        updateDropdowns($('#confidencepoints10 option:selected').val(), " - " + games[9].away);
+        if ($('#confidencepoints10 option:selected').val() == newSelectedValue && selectedList != "10"){
+            document.getElementById("away10").checked = false;
+            alert("Deselected Game 10, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints10 option:selected').val(), " - " + games[9].away);
+        }
     }
     if(document.getElementById("home11").checked){
-        updateDropdowns($('#confidencepoints11 option:selected').val(), " - " + games[10].home);
+        if ($('#confidencepoints11 option:selected').val() == newSelectedValue && selectedList != "11"){
+            document.getElementById("home11").checked = false;
+            alert("Deselected Game 11, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints11 option:selected').val(), " - " + games[10].home);
+        }
     }
     if(document.getElementById("away11").checked){
-        updateDropdowns($('#confidencepoints11 option:selected').val(), " - " + games[10].away);
+        if ($('#confidencepoints11 option:selected').val() == newSelectedValue && selectedList != "11"){
+            document.getElementById("away11").checked = false;
+            alert("Deselected Game 11, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints11 option:selected').val(), " - " + games[10].away);
+        }
     }
     if(document.getElementById("home12").checked){
-        updateDropdowns($('#confidencepoints12 option:selected').val(), " - " + games[11].home);
+        if ($('#confidencepoints12 option:selected').val() == newSelectedValue && selectedList != "12"){
+            document.getElementById("home12").checked = false;
+            alert("Deselected Game 12, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints12 option:selected').val(), " - " + games[11].home);
+        }
     }
     if(document.getElementById("away12").checked){
-        updateDropdowns($('#confidencepoints12 option:selected').val(), " - " + games[11].away);
+        if ($('#confidencepoints12 option:selected').val() == newSelectedValue && selectedList != "12"){
+            document.getElementById("away12").checked = false;
+            alert("Deselected Game 12, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints12 option:selected').val(), " - " + games[11].away);
+        }
     }
     if(document.getElementById("home13").checked){
-        updateDropdowns($('#confidencepoints13 option:selected').val(), " - " + games[12].home);
+        if ($('#confidencepoints13 option:selected').val() == newSelectedValue && selectedList != "13"){
+            document.getElementById("home13").checked = false;
+            alert("Deselected Game 13, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints13 option:selected').val(), " - " + games[12].home);
+        }
     }
     if(document.getElementById("away13").checked){
-
-        updateDropdowns($('#confidencepoints13 option:selected').val(), " - " + games[12].away);
+        if ($('#confidencepoints13 option:selected').val() == newSelectedValue && selectedList != "13"){
+            document.getElementById("away13").checked = false;
+            alert("Deselected Game 13, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints13 option:selected').val(), " - " + games[12].away);
+        }
     }
     if(document.getElementById("home14").checked){
-        updateDropdowns($('#confidencepoints14 option:selected').val(), " - " + games[13].home);
+        if ($('#confidencepoints14 option:selected').val() == newSelectedValue && selectedList != "14"){
+            document.getElementById("home14").checked = false;
+            alert("Deselected Game 14, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints14 option:selected').val(), " - " + games[13].home);
+        }
     }
     if(document.getElementById("away14").checked){
-        updateDropdowns($('#confidencepoints14 option:selected').val(), " - " + games[13].away);
+        if ($('#confidencepoints14 option:selected').val() == newSelectedValue && selectedList != "14"){
+            document.getElementById("away14").checked = false;
+            alert("Deselected Game 14, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints14 option:selected').val(), " - " + games[13].away);
+        }
     }
     if(document.getElementById("home15").checked){
-        updateDropdowns($('#confidencepoints15 option:selected').val(), " - " + games[14].home);
+        if ($('#confidencepoints15 option:selected').val() == newSelectedValue && selectedList != "15"){
+            document.getElementById("home15").checked = false;
+            alert("Deselected Game 15, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints15 option:selected').val(), " - " + games[14].home);
+        }
     }
     if(document.getElementById("away15").checked){
-        updateDropdowns($('#confidencepoints15 option:selected').val(), " - " + games[14].away);
+        if ($('#confidencepoints15 option:selected').val() == newSelectedValue && selectedList != "15"){
+            document.getElementById("away15").checked = false;
+            alert("Deselected Game 15, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints15 option:selected').val(), " - " + games[14].away);
+        }
     }
     if(document.getElementById("home16").checked){
-        updateDropdowns($('#confidencepoints16 option:selected').val(), " - " + games[15].home);
+        if ($('#confidencepoints16 option:selected').val() == newSelectedValue && selectedList != "16"){
+            document.getElementById("home16").checked = false;
+            alert("Deselected Game 16, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints16 option:selected').val(), " - " + games[15].home);
+        }
     }
     if(document.getElementById("away16").checked){
-        updateDropdowns($('#confidencepoints16 option:selected').val(), " - " + games[15].away);
+        if ($('#confidencepoints16 option:selected').val() == newSelectedValue && selectedList != "16"){
+            document.getElementById("away16").checked = false;
+            alert("Deselected Game 16, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints16 option:selected').val(), " - " + games[15].away);
+        }
     }
     if(document.getElementById("home17").checked){
-        updateDropdowns($('#confidencepoints17 option:selected').val(), " - " + games[16].home);
+        if ($('#confidencepoints17 option:selected').val() == newSelectedValue && selectedList != "17"){
+            document.getElementById("home17").checked = false;
+            alert("Deselected Game 17, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints17 option:selected').val(), " - " + games[16].home);
+        }
     }
     if(document.getElementById("away17").checked){
-        updateDropdowns($('#confidencepoints17 option:selected').val(), " - " + games[16].away);
+        if ($('#confidencepoints17 option:selected').val() == newSelectedValue && selectedList != "17"){
+            document.getElementById("away17").checked = false;
+            alert("Deselected Game 17, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints17 option:selected').val(), " - " + games[16].away);
+        }
     }
     if(document.getElementById("home18").checked){
-        updateDropdowns($('#confidencepoints18 option:selected').val(), " - " + games[17].home);
+        if ($('#confidencepoints18 option:selected').val() == newSelectedValue && selectedList != "18"){
+            document.getElementById("home18").checked = false;
+            alert("Deselected Game 18, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints18 option:selected').val(), " - " + games[17].home);
+        }
     }
     if(document.getElementById("away18").checked){
-        updateDropdowns($('#confidencepoints18 option:selected').val(), " - " + games[17].away);
+        if ($('#confidencepoints18 option:selected').val() == newSelectedValue && selectedList != "18"){
+            document.getElementById("away18").checked = false;
+            alert("Deselected Game 18, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints18 option:selected').val(), " - " + games[17].away);
+        }
     }
     if(document.getElementById("home19").checked){
-        updateDropdowns($('#confidencepoints19 option:selected').val(), " - " + games[18].home);
+        if ($('#confidencepoints19 option:selected').val() == newSelectedValue && selectedList != "19"){
+            document.getElementById("home19").checked = false;
+            alert("Deselected Game 19, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints19 option:selected').val(), " - " + games[18].home);
+        }
     }
     if(document.getElementById("away19").checked){
-        updateDropdowns($('#confidencepoints19 option:selected').val(), " - " + games[18].away);
+        if ($('#confidencepoints19 option:selected').val() == newSelectedValue && selectedList != "19"){
+            document.getElementById("away19").checked = false;
+            alert("Deselected Game 19, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints19 option:selected').val(), " - " + games[18].away);
+        }
     }
     if(document.getElementById("home20").checked){
-        updateDropdowns($('#confidencepoints20 option:selected').val(), " - " + games[19].home);
+        if ($('#confidencepoints20 option:selected').val() == newSelectedValue && selectedList != "20"){
+            document.getElementById("home20").checked = false;
+            alert("Deselected Game 20, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints20 option:selected').val(), " - " + games[19].home);
+        }
     }
     if(document.getElementById("away20").checked){
-        updateDropdowns($('#confidencepoints20 option:selected').val(), " - " + games[19].away);
+        if ($('#confidencepoints20 option:selected').val() == newSelectedValue && selectedList != "20"){
+            document.getElementById("away20").checked = false;
+            alert("Deselected Game 20, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints20 option:selected').val(), " - " + games[19].away);
+        }
     }
     if(document.getElementById("home21").checked){
-        updateDropdowns($('#confidencepoints21 option:selected').val(), " - " + games[20].home);
+        if ($('#confidencepoints21 option:selected').val() == newSelectedValue && selectedList != "21"){
+            document.getElementById("home21").checked = false;
+            alert("Deselected Game 21, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints21 option:selected').val(), " - " + games[20].home);
+        }
     }
     if(document.getElementById("away21").checked){
-        updateDropdowns($('#confidencepoints21 option:selected').val(), " - " + games[20].away);
+        if ($('#confidencepoints21 option:selected').val() == newSelectedValue && selectedList != "21"){
+            document.getElementById("away21").checked = false;
+            alert("Deselected Game 21, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints21 option:selected').val(), " - " + games[20].away);
+        }
     }
     if(document.getElementById("home22").checked){
-        updateDropdowns($('#confidencepoints22 option:selected').val(), " - " + games[21].home);
+        if ($('#confidencepoints22 option:selected').val() == newSelectedValue && selectedList != "22"){
+            document.getElementById("home22").checked = false;
+            alert("Deselected Game 22, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints22 option:selected').val(), " - " + games[21].home);
+        }
     }
     if(document.getElementById("away22").checked){
-        updateDropdowns($('#confidencepoints22 option:selected').val(), " - " + games[21].away);
+        if ($('#confidencepoints22 option:selected').val() == newSelectedValue && selectedList != "22"){
+            document.getElementById("away22").checked = false;
+            alert("Deselected Game 22, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints22 option:selected').val(), " - " + games[21].away);
+        }
     }
     if(document.getElementById("home23").checked){
-        updateDropdowns($('#confidencepoints23 option:selected').val(), " - " + games[22].home);
+        if ($('#confidencepoints23 option:selected').val() == newSelectedValue && selectedList != "23"){
+            document.getElementById("home23").checked = false;
+            alert("Deselected Game 23, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints23 option:selected').val(), " - " + games[22].home);
+        }
     }
     if(document.getElementById("away23").checked){
-        updateDropdowns($('#confidencepoints23 option:selected').val(), " - " + games[22].away);
+        if ($('#confidencepoints23 option:selected').val() == newSelectedValue && selectedList != "23"){
+            document.getElementById("away23").checked = false;
+            alert("Deselected Game 23, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints23 option:selected').val(), " - " + games[22].away);
+        }
     }
     if(document.getElementById("home24").checked){
-        updateDropdowns($('#confidencepoints24 option:selected').val(), " - " + games[23].home);
+        if ($('#confidencepoints24 option:selected').val() == newSelectedValue && selectedList != "24"){
+            document.getElementById("home24").checked = false;
+            alert("Deselected Game 24, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints24 option:selected').val(), " - " + games[23].home);
+        }
     }
     if(document.getElementById("away24").checked){
-        updateDropdowns($('#confidencepoints24 option:selected').val(), " - " + games[23].away);
+        if ($('#confidencepoints24 option:selected').val() == newSelectedValue && selectedList != "24"){
+            document.getElementById("away24").checked = false;
+            alert("Deselected Game 24, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints24 option:selected').val(), " - " + games[23].away);
+        }
     }
     if(document.getElementById("home25").checked){
-        updateDropdowns($('#confidencepoints25 option:selected').val(), " - " + games[24].home);
+        if ($('#confidencepoints25 option:selected').val() == newSelectedValue && selectedList != "25"){
+            document.getElementById("home25").checked = false;
+            alert("Deselected Game 25, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints25 option:selected').val(), " - " + games[24].home);
+        }
     }
     if(document.getElementById("away25").checked){
-        updateDropdowns($('#confidencepoints25 option:selected').val(), " - " + games[24].away);
+        if ($('#confidencepoints25 option:selected').val() == newSelectedValue && selectedList != "25"){
+            document.getElementById("away25").checked = false;
+            alert("Deselected Game 25, make sure to go back and select a new option!")
+        } else {
+            updateDropdowns($('#confidencepoints25 option:selected').val(), " - " + games[24].away);
+        }
     }
 }
 
@@ -711,7 +960,7 @@ function populateDivs(games, userid, selections=null, week) {
         cb1.id = "home" + (i+1).toString();
         cb1.name = "radio" + (i+1).toString();
         cb1.value = "home" + (i+1).toString();
-        cb1.disabled = lockSelection;
+        cb1.disabled = false;//lockSelection;
 
 
         var cb1label = document.createElement("label");
@@ -724,7 +973,7 @@ function populateDivs(games, userid, selections=null, week) {
         cb2.id = "away" + (i+1).toString();
         cb2.name = "radio" + (i+1).toString();
         cb2.value = "away" + (i+1).toString();
-        cb2.disabled = lockSelection;
+        cb2.disabled = false; //lockSelection;
 
         var cb2label = document.createElement("label");
         cb2label.htmlFor = "away" + (i+1).toString();
@@ -738,7 +987,7 @@ function populateDivs(games, userid, selections=null, week) {
         var confidencePoints = document.createElement("select");
         confidencePoints.id = "confidencepoints" + (i+1).toString();
         confidencePoints.name = "confidencepoints" + (i+1).toString();
-        confidencePoints.disabled = lockSelection;
+        confidencePoints.disabled = false; //lockSelection;
         if(selections) {
             confidencePoints.appendChild(new Option("None", "None"));
 
@@ -1223,104 +1472,129 @@ function populateDivs(games, userid, selections=null, week) {
     });
 
     $('#confidencepoints1').change(function() {
+        var newSelectedValue = $('#confidencepoints1 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 1);
     });
     $('#confidencepoints2').change(function() {
+        var newSelectedValue = $('#confidencepoints2 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 2);
     });
     $('#confidencepoints3').change(function() {
+        var newSelectedValue = $('#confidencepoints3 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 3);
     });
     $('#confidencepoints4').change(function() {
+        var newSelectedValue = $('#confidencepoints4 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 4);
     });
     $('#confidencepoints5').change(function() {
+        var newSelectedValue = $('#confidencepoints5 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 5);
     });
     $('#confidencepoints6').change(function() {
+        var newSelectedValue = $('#confidencepoints6 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 6);
     });
     $('#confidencepoints7').change(function() {
+        var newSelectedValue = $('#confidencepoints7 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 7);
     });
     $('#confidencepoints8').change(function() {
+        var newSelectedValue = $('#confidencepoints8 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 8);
     });
     $('#confidencepoints9').change(function() {
+        var newSelectedValue = $('#confidencepoints9 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 9);
     });
     $('#confidencepoints10').change(function() {
+        var newSelectedValue = $('#confidencepoints10 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 10);
     });
     $('#confidencepoints11').change(function() {
+        var newSelectedValue = $('#confidencepoints11 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 11);
     });
     $('#confidencepoints12').change(function() {
+        var newSelectedValue = $('#confidencepoints12 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 12);
     });
     $('#confidencepoints13').change(function() {
+        var newSelectedValue = $('#confidencepoints13 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 13);
     });
     $('#confidencepoints14').change(function() {
+        var newSelectedValue = $('#confidencepoints14 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 14);
     });
     $('#confidencepoints15').change(function() {
+        var newSelectedValue = $('#confidencepoints15 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 15);
     });
     $('#confidencepoints16').change(function() {
+        var newSelectedValue = $('#confidencepoints16 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 16);
     });
     $('#confidencepoints17').change(function() {
+        var newSelectedValue = $('#confidencepoints17 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 17);
     });
     $('#confidencepoints18').change(function() {
+        var newSelectedValue = $('#confidencepoints18 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 18);
     });
     $('#confidencepoints19').change(function() {
+        var newSelectedValue = $('#confidencepoints19 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 19);
     });
     $('#confidencepoints20').change(function() {
+        var newSelectedValue = $('#confidencepoints20 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 20);
     });
     $('#confidencepoints21').change(function() {
+        var newSelectedValue = $('#confidencepoints21 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 21);
     });
     $('#confidencepoints22').change(function() {
+        var newSelectedValue = $('#confidencepoints22 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 22);
     });
     $('#confidencepoints23').change(function() {
+        var newSelectedValue = $('#confidencepoints23 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 23);
     });
     $('#confidencepoints24').change(function() {
+        var newSelectedValue = $('#confidencepoints24 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 24);
     });
     $('#confidencepoints25').change(function() {
+        var newSelectedValue = $('#confidencepoints25 option:selected').val()
         resetDropdowns(games);
-        populateDropdown(games);
+        populateDropdown(games, newSelectedValue, 25);
     });
 
     var button = document.createElement("BUTTON");
