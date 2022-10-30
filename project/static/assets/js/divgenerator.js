@@ -657,7 +657,7 @@ function populateDivs(games, userid, selections=null, week) {
         var d1 = new Date(games[i].kickoff);
         var d2 = new Date();
         d1.setHours(d1.getHours() - 3);
-        if (d1 <= d2) {
+        if (d1 <= d2 && d1 != null) {
             lockSelection = true;
             break;
         }
