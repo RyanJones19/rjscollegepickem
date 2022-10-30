@@ -960,7 +960,7 @@ function populateDivs(games, userid, selections=null, week) {
         cb1.id = "home" + (i+1).toString();
         cb1.name = "radio" + (i+1).toString();
         cb1.value = "home" + (i+1).toString();
-        cb1.disabled = false;//lockSelection;
+        cb1.disabled = lockSelection;
 
 
         var cb1label = document.createElement("label");
@@ -973,7 +973,7 @@ function populateDivs(games, userid, selections=null, week) {
         cb2.id = "away" + (i+1).toString();
         cb2.name = "radio" + (i+1).toString();
         cb2.value = "away" + (i+1).toString();
-        cb2.disabled = false; //lockSelection;
+        cb2.disabled = lockSelection;
 
         var cb2label = document.createElement("label");
         cb2label.htmlFor = "away" + (i+1).toString();
@@ -987,7 +987,7 @@ function populateDivs(games, userid, selections=null, week) {
         var confidencePoints = document.createElement("select");
         confidencePoints.id = "confidencepoints" + (i+1).toString();
         confidencePoints.name = "confidencepoints" + (i+1).toString();
-        confidencePoints.disabled = false; //lockSelection;
+        confidencePoints.disabled = lockSelection;
         if(selections) {
             confidencePoints.appendChild(new Option("None", "None"));
 
