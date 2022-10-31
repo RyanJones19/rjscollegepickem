@@ -114,7 +114,11 @@ var teamLogos = {
     "UTAHST":"/static/images/UTAHST.jpg",
     "TX":"/static/images/TX.jpg",
     "BALLST":"/static/images/BALLST.jpg",
-    "NILL":"/static/images/NILL.jpg"
+    "NILL":"/static/images/NILL.jpg",
+    "WASH":"/static/images/WASH.jpg",
+    "PUR":"/static/images/PUR.jpg",
+    "MARY":"/static/images/MARY.jpg",
+    "KAN":"/static/images/KAN.jpg"
 }
 
 function updateDropdowns(optiontext, appendedText) {
@@ -916,7 +920,11 @@ function populateDivs(games, userid, selections=null, week) {
         "UTAHST":"https://www.espn.com/college-football/team/_/id/328/utah-state-aggies",
         "TX":"https://www.espn.com/college-football/team/_/id/251/texas-longhorns",
         "BALLST":"https://www.espn.com/college-football/team/_/id/2050",
-        "NILL":"https://www.espn.com/college-football/team/_/id/2459/northern-illinois-huskies"
+        "NILL":"https://www.espn.com/college-football/team/_/id/2459/northern-illinois-huskies",
+        "WASH":"https://www.espn.com/college-football/team/_/id/264/washington-huskies",
+        "PUR":"https://www.espn.com/college-football/team/_/id/2509/purdue-boilermakers",
+        "MARY":"https://www.espn.com/college-football/team/_/id/120/maryland-terrapins",
+        "KAN":"https://www.espn.com/college-football/team/_/id/2305/kansas-jayhawks"
     }
 
     for(var i = 0; i < games.length; i++) {
