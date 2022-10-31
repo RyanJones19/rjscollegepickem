@@ -141,11 +141,6 @@ def weeklyleaguestats(week):
 
     allPicks=db.session.query(User,Scores).filter(User.id==Scores.id).all()
     groupSelectionDisplay={}
-    correctSelections=[]
-    incorrectSelections=[]
-    userSelectionDisplay={}
-    userSelectionDisplayParsed={}
-    totalScore = 0
     orderedGameNames = {}
     for game in games:
         orderedGameNames[game['home_team_details'].split(':')[0]] = game['kickoff']
@@ -153,8 +148,13 @@ def weeklyleaguestats(week):
 
     if allPicks is not None:
         for picks in allPicks:
+            correctSelections=[]
+            incorrectSelections=[]
             username = picks.User.name
             userid = picks.User.id
+            totalScore = 0
+            userSelectionDisplay={}
+            userSelectionDisplayParsed={}
             picks = getattr(picks.Scores, "week" + week + "picks")
             if picks is None:
                 groupSelectionDisplay[username] = {
@@ -185,12 +185,13 @@ def weeklyleaguestats(week):
                     incorrectSelections.append(games[i]['home_team_details'].split(":")[0])
                 else:
                     print("Game has not yet concluded")
+
+            for team in orderedGameNames.keys():
+                if team in userSelectionDisplay.keys():
+                    userSelectionDisplayParsed[team] = userSelectionDisplay[team]
             for winner in correctSelections:
                 if winner in userSelectionDisplay:
                     totalScore = totalScore + int(userSelectionDisplay[winner])
-            for team in orderedGameNames.keys():
-                if team in userSelectionDisplay.keys(): #groupSelectionDisplay['selections'].keys():
-                    userSelectionDisplayParsed[team] = userSelectionDisplay[team]
             groupSelectionDisplay[username] = {
                 'selections': userSelectionDisplayParsed,
                 'score': totalScore
