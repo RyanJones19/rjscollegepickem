@@ -145,10 +145,10 @@ def weeklyleaguestats(week):
     else:
         return render_template('profile.html', name=str(current_user.name) + ", an error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
 
-    for game in range(len(games)):
-        if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') < datetime.now():
-            break
-        return render_template('profile.html', name=str(current_user.name) + ", games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+    #for game in range(len(games)):
+    #    if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') < datetime.now():
+    #        break
+    #    return render_template('profile.html', name=str(current_user.name) + ", games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
 
     allPicks=db.session.query(User,Scores).filter(User.id==Scores.id).all()
     groupSelectionDisplay={}
