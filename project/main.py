@@ -67,10 +67,20 @@ def myscores(week=1):
                     for game in games:
                         if str(selection) == str(game["game_id"]):
                             team = game["home_team_details"].split(":")[0]
+                            #print(team)
+                            #print("POINTS: " + points)
+                            #alternatepoints = int(points) + int(game["home"].split('|')[1])
+                            #print("ALTERNATE POINTS: " + str(alternatepoints))
+                            #print("\n")
                 else:
                     for game in games:
                         if str(selection) == str(game["game_id"]):
                             team = game["away_team_details"].split(":")[0]
+                            #print(team)
+                            #print("POINTS: " + points)
+                            #alternatepoints = int(points) + int(game["away"].split('|')[1])
+                            #print("ALTERNATE POINTS: " + str(alternatepoints))
+                            #print("\n")
                 selectionDisplay[team] = points
         for i in range(len(games)):
             if int(games[i]['home_team_details'].split(":")[1]) > int(games[i]['away_team_details'].split(":")[1]) and games[i]['isClosed']:
