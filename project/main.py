@@ -47,20 +47,32 @@ def myscores(week=1):
         return render_template('profile.html', name=str(current_user.name) + ", you have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
     picks=getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
 
+    orderedGameNames = {}
+    for game in games:
+        orderedGameNames[game['home_team_details'].split(':')[0]] = game['kickoff']
+        orderedGameNames[game['away_team_details'].split(':')[0]] = game['kickoff']
+
     if picks is not None:
-        picks = picks.split(',')
         correctSelections=[]
         incorrectSelections=[]
         selectionDisplay={}
+        selectionDisplayParsed={}
         totalScore = 0
+        picks = json.loads(picks)
+        for pick in picks:
+            for selection in pick.keys():
+                team = ""
+                points = pick[selection]["confidence"]
+                if pick[selection]["selection"] == "1":
+                    for game in games:
+                        if str(selection) == str(game["game_id"]):
+                            team = game["home_team_details"].split(":")[0]
+                else:
+                    for game in games:
+                        if str(selection) == str(game["game_id"]):
+                            team = game["away_team_details"].split(":")[0]
+                selectionDisplay[team] = points
         for i in range(len(games)):
-            team = ""
-            points = picks[i][1:]
-            if picks[i][0] == "1":
-                team = games[i]['home_team_details'].split(":")[0]
-            else:
-                team = games[i]['away_team_details'].split(":")[0]
-            selectionDisplay[team] = points
             if int(games[i]['home_team_details'].split(":")[1]) > int(games[i]['away_team_details'].split(":")[1]) and games[i]['isClosed']:
                 correctSelections.append(games[i]['home_team_details'].split(":")[0])
                 incorrectSelections.append(games[i]['away_team_details'].split(":")[0])
@@ -75,7 +87,10 @@ def myscores(week=1):
         scores = Scores.query.filter_by(id=current_user.id).first()
         setattr(scores, "week" + week + "score", str(totalScore))
         db.session.commit()
-        return render_template('myscores.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(selectionDisplay), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={})
+        for team in orderedGameNames.keys():
+            if team in selectionDisplay.keys():
+                selectionDisplayParsed[team] = selectionDisplay[team]
+        return render_template('myscores.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(selectionDisplayParsed), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={})
     else:
         return render_template('profile.html', name=current_user.name + ", you have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
 
@@ -85,7 +100,7 @@ def schedule(week=1):
     try:
         data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
-        userSelectedScores=getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
+        userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
         return render_template('schedule.html', games=games, userid=current_user.id, selections=userSelectedScores, selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
     except:
         return render_template('profile.html', name=" game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
@@ -126,10 +141,20 @@ def weeklyleaguestats(week):
 
     allPicks=db.session.query(User,Scores).filter(User.id==Scores.id).all()
     groupSelectionDisplay={}
+    correctSelections=[]
+    incorrectSelections=[]
+    userSelectionDisplay={}
+    userSelectionDisplayParsed={}
+    totalScore = 0
+    orderedGameNames = {}
+    for game in games:
+        orderedGameNames[game['home_team_details'].split(':')[0]] = game['kickoff']
+        orderedGameNames[game['away_team_details'].split(':')[0]] = game['kickoff']
 
     if allPicks is not None:
         for picks in allPicks:
             username = picks.User.name
+            userid = picks.User.id
             picks = getattr(picks.Scores, "week" + week + "picks")
             if picks is None:
                 groupSelectionDisplay[username] = {
@@ -137,20 +162,21 @@ def weeklyleaguestats(week):
                     'score': 0
                 }
                 continue
-            else:
-                picks = picks.split(',')
-            correctSelections=[]
-            incorrectSelections=[]
-            userSelectionDisplay={}
-            totalScore = 0
+            picks = json.loads(picks)
+            for pick in picks:
+                for selection in pick.keys():
+                    team = ""
+                    points = pick[selection]["confidence"]
+                    if pick[selection]["selection"] == "1":
+                        for game in games:
+                            if str(selection) == str(game["game_id"]):
+                                team = game["home_team_details"].split(":")[0]
+                    else:
+                        for game in games:
+                            if str(selection) == str(game["game_id"]):
+                                team = game["away_team_details"].split(":")[0]
+                    userSelectionDisplay[team] = points
             for i in range(len(games)):
-                team = ""
-                points = picks[i][1:]
-                if picks[i][0] == "1":
-                    team = games[i]['home_team_details'].split(":")[0]
-                else:
-                    team = games[i]['away_team_details'].split(":")[0]
-                userSelectionDisplay[team] = points
                 if int(games[i]['home_team_details'].split(":")[1]) > int(games[i]['away_team_details'].split(":")[1]) and games[i]['isClosed']:
                     correctSelections.append(games[i]['home_team_details'].split(":")[0])
                     incorrectSelections.append(games[i]['away_team_details'].split(":")[0])
@@ -162,10 +188,17 @@ def weeklyleaguestats(week):
             for winner in correctSelections:
                 if winner in userSelectionDisplay:
                     totalScore = totalScore + int(userSelectionDisplay[winner])
+            for team in orderedGameNames.keys():
+                if team in userSelectionDisplay.keys(): #groupSelectionDisplay['selections'].keys():
+                    userSelectionDisplayParsed[team] = userSelectionDisplay[team]
             groupSelectionDisplay[username] = {
-                'selections': userSelectionDisplay,
+                'selections': userSelectionDisplayParsed,
                 'score': totalScore
             }
+            # Update all users scores
+            scores = Scores.query.filter_by(id=userid).first()
+            setattr(scores, "week" + week + "score", str(totalScore))
+            db.session.commit()
         groupSelectionDisplay = sorted(groupSelectionDisplay.items(), key=lambda x: x[1]['score'], reverse=True)
         return render_template('weeklyleaguestats.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(groupSelectionDisplay), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={})
     else:

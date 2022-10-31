@@ -111,7 +111,10 @@ var teamLogos = {
     "SMHO":"/static/images/SMHO.jpg",
     "NIOWA":"/static/images/NIOWA.jpg",
     "ARMY":"/static/images/ARMY.jpg",
-    "UTAHST":"/static/images/UTAHST.jpg"
+    "UTAHST":"/static/images/UTAHST.jpg",
+    "TX":"/static/images/TX.jpg",
+    "BALLST":"/static/images/BALLST.jpg",
+    "NILL":"/static/images/NILL.jpg"
 }
 
 function updateDropdowns(optiontext, appendedText) {
@@ -910,7 +913,10 @@ function populateDivs(games, userid, selections=null, week) {
         "SMHO":"https://www.espn.com/college-football/team/_/id/2534/sam-houston-bearkats",
         "NIOWA":"https://www.espn.com/college-football/team/_/id/2460/northern-iowa-panthers",
         "ARMY":"https://www.espn.com/college-football/team/_/id/349/army-black-knights",
-        "UTAHST":"https://www.espn.com/college-football/team/_/id/328/utah-state-aggies"
+        "UTAHST":"https://www.espn.com/college-football/team/_/id/328/utah-state-aggies",
+        "TX":"https://www.espn.com/college-football/team/_/id/251/texas-longhorns",
+        "BALLST":"https://www.espn.com/college-football/team/_/id/2050",
+        "NILL":"https://www.espn.com/college-football/team/_/id/2459/northern-illinois-huskies"
     }
 
     for(var i = 0; i < games.length; i++) {
@@ -969,10 +975,19 @@ function populateDivs(games, userid, selections=null, week) {
         var cb1 = document.createElement("input");
         var cb2 = document.createElement("input");
 
+        var selectedOption = "";
+        var selectedConfidence = "";
+
         if(selections) {
-            var selectionList = selections.split(',');
-            var selection = selectionList[i].charAt(0);
-            if(selection == "1") {
+            var selectionsJson = JSON.parse(selections);
+            for(var game = 0; game < games.length; game++){
+                if(Object.keys(selectionsJson[game])[0] == games[i].game_id){
+                    selectedOption = selectionsJson[game][games[i].game_id]["selection"];
+                    selectedConfidence = selectionsJson[game][games[i].game_id]["confidence"];
+                    break;
+                }
+            }
+            if(selectedOption == "1") {
                 cb1.checked = true;
                 cb2.checked = false;
             } else {
@@ -988,7 +1003,7 @@ function populateDivs(games, userid, selections=null, week) {
         cb1.id = "home" + (i+1).toString();
         cb1.name = "radio" + (i+1).toString();
         cb1.value = "home" + (i+1).toString();
-        cb1.disabled = lockSelection;
+        cb1.disabled = false; //lockSelection;
 
 
         var cb1label = document.createElement("label");
@@ -1001,7 +1016,7 @@ function populateDivs(games, userid, selections=null, week) {
         cb2.id = "away" + (i+1).toString();
         cb2.name = "radio" + (i+1).toString();
         cb2.value = "away" + (i+1).toString();
-        cb2.disabled = lockSelection;
+        cb2.disabled = false; //lockSelection;
 
         var cb2label = document.createElement("label");
         cb2label.htmlFor = "away" + (i+1).toString();
@@ -1015,44 +1030,59 @@ function populateDivs(games, userid, selections=null, week) {
         var confidencePoints = document.createElement("select");
         confidencePoints.id = "confidencepoints" + (i+1).toString();
         confidencePoints.name = "confidencepoints" + (i+1).toString();
-        confidencePoints.disabled = lockSelection;
+        confidencePoints.disabled = false; //lockSelection;
+
         if(selections) {
+            var selectionsJson = JSON.parse(selections);
             confidencePoints.appendChild(new Option("None", "None"));
 
-            var option1;
-            var option2;
-            var option3;
-            var option4;
-            var option5;
-            var option6;
-            var option7;
-            var option8;
-            var option9;
-            var option10;
-            var option11;
-            var option12;
-            var option13;
-            var option14;
-            var option15;
-            var option16;
-            var option17;
-            var option18;
-            var option19;
-            var option20;
-            var option21;
-            var option22;
-            var option23;
-            var option24;
-            var option25;
+            var option1 = "";
+            var option2 = "";
+            var option3 = "";
+            var option4 = "";
+            var option5 = "";
+            var option6 = "";
+            var option7 = "";
+            var option8 = "";
+            var option9 = "";
+            var option10 = "";
+            var option11 = "";
+            var option12 = "";
+            var option13 = "";
+            var option14 = "";
+            var option15 = "";
+            var option16 = "";
+            var option17 = "";
+            var option18 = "";
+            var option19 = "";
+            var option20 = "";
+            var option21 = "";
+            var option22 = "";
+            var option23 = "";
+            var option24 = "";
+            var option25 = "";
+
 
             for (var j = 0; j< games.length; j++){
+
+
+                for(var game = 0; game < games.length; game++){
+                    if(Object.keys(selectionsJson[game])[0] == games[j].game_id){
+                        selectedOption = selectionsJson[game][games[j].game_id]["selection"];
+                        selectedConfidence = selectionsJson[game][games[j].game_id]["confidence"];
+                        break;
+                    }
+                }
+
+
                 var optionText = "";
                 var isSelected = false;
-                var confidence = selectionList[j].substring(1);
+                var confidence = selectedConfidence;
+                var option = selectedOption
 
-                if(selectionList[j].charAt(0) == "1"){
+                if(option == "1"){
                     optionText = confidence + " - " + games[j].home.toString();
-                } else if (selectionList[j].charAt(0) == "2") {
+                } else if (option == "2") {
                     optionText = confidence + " - " + games[j].away.toString();
                 } else {
                     optionText = j.toString();
@@ -1628,29 +1658,31 @@ function populateDivs(games, userid, selections=null, week) {
     var button = document.createElement("BUTTON");
     button.innerHTML = "Submit Picks";
     button.onclick = function(){
-        var selectionValues = []
+        var confidenceValues = [];
+        var selectionString = "[";
         for(var i = 1; i <= games.length; i++) {
+            selectionString = selectionString + "{\"" + games[i-1].game_id + "\":{\"selection\":";
             if (document.getElementById("home" + i.toString()).checked) {
-                picks = picks + "1";
+                selectionString = selectionString + "\"1\",";
             }
             if (document.getElementById("away" + i.toString()).checked) {
-                picks = picks + "2";
+                selectionString = selectionString + "\"2\",";
             }
             var updationID = "#confidencepoints" + i.toString();
-            var selectionValue = $(updationID).val();
-            if(selectionValues.includes(selectionValue)){
-                alert("You have selected duplicate confidence points for CP value: " + selectionValue)
+            var confidence = $(updationID).val();
+            selectionString = selectionString + "\"confidence\":\"" + confidence + "\"}}"
+            if(confidenceValues.includes(confidence)){
+                alert("You have selected duplicate confidence points for CP value: " + confidence)
                 return false;
             } else {
-                selectionValues.push(selectionValue);
+                confidenceValues.push(confidence);
             }
             if (i != games.length) {
-                picks = picks + selectionValue + ","
-            } else {
-                picks = picks + selectionValue
+                selectionString = selectionString + ","
             }
         }
-        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}?picks=${picks}`;
+        selectionString = selectionString + "]";
+        var url = `http://localhost:5000/submitpicks/${week}?picks=${selectionString}`;//`http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}?picks=${picks}`;
         location.replace(url);
     };
     gamesList.appendChild(button);
