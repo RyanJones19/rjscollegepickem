@@ -4,15 +4,15 @@ from .ncaa.lib.ncaa import NCAAAPI
 from .models import User, Scores, Adminselections
 from datetime import datetime
 from . import db
+import requests
 import json
 
 main = Blueprint('main', __name__)
 
 ncaa_api_client = NCAAAPI()
 
-
-week="1"
-totalWeeks=12
+week = str(json.loads(requests.get("https://api.sportsdata.io/v3/cfb/scores/json/CurrentSeasonDetails?key=1cad9502a7fb41309dd027faa659317f").text)['ApiWeek'])
+totalWeeks=13
 
 @main.route('/')
 def index():
@@ -136,8 +136,9 @@ def weeklyleaguestats(week):
         return render_template('profile.html', name=str(current_user.name) + ", an error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
 
     for game in range(len(games)):
-        if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') > datetime.now():
-            return render_template('profile.html', name=str(current_user.name) + ", games for week " + week + " have not unlocked yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') < datetime.now():
+            break
+        return render_template('profile.html', name=str(current_user.name) + ", games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
 
     allPicks=db.session.query(User,Scores).filter(User.id==Scores.id).all()
     groupSelectionDisplay={}
@@ -146,10 +147,20 @@ def weeklyleaguestats(week):
         orderedGameNames[game['home_team_details'].split(':')[0]] = game['kickoff']
         orderedGameNames[game['away_team_details'].split(':')[0]] = game['kickoff']
 
+    correctSelections=[]
+    incorrectSelections=[]
+    for i in range(len(games)):
+        if int(games[i]['home_team_details'].split(":")[1]) > int(games[i]['away_team_details'].split(":")[1]) and games[i]['isClosed']:
+            correctSelections.append(games[i]['home_team_details'].split(":")[0])
+            incorrectSelections.append(games[i]['away_team_details'].split(":")[0])
+        elif games[i]['isClosed']:
+            correctSelections.append(games[i]['away_team_details'].split(":")[0])
+            incorrectSelections.append(games[i]['home_team_details'].split(":")[0])
+        else:
+            print("Game has not yet concluded")
+
     if allPicks is not None:
         for picks in allPicks:
-            correctSelections=[]
-            incorrectSelections=[]
             username = picks.User.name
             userid = picks.User.id
             totalScore = 0
@@ -176,15 +187,6 @@ def weeklyleaguestats(week):
                             if str(selection) == str(game["game_id"]):
                                 team = game["away_team_details"].split(":")[0]
                     userSelectionDisplay[team] = points
-            for i in range(len(games)):
-                if int(games[i]['home_team_details'].split(":")[1]) > int(games[i]['away_team_details'].split(":")[1]) and games[i]['isClosed']:
-                    correctSelections.append(games[i]['home_team_details'].split(":")[0])
-                    incorrectSelections.append(games[i]['away_team_details'].split(":")[0])
-                elif games[i]['isClosed']:
-                    correctSelections.append(games[i]['away_team_details'].split(":")[0])
-                    incorrectSelections.append(games[i]['home_team_details'].split(":")[0])
-                else:
-                    print("Game has not yet concluded")
 
             for team in orderedGameNames.keys():
                 if team in userSelectionDisplay.keys():
