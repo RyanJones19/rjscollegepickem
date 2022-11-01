@@ -52,14 +52,6 @@ class TeamResponseModel(pydantic.BaseModel):
 class TeamInfoResponseModel(pydantic.BaseModel):
     __root__: typing.List[TeamResponseModel]
 
-#class correctScoresResponseModel(pydantic.BaseModel):
-#    home_team: str
-#    home_points: typing.Optional[int]
-#    away_team: str
-#    away_points: typing.Optional[int]
-#    venue: typing.Optional[str]
-#    start_date: typing.Optional[str]
-
 class CorrectTeamResponseModel(pydantic.BaseModel):
     name: typing.Optional[str]
     alias: typing.Optional[str]
