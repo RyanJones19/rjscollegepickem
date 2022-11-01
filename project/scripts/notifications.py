@@ -58,8 +58,9 @@ message_body_not_done = f"Our records indicate you have not yet submitted your p
 
 message_body_done = f"Our records indicate you have already submitted your picks for College Pickem Week {week} -- thanks and good luck!"
 
-account_sid = 'ACb8b4d121c8196cb8d5fbe8ceaa234eb0'
-auth_token = '36f3731f9f389c9175c4015148c7b04f'
+# fetch below values here: https://console.twilio.com/?frameUrl=%2Fconsole%3Fx-target-region%3Dus1
+account_sid = 'TWILIOSID'
+auth_token = 'TWILIOAUTHTOKEN'
 client = Client(account_sid, auth_token)
 
 for user in textList:
