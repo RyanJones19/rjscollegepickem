@@ -230,3 +230,7 @@ def yearlyleaguestats():
     yearlyScoresDict = dict(sorted(yearlyScoresDict.items(), key=lambda x: x[1], reverse=True))
     return render_template('yearlyleaguestats.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict=json.dumps(yearlyScoresDict))
 
+@main.route('/emailformsubmit')
+@login_required
+def emailformsubmit():
+    return render_template('emailformsubmit.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict="")
