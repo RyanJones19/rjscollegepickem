@@ -7,6 +7,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
     admin = db.Column(db.Integer, default=0, nullable=False)
+    phonenumber = db.Column(db.String(10))
 
 class Adminselections(UserMixin, db.Model):
     year = db.Column(db.Integer, primary_key=True)
