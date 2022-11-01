@@ -5,7 +5,7 @@ from twilio.rest import Client
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('mysql+pymysql://jonesr:x4p3m0nk3yx@testcommsdb.cluster-cyl3p4f2r81e.us-west-2.rds.amazonaws.com:3306/ryan_test')
+engine = create_engine('DB_CONNECTION_STRING')
 
 metadata = MetaData(bind=None)
 
