@@ -1667,13 +1667,16 @@ function populateDivs(games, userid, selections=null, week) {
     button.innerHTML = "Submit Picks";
     button.onclick = function(){
         var confidenceValues = [];
+        var selectionsMade = 0;
         var selectionString = "[";
         for(var i = 1; i <= games.length; i++) {
             selectionString = selectionString + "{\"" + games[i-1].game_id + "\":{\"selection\":";
             if (document.getElementById("home" + i.toString()).checked) {
+                ++selectionsMade;
                 selectionString = selectionString + "\"1\",";
             }
             if (document.getElementById("away" + i.toString()).checked) {
+                ++selectionsMade;
                 selectionString = selectionString + "\"2\",";
             }
             var updationID = "#confidencepoints" + i.toString();
@@ -1685,9 +1688,20 @@ function populateDivs(games, userid, selections=null, week) {
             } else {
                 confidenceValues.push(confidence);
             }
+
             if (i != games.length) {
                 selectionString = selectionString + ","
             }
+        }
+        for(var j = 1; j <= games.length; j++){
+            if(!confidenceValues.includes(j.toString())){
+                alert("You have not selected 25 unique confidence values, please verify 1-25 are uniquely selected")
+                return false;
+            }
+        }
+        if(selectionsMade != 25){
+            alert("You only made " + selectionsMade.toString() + " selections, please choose 25 games!")
+            return false;
         }
         selectionString = selectionString + "]";
         var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}?picks=${selectionString}`;

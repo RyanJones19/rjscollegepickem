@@ -5,12 +5,14 @@ import urllib.parse
 import re
 import sys
 import ast
+import requests
 from datetime import datetime
 from datetime import timedelta
 from .base_client import *
 from .ncaamodels import (
     ScheduleResponseModel,
-    TeamInfoResponseModel
+    TeamInfoResponseModel,
+    CorrectScoresResponseModelList
 )
 
 class NCAAAPI(BaseClient):
@@ -46,6 +48,9 @@ class NCAAAPI(BaseClient):
         teamdata = pydantic.parse_obj_as(TeamInfoResponseModel, response.json())
         teamMap = {}
 
+        correctScoresResponse = requests.get(f"https://api.sportradar.us/ncaafb/trial/v7/en/games/{year}/REG/{week}/schedule.json?api_key=ybq9wq8cgan9anqg5yhwyxj6")
+        correctScores = pydantic.parse_obj_as(CorrectScoresResponseModelList, correctScoresResponse.json())
+
 
         for team in teamdata.__root__:
             teamMap[team.TeamID] = team
@@ -62,14 +67,38 @@ class NCAAAPI(BaseClient):
                     status = s
                 else:
                     status = "Scheduled - Time TBD"
-            if game.HomeTeamScore is not None:
-                home_team = game.HomeTeam + ": " + str(game.HomeTeamScore)
-            else:
-                home_team = game.HomeTeam + ": 0"
-            if game.AwayTeamScore is not None:
-                away_team = game.AwayTeam + ": " + str(game.AwayTeamScore)
-            else:
-                away_team = game.AwayTeam + ": 0"
+
+            for correctScore in correctScores.__root__.week.games:
+                d1 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=4)
+                d2 = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S')
+                if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and d1 == d2):
+                    if correctScore.scoring is not None and correctScore.scoring.home_points is not None:
+                        # sometimes the two APIs flip flop which teams are Home and Away (seems only neutral venues)
+                        if(game.HomeTeamName == correctScore.away.name):
+                            home_team = game.HomeTeam + ": " + str(correctScore.scoring.away_points)
+                        else:
+                            home_team = game.HomeTeam + ": " + str(correctScore.scoring.home_points)
+                    else:
+                        home_team = game.HomeTeam + ": 0"
+                    if correctScore.scoring is not None and correctScore.scoring.away_points is not None:
+                        if(game.AwayTeamName == correctScore.home.name):
+                            away_team = game.AwayTeam + ": " + str(correctScore.scoring.home_points)
+                        else:
+                            away_team = game.AwayTeam + ": " + str(correctScore.scoring.away_points)
+                    else:
+                        away_team = game.AwayTeam + ": 0"
+                    break
+
+            # OLD API with intentionally incorrect scores
+            #if game.HomeTeamScore is not None:
+            #    home_team = game.HomeTeam + ": " + str(game.HomeTeamScore)
+            #else:
+            #    home_team = game.HomeTeam + ": 0"
+            #if game.AwayTeamScore is not None:
+            #    away_team = game.AwayTeam + ": " + str(game.AwayTeamScore)
+            #else:
+            #    away_team = game.AwayTeam + ": 0"
+
             homeTeamRank = ""
             awayTeamRank = ""
             if teamMap[game.HomeTeamID].ApRank is not None:
