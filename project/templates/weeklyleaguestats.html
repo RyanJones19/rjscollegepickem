@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1>{{ message }}</h1>
 <label>Select Week:<select name="form" onchange="location = this.value;">
     <option value="{{ url_for('main.weeklyleaguestats', week=0) }}">None</option>
     <option value="{{ url_for('main.weeklyleaguestats', week=1) }}">1</option>
