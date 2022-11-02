@@ -927,14 +927,18 @@ function populateDivs(games, userid, selections=null, week) {
         "KAN":"https://www.espn.com/college-football/team/_/id/2305/kansas-jayhawks"
     }
 
-    for(var i = 0; i < games.length; i++) {
-        var lockSelection = false;
-        var d1 = new Date(games[i].kickoff);
-        var d2 = new Date();
-        d1.setHours(d1.getHours() - 3);
-        if (d1 <= d2) {
-            lockSelection = true;
-            break;
+    // TODO -- change the user id logic used here to instead check if is admin instead of hard coding user id
+    var lockSelection = false;
+    if(userid != 1 && userid != 5) {
+        for (var i = 0; i < games.length; i++) {
+            //var lockSelection = false;
+            var d1 = new Date(games[i].kickoff);
+            var d2 = new Date();
+            d1.setHours(d1.getHours() - 3);
+            if (d1 <= d2) {
+                lockSelection = true;
+                break;
+            }
         }
     }
 
@@ -1704,7 +1708,7 @@ function populateDivs(games, userid, selections=null, week) {
             return false;
         }
         selectionString = selectionString + "]";
-        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}?picks=${selectionString}`;
+        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}/${userid}?picks=${selectionString}`;
         location.replace(url);
     };
     gamesList.appendChild(button);
@@ -1834,5 +1838,48 @@ function populateWeeklyScores(weeklyScoresDict, correctSelections, incorrectSele
         }
         weeklyScoresDisplay.appendChild(userWeeklyScoresTable);
     }
+}
+
+function populateAdminAdjustments(userList) {
+    var adminAdjust = document.getElementsByClassName("admin-adjust")[0];
+    var userInfo = JSON.parse(userList);
+
+    var userSelectText = document.createElement("h3");
+    userSelectText.innerHTML = "Please Select the User you want to modify below: ";
+    adminAdjust.appendChild(userSelectText);
+    var users = document.createElement("select");
+    users.id = "userlist";
+    users.name = "userlist";
+    for(var j = 0; j < userInfo.length; j++){
+        for(var i = 0; i < Object.keys(userInfo[j]).length; i++){
+            var option = new Option(Object.keys(userInfo[j])[i],userInfo[j][Object.keys(userInfo[j])[i]]);
+            users.appendChild(option);
+        }
+    }
+    adminAdjust.appendChild(users);
+
+    var weekSelectText = document.createElement("h3");
+    weekSelectText.innerHTML = "Please Select the Week to modify below: ";
+    adminAdjust.appendChild(weekSelectText);
+    var weeks = document.createElement("select");
+    weeks.id = "weeklist";
+    weeks.name = "weeklist";
+    for(var i = 1; i <= 13; i++){
+        var option = new Option(i,i);
+        weeks.appendChild(option);
+    }
+    adminAdjust.appendChild(weeks);
+
+
+
+    var button = document.createElement("BUTTON");
+    button.innerHTML = "Submit New Admin Picks";
+    button.onclick = function(){
+        var user_id = $('#userlist option:selected').val();
+        var week = $('#weeklist option:selected').val();
+        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/admin_adjust/${week}/${user_id}`;
+        location.replace(url);
+    }
+    adminAdjust.appendChild(button);
 }
 

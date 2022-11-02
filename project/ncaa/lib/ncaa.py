@@ -69,8 +69,12 @@ class NCAAAPI(BaseClient):
                     status = "Scheduled - Time TBD"
 
             for correctScore in correctScores.__root__.week.games:
-                d1 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=4)
-                d2 = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S')
+                try:
+                    d1 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=4)
+                    d2 = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S')
+                except:
+                    d1 = None
+                    d2 = None
                 if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and d1 == d2):
                     if correctScore.scoring is not None and correctScore.scoring.home_points is not None:
                         # sometimes the two APIs flip flop which teams are Home and Away (seems only neutral venues)

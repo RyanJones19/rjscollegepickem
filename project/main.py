@@ -17,34 +17,35 @@ totalWeeks=13
 @main.route('/')
 def index():
     games=[]
-    return render_template('index.html', games=games, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[],totalScore=0, week=week, yearlyScoresDict={})
+    return render_template('index.html', games=games, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[],totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
 @main.route('/admin/<week>')
 @login_required
-def admin(week=1):
+def admin(week):
     games=ncaa_api_client.get_weekly_matchups(2022, week)
     if current_user.admin == 0:
-        return render_template('failedadmin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('failedadmin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     else:
-        return render_template('admin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, weekText="Game Options for week " + week, yearlyScoresDict={})
+        return render_template('admin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, weekText="Game Options for week " + week, yearlyScoresDict={}, userList=[])
+
 
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+    return render_template('profile.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
 
 @main.route('/myscores/<week>')
 @login_required
-def myscores(week=1):
+def myscores(week):
     try:
         data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
     except:
-        return render_template('scores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('scores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     if data is not None:
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
     else:
-        return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     picks=getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
 
     orderedGameNames = {}
@@ -67,20 +68,10 @@ def myscores(week=1):
                     for game in games:
                         if str(selection) == str(game["game_id"]):
                             team = game["home_team_details"].split(":")[0]
-                            #print(team)
-                            #print("POINTS: " + points)
-                            #alternatepoints = int(points) + int(game["home"].split('|')[1])
-                            #print("ALTERNATE POINTS: " + str(alternatepoints))
-                            #print("\n")
                 else:
                     for game in games:
                         if str(selection) == str(game["game_id"]):
                             team = game["away_team_details"].split(":")[0]
-                            #print(team)
-                            #print("POINTS: " + points)
-                            #alternatepoints = int(points) + int(game["away"].split('|')[1])
-                            #print("ALTERNATE POINTS: " + str(alternatepoints))
-                            #print("\n")
                 selectionDisplay[team] = points
         for i in range(len(games)):
             if int(games[i]['home_team_details'].split(":")[1]) > int(games[i]['away_team_details'].split(":")[1]) and games[i]['isClosed']:
@@ -100,29 +91,57 @@ def myscores(week=1):
         for team in orderedGameNames.keys():
             if team in selectionDisplay.keys():
                 selectionDisplayParsed[team] = selectionDisplay[team]
-        return render_template('myscores.html', message="", name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(selectionDisplayParsed), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={})
+        return render_template('myscores.html', message="", name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(selectionDisplayParsed), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={}, userList=[])
     else:
-        return render_template('myscores.html', message="You have not made any picks yet for week " + week + " please go make your selections", name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('myscores.html', message="You have not made any picks yet for week " + week + " please go make your selections", name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
 @main.route('/schedule/<week>')
 @login_required
-def schedule(week=1):
+def schedule(week):
     try:
         data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
         userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
-        return render_template('schedule.html', message="", games=games, userid=current_user.id, selections=userSelectedScores, selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('schedule.html', message="", games=games, userid=current_user.id, selections=userSelectedScores, selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     except:
-        return render_template('schedule.html', name=current_user.name, message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('schedule.html', name=current_user.name, message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
-@main.route('/submitpicks/<week>', methods=['GET'])
+@main.route('/admin_adjust')
 @login_required
-def submit_picks(week):
-    scores = Scores.query.filter_by(id=current_user.id).first()
-    args = request.args
-    setattr(scores, "week" + week + "picks", str(args.get("picks")))
-    db.session.commit()
-    return redirect(url_for('main.profile'))
+def admin_select_user():
+    users=User.query.all()
+    userList = []
+    for user in users:
+        userList.append({user.name:user.id})
+    return render_template('adminadjust.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=json.dumps(userList))
+
+
+@main.route('/admin_adjust/<week>/<user_id>')
+@login_required
+def admin_adjust_picks(week, user_id):
+    if current_user.admin == 0:
+        return render_template('failedadmin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+    else:
+        try:
+            data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
+            games=ncaa_api_client.get_weekly_matchups(2022, week, data)
+            userSelectedScores = getattr(Scores.query.filter_by(id=user_id).first(), "week" + week + "picks")
+            return render_template('schedule.html', message="", games=games, userid=user_id, selections=userSelectedScores, selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+        except:
+            return render_template('schedule.html', name=current_user.name, message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+
+
+@main.route('/submitpicks/<week>/<user_id>', methods=['GET'])
+@login_required
+def submit_picks(week, user_id):
+    if user_id != current_user.id and current_user.admin == 0:
+        return render_template('failedadmin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+    else:
+        scores = Scores.query.filter_by(id=user_id).first()
+        args = request.args
+        setattr(scores, "week" + week + "picks", str(args.get("picks")))
+        db.session.commit()
+        return redirect(url_for('main.profile'))
 
 @main.route('/selectweeklygames/<week>', methods=['GET'])
 @login_required
@@ -139,16 +158,16 @@ def weeklyleaguestats(week):
     try:
         data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
     except:
-        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="An error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="An error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     if data is not None:
         games=ncaa_api_client.get_weekly_matchups(2022, week, data)
     else:
-        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="An error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="An error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
     for game in range(len(games)):
         if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') < datetime.now():
             break
-        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="Games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="Games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
     allPicks=db.session.query(User,Scores).filter(User.id==Scores.id).all()
     groupSelectionDisplay={}
@@ -213,9 +232,9 @@ def weeklyleaguestats(week):
             setattr(scores, "week" + week + "score", str(totalScore))
             db.session.commit()
         groupSelectionDisplay = sorted(groupSelectionDisplay.items(), key=lambda x: x[1]['score'], reverse=True)
-        return render_template('weeklyleaguestats.html', message="", name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(groupSelectionDisplay), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={})
+        return render_template('weeklyleaguestats.html', message="", name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=json.dumps(groupSelectionDisplay), correctSelections=correctSelections, incorrectSelections=incorrectSelections, totalScore=totalScore, week=week, yearlyScoresDict={}, userList=[])
     else:
-        return render_template('weeklyleaguestats.html', name=current_user.name, message="You have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={})
+        return render_template('weeklyleaguestats.html', name=current_user.name, message="You have not made any picks yet for week " + week + " please go make your selections", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
 @main.route('/yearlyleaguestats')
 @login_required
@@ -228,9 +247,9 @@ def yearlyleaguestats():
             yearlyScore = yearlyScore + int(getattr(userScore.Scores, "week" + str(weekNum) + "score"))
         yearlyScoresDict[userScore.User.name] = yearlyScore
     yearlyScoresDict = dict(sorted(yearlyScoresDict.items(), key=lambda x: x[1], reverse=True))
-    return render_template('yearlyleaguestats.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict=json.dumps(yearlyScoresDict))
+    return render_template('yearlyleaguestats.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict=json.dumps(yearlyScoresDict), userList=[])
 
 @main.route('/emailformsubmit')
 @login_required
 def emailformsubmit():
-    return render_template('emailformsubmit.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict="")
+    return render_template('emailformsubmit.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])

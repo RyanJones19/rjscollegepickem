@@ -64,7 +64,7 @@
                      <a href="/myscores/{{week}}">
                         <h2>Profile</h2>
                         <div class="content">
-                           <p>View your profile past selections and statistics</p>
+                           <p>View your selections for a given week</p>
                         </div>
                      </a>
                   </article>
@@ -72,10 +72,10 @@
                      <span class="image">
                      <img src="/static/images/pic02.jpg" alt="" />
                      </span>
-                     <a href="/admin/{{week}}">
-                        <h2>Admin</h2>
+                     <a href="/schedule/{{week}}">
+                        <h2>Make Picks</h2>
                         <div class="content">
-                           <p>View the relevant games for this week</p>
+                           <p>View the slate of game and pick your winners</p>
                         </div>
                      </a>
                   </article>
@@ -83,10 +83,10 @@
                      <span class="image">
                      <img src="/static/images/pic03.jpg" alt="" />
                      </span>
-                     <a href="/schedule/{{week}}">
-                        <h2>Make Picks</h2>
+                     <a href="/weeklyleaguestats/{{week}}">
+                        <h2>League Selections by Week</h2>
                         <div class="content">
-                           <p>View the games schedule</p>
+                           <p>View all other players picks for the week</p>
                         </div>
                      </a>
                   </article>
@@ -94,10 +94,10 @@
                      <span class="image">
                      <img src="/static/images/pic04.jpg" alt="" />
                      </span>
-                     <a href="/weeklyleaguestats/{{week}}">
-                        <h2>Weekly League Stats</h2>
+                     <a href="/yearlyleaguestats}">
+                        <h2>Yearly Stats</h2>
                         <div class="content">
-                           <p>View league stats for the week and how you stack up</p>
+                           <p>View Year Long Stats</p>
                         </div>
                      </a>
                   </article>
@@ -105,10 +105,10 @@
                      <span class="image">
                      <img src="/static/images/pic05.jpg" alt="" />
                      </span>
-                     <a href="/yearlyleaguestats">
-                        <h2>Yearly Stats</h2>
+                     <a href="/admin/{{week}}">
+                        <h2>Admin - Select Games</h2>
                         <div class="content">
-                           <p>View year long stats</p>
+                           <p>Admin Only Page for Selecting the Games for the Week</p>
                         </div>
                      </a>
                   </article>
@@ -116,10 +116,10 @@
                      <span class="image">
                      <img src="/static/images/pic06.jpg" alt="" />
                      </span>
-                     <a href="/myscores/{{week}}">
-                        <h2>View your Scores</h2>
+                     <a href="/admin_adjust">
+                        <h2>Admin - Adjust Other Users Entries</h2>
                         <div class="content">
-                           <p>View your scores</p>
+                           <p>As an admin, adjust other users entries (For Mistakes)</p>
                         </div>
                      </a>
                   </article>
@@ -189,6 +189,9 @@
       </script>
       <script>
          populateWeeklyScores({{selectionDisplay|tojson}}, {{correctSelections|tojson}}, {{incorrectSelections|tojson}}, {{week}})
+      </script>
+      <script>
+         populateAdminAdjustments({{userList|tojson}})
       </script>
    </body>
 </html>
