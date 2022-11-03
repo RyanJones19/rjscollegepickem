@@ -791,7 +791,7 @@ function populateAdminPage(games,week){
         if(arraylen != 25){
             alert("Please select 25 games, you selected: " + arraylen.toString());
         }else {
-            var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/selectweeklygames/${week}?selections=${selections}`;
+            var url = `http://rjscollegepickem-67231715.us-west-2.elb.amazonaws.com/selectweeklygames/${week}?selections=${selections}`;
             location.replace(url);
         }
     };
@@ -1708,7 +1708,7 @@ function populateDivs(games, userid, selections=null, week) {
             return false;
         }
         selectionString = selectionString + "]";
-        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}/${userid}?picks=${selectionString}`;
+        var url = `http://rjscollegepickem-67231715.us-west-2.elb.amazonaws.com/submitpicks/${week}/${userid}?picks=${selectionString}`;
         location.replace(url);
     };
     gamesList.appendChild(button);
@@ -1877,7 +1877,7 @@ function populateAdminAdjustments(userList) {
     button.onclick = function(){
         var user_id = $('#userlist option:selected').val();
         var week = $('#weeklist option:selected').val();
-        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/admin_adjust/${week}/${user_id}`;
+        var url = `http://rjscollegepickem-67231715.us-west-2.elb.amazonaws.com/admin_adjust/${week}/${user_id}`;
         location.replace(url);
     }
     adminAdjust.appendChild(button);

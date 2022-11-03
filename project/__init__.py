@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'b5ebbe7e74565a661a0958ae9d122681'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jonesr:x4p3m0nk3yx@testcommsdb.cluster-cyl3p4f2r81e.us-west-2.rds.amazonaws.com:3306/ryan_test' #'sqlite:///db.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jonesr:x4p3m0nk3yx@rjscollegepickem.cluster-cctmcd2upnno.us-west-2.rds.amazonaws.com:3306/pickem'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
