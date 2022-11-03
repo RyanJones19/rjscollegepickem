@@ -94,7 +94,7 @@
                      <span class="image">
                      <img src="/static/images/pic04.jpg" alt="" />
                      </span>
-                     <a href="/yearlyleaguestats}">
+                     <a href="/yearlyleaguestats">
                         <h2>Yearly Stats</h2>
                         <div class="content">
                            <p>View Year Long Stats</p>
@@ -190,8 +190,10 @@
       <script>
          populateWeeklyScores({{selectionDisplay|tojson}}, {{correctSelections|tojson}}, {{incorrectSelections|tojson}}, {{week}})
       </script>
-      <script>
+      {% block script %}
+      {% endblock %}
+      <!--<script>
          populateAdminAdjustments({{userList|tojson}})
-      </script>
+      </script>-->
    </body>
 </html>

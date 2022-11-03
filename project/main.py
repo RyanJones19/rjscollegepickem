@@ -134,8 +134,8 @@ def admin_adjust_picks(week, user_id):
 @main.route('/submitpicks/<week>/<user_id>', methods=['GET'])
 @login_required
 def submit_picks(week, user_id):
-    if user_id != current_user.id and current_user.admin == 0:
-        return render_template('failedadmin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+    if str(user_id) != str(current_user.id) and current_user.admin == 0:
+        return render_template('failedadmin.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     else:
         scores = Scores.query.filter_by(id=user_id).first()
         args = request.args

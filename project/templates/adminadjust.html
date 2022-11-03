@@ -8,4 +8,11 @@
 <br>
 <br>
 <div class="admin-adjust"></div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+   populateAdminAdjustments({{userList|tojson}})
+</script>
 {% endblock %}
