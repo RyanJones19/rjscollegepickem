@@ -1708,7 +1708,7 @@ function populateDivs(games, userid, selections=null, week) {
             return false;
         }
         selectionString = selectionString + "]";
-        var url = `http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}/${userid}?picks=${selectionString}`;
+        var url = `http://localhost:5000/submitpicks/${week}/${userid}?picks=${selectionString}`;//`http://testcomms-1812807762.us-west-2.elb.amazonaws.com/submitpicks/${week}/${userid}?picks=${selectionString}`;
         location.replace(url);
     };
     gamesList.appendChild(button);

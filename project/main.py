@@ -141,7 +141,8 @@ def submit_picks(week, user_id):
         args = request.args
         setattr(scores, "week" + week + "picks", str(args.get("picks")))
         db.session.commit()
-        return redirect(url_for('main.profile'))
+        #return redirect(url_for('main.profile'))
+        return redirect(f"/myscores/{week}")
 
 @main.route('/selectweeklygames/<week>', methods=['GET'])
 @login_required
