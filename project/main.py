@@ -164,10 +164,10 @@ def weeklyleaguestats(week):
     else:
         return render_template('weeklyleaguestats.html', name=str(current_user.name), message="An error occurred loading all other teams picks, please reachout to an admin", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
-    #for game in range(len(games)):
-    #    if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') < datetime.now():
-    #        break
-    #    return render_template('weeklyleaguestats.html', name=str(current_user.name), message="Games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+    for game in range(len(games)):
+        if datetime.strptime(games[0]['kickoff'], '%Y-%m-%dT%H:%M:%S') < datetime.now():
+            break
+        return render_template('weeklyleaguestats.html', name=str(current_user.name), message="Games for week " + week + " have not started yet, please check back after the first game kicks off", games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
 
     allPicks=db.session.query(User,Scores).filter(User.id==Scores.id).all()
     groupSelectionDisplay={}
