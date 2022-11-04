@@ -929,7 +929,7 @@ function populateDivs(games, userid, selections=null, week) {
 
     // TODO -- change the user id logic used here to instead check if is admin instead of hard coding user id
     var lockSelection = false;
-    if(userid != 1 && userid != 5) {
+    if(userid != 1 && userid != 2) {
         for (var i = 0; i < games.length; i++) {
             //var lockSelection = false;
             var d1 = new Date(games[i].kickoff);
