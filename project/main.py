@@ -120,7 +120,7 @@ def admin_select_user():
 @login_required
 def admin_adjust_picks(week, user_id):
     if current_user.admin == 0:
-        return render_template('failedadmin.html', name=current_user.name, games=games, userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
+        return render_template('failedadmin.html', name=current_user.name, games=[], userid=current_user.id, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, yearlyScoresDict={}, userList=[])
     else:
         try:
             data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')

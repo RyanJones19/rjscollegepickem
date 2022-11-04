@@ -5,7 +5,7 @@ from twilio.rest import Client
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('DB_CONNECTION_STRING')
+engine = create_engine('YOUR_DB_HERE')
 
 metadata = MetaData(bind=None)
 
@@ -26,7 +26,6 @@ scores = Table(
 
 Session = sessionmaker(bind=engine)
 session = Session()
-
 users = session.query(user).all()
 scores = session.query(scores).all()
 userslist = []
@@ -53,27 +52,28 @@ for user in userslist:
     if(user["phonenumber"] is not None):
         textList.append(user["phonenumber"])
 
-message_body_not_done = f"Our records indicate you have not yet submitted your picks for College Pickem Week {week} -- visit http://testcomms-1812807762.us-west-2.elb.amazonaws.com/schedule/{week} and login to make your selections, good luck!"
+message_body_not_done = f"Our records indicate you have not yet submitted your picks for College Pickem Week {week} -- visit https://rjscollegepickem.com/schedule/{week} and login to make your selections, good luck!"
 
 
 message_body_done = f"Our records indicate you have already submitted your picks for College Pickem Week {week} -- thanks and good luck!"
 
 # fetch below values here: https://console.twilio.com/?frameUrl=%2Fconsole%3Fx-target-region%3Dus1
 account_sid = 'TWILIOSID'
-auth_token = 'TWILIOAUTHTOKEN'
+auth_token = 'TWILIOTOKEN'
 client = Client(account_sid, auth_token)
 
 for user in textList:
-    if user in submittedNumbers:
-        messagetext=message_body_done
-    else:
+    if user not in submittedNumbers:
         messagetext=message_body_not_done
-    message = client.messages \
-        .create(
-	body=messagetext,
-	from_='+15034617975',
-	to=f"+1{user}",
-	)
-    print("Successfully sent message")
-    print(message.sid)
-    print(messagetext)
+        message = client.messages \
+            .create(
+	    body=messagetext,
+	    from_='+15034617975',
+	    to=f"+1{user}",
+	    )
+        print("Successfully sent message")
+        print(user)
+        print(message.sid)
+        print(messagetext)
+    else:
+        print("User has submitted, doing nothing")
