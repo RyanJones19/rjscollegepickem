@@ -22,3 +22,9 @@
 <h2>Week {{week}} Selections: </h2>
 <div class="games-list"></div>
 {% endblock %}
+
+{% block script %}
+      <script type="text/javascript">
+        populateDivs({{games|tojson}}, {{userid}}, {{selections|tojson}}, {{week}}, {{isAdmin}})
+      </script>
+{% endblock %}

@@ -23,3 +23,9 @@
 <h2>Week {{week}} Stats</h2>
 <div class="weekly-scores"></div>
 {% endblock %}
+
+{% block script %}
+<script>
+    populateWeeklyScores({{selectionDisplay|tojson}}, {{correctSelections|tojson}}, {{incorrectSelections|tojson}}, {{week}})
+</script>
+{% endblock %}}

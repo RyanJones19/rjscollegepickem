@@ -25,3 +25,9 @@
 </h1>
 <div class="profile-scores"></div>
 {% endblock %}
+
+{% block script %}
+      <script type="text/javascript">
+         profileScores({{selectionDisplay|tojson}}, {{correctSelections|tojson}}, {{totalScore}}, {{incorrectSelections|tojson}}, {{week}})
+      </script>
+{% endblock %}

@@ -760,7 +760,10 @@ function populateDropdown(games, newSelectedValue, selectedList) {
 }
 
 function populateAdminPage(games,week){
-    var gameSelectionList = document.getElementsByClassName("game-selection")[0];
+    var gameSelection = document.getElementsByClassName("game-selection")[0];
+    var gameSelectionList = document.createElement("form");
+    gameSelectionList.id = "adminform";
+
     for(var i=0; i < games.length; i++) {
         var cb1 = document.createElement("input");
         cb1.type = "checkbox";
@@ -791,17 +794,20 @@ function populateAdminPage(games,week){
         if(arraylen != 25){
             alert("Please select 25 games, you selected: " + arraylen.toString());
         }else {
-            var url = `http://rjscollegepickem.com/selectweeklygames/${week}?selections=${selections}`;
-            location.replace(url);
+            gameSelectionList.setAttribute("method", "post");
+            gameSelectionList.setAttribute("action", `/selectweeklygames/${week}?selections=${selections}`)
         }
     };
     var br = document.createElement("br");
     gameSelectionList.appendChild(br);
     gameSelectionList.appendChild(button);
+    gameSelection.appendChild(gameSelectionList);
 }
 
-function populateDivs(games, userid, selections=null, week) {
-    var gamesList = document.getElementsByClassName("games-list")[0];
+function populateDivs(games, userid, selections=null, week, isAdmin) {
+    var gamesListParent = document.getElementsByClassName("games-list")[0];
+    var gamesList = document.createElement("form");
+    gamesList.id = "popdivsform";
 
     var picks = "";
     var espnTeamLinkDict = {
@@ -927,11 +933,9 @@ function populateDivs(games, userid, selections=null, week) {
         "KAN":"https://www.espn.com/college-football/team/_/id/2305/kansas-jayhawks"
     }
 
-    // TODO -- change the user id logic used here to instead check if is admin instead of hard coding user id
     var lockSelection = false;
-    if(userid != 1 && userid != 2) {
+    if(!(isAdmin == 1)) {
         for (var i = 0; i < games.length; i++) {
-            //var lockSelection = false;
             var d1 = new Date(games[i].kickoff);
             var d2 = new Date();
             d1.setHours(d1.getHours() - 3);
@@ -1708,10 +1712,11 @@ function populateDivs(games, userid, selections=null, week) {
             return false;
         }
         selectionString = selectionString + "]";
-        var url = `http://rjscollegepickem.com/submitpicks/${week}/${userid}?picks=${selectionString}`;
-        location.replace(url);
+        gamesList.setAttribute("method", "post");
+        gamesList.setAttribute("action", `/submitpicks/${week}/${userid}?picks=${selectionString}`);
     };
     gamesList.appendChild(button);
+    gamesListParent.appendChild(gamesList);
 }
 
 function profileScores(selectionDisplay, correctSelections, totalScore, incorrectSelections, week) {
@@ -1748,7 +1753,7 @@ function profileScores(selectionDisplay, correctSelections, totalScore, incorrec
                 td.appendChild(cellTeam);
             }
             else {
-                var cellScore = document.createElement("t");
+                var cellScore = document.createElement("b");
                 cellScore.innerHTML = selectionDisplayJson[team];
                 cellScore.style.color = textColor;
                 td.appendChild(cellScore);
@@ -1801,12 +1806,16 @@ function populateWeeklyScores(weeklyScoresDict, correctSelections, incorrectSele
                 const td = tr.insertCell();
                 var cell = document.createElement("b");
                 cell.innerHTML = orderedScores[i][0];
+                cell.style.width = '100px';
+                cell.style.height = '40px';
                 td.style.border = '3px solid black';
                 td.appendChild(cell);
             } else {
                 const td = tr.insertCell();
-                var cell = document.createElement("t");
+                var cell = document.createElement("b");
                 cell.innerHTML = orderedScores[i][1]['score'];
+                cell.style.width = '100px';
+                cell.style.height = '40px';
                 td.style.border = '3px solid black';
                 td.appendChild(cell);
             }
@@ -1820,7 +1829,7 @@ function populateWeeklyScores(weeklyScoresDict, correctSelections, incorrectSele
                     td.style.border = '1px solid black';
                     td.appendChild(cell);
                 } else {
-                    var cell = document.createElement("t");
+                    var cell = document.createElement("b");
                     var textColor = ""
                     if(correctSelections.toString().split(',').includes(Object.keys(orderedScores[i][1]['selections'])[k])){
                         textColor = "green"
@@ -1844,9 +1853,13 @@ function populateAdminAdjustments(userList) {
     var adminAdjust = document.getElementsByClassName("admin-adjust")[0];
     var userInfo = JSON.parse(userList);
 
+    var form = document.createElement("form");
+    form.id = "adminform";
+
     var userSelectText = document.createElement("h3");
     userSelectText.innerHTML = "Please Select the User you want to modify below: ";
-    adminAdjust.appendChild(userSelectText);
+    form.appendChild(userSelectText);
+
     var users = document.createElement("select");
     users.id = "userlist";
     users.name = "userlist";
@@ -1856,11 +1869,12 @@ function populateAdminAdjustments(userList) {
             users.appendChild(option);
         }
     }
-    adminAdjust.appendChild(users);
+    form.appendChild(users);
 
     var weekSelectText = document.createElement("h3");
     weekSelectText.innerHTML = "Please Select the Week to modify below: ";
-    adminAdjust.appendChild(weekSelectText);
+    form.appendChild(weekSelectText);
+
     var weeks = document.createElement("select");
     weeks.id = "weeklist";
     weeks.name = "weeklist";
@@ -1868,18 +1882,20 @@ function populateAdminAdjustments(userList) {
         var option = new Option(i,i);
         weeks.appendChild(option);
     }
-    adminAdjust.appendChild(weeks);
-
-
+    form.appendChild(weeks);
 
     var button = document.createElement("BUTTON");
     button.innerHTML = "Submit New Admin Picks";
-    button.onclick = function(){
-        var user_id = $('#userlist option:selected').val();
-        var week = $('#weeklist option:selected').val();
-        var url = `http://rjscollegepickem.com/admin_adjust/${week}/${user_id}`;
-        location.replace(url);
+    form.appendChild(button);
+
+    button.onclick = function() {
+        var selected_user_id_index = form.elements["userlist"].selectedIndex;
+        var user_id = form.elements["userlist"].options[selected_user_id_index].value;
+        var selected_week_index = form.elements["weeklist"].selectedIndex;
+        var week = form.elements["weeklist"].options[selected_week_index].value;
+        form.setAttribute("method", "post");
+        form.setAttribute("action", `/admin_adjust/${week}/${user_id}`);
     }
-    adminAdjust.appendChild(button);
+    adminAdjust.appendChild(form);
 }
 

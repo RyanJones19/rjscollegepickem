@@ -16,7 +16,7 @@
          <header id="header">
             <div class="inner">
                <!-- Logo -->
-               <a href="index.html" class="logo">
+               <a href="/myscores/{{week}}" class="logo">
                <span class="symbol"><img src="/static/images/footballlogo.jpg" alt="" /></span><span class="title">Pick'Em</span>
                </a>
                <!-- Nav -->
@@ -175,21 +175,6 @@
       <script src="/static/assets/js/util.js"></script>
       <script src="/static/assets/js/main.js"></script>
       <script src="/static/assets/js/divgenerator.js"></script>
-      <script type="text/javascript">
-        populateDivs({{games|tojson}}, {{userid}}, {{selections|tojson}}, {{week}})
-      </script>
-      <script type="text/javascript">
-         populateAdminPage({{games|tojson}}, {{week}})
-      </script>
-      <script type="text/javascript">
-         profileScores({{selectionDisplay|tojson}}, {{correctSelections|tojson}}, {{totalScore}}, {{incorrectSelections|tojson}}, {{week}})
-      </script>
-      <script>
-         populateYearlyScores({{yearlyScoresDict|tojson}})
-      </script>
-      <script>
-         populateWeeklyScores({{selectionDisplay|tojson}}, {{correctSelections|tojson}}, {{incorrectSelections|tojson}}, {{week}})
-      </script>
       {% block script %}
       {% endblock %}
    </body>
