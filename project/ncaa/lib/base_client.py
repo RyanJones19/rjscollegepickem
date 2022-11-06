@@ -12,8 +12,8 @@ import requests.exceptions
 import structlog
 import urllib3.util.retry
 
-NCAA_HOST = "https://api.sportsdata.io/v3"
-#NCAA_HOST = "https://api.sportradar.us/ncaafb/trial/v7/en/games"
+NCAA_HOST_ONE = "https://api.sportsdata.io/v3"
+NCAA_HOST_TWO = "https://api.sportradar.us/ncaafb/trial/v7/en/games"
 
 class BaseClient(requests.Session):
     REQUEST_RETRIES = 5
@@ -35,12 +35,6 @@ class BaseClient(requests.Session):
         super().__init__()
 
         if logger is None:
-            # Pull in the wrapped stdlib logger for use in the module.
-            #
-            # If structlog has not been configured, see the following for how
-            # the stdlib logger will be wrapped:
-            #
-            # https://www.structlog.org/en/stable/configuration.html
             self.logger = structlog.get_logger()
         else:
             self.logger = logger
@@ -64,9 +58,7 @@ class BaseClient(requests.Session):
             self.access_token = access_token
 
         else:
-            #self.access_token = "5AULxAYQAm4/IAwSg15WI3am2F/V551tTH4FKxkzANIvmBzgQLQSODsPJQx6RJh0"
-            self.access_token = "1cad9502a7fb41309dd027faa659317f"
-            #self.api_key = "ybq9wq8cgan9anqg5yhwyxj6"
+            self.access_token = os.environ['SPORTS_DATA_API_KEY']
 
         self.headers.update({"Ocp-Apim-Subscription-Key": self.access_token})
 
@@ -74,12 +66,18 @@ class BaseClient(requests.Session):
         self,
         request_type: str,
         route: str,
+        host_number: int,
         data: typing.Optional[typing.Union[typing.List, typing.Dict]] = None,
         json: typing.Optional[typing.Union[typing.List, typing.Dict]] = None,
     ) -> requests.Response:
         """Perform a generic HTTP request and log on exception"""
+        if host_number == 1:
+            NCAA_HOST = NCAA_HOST_ONE
+        elif host_number == 2:
+            NCAA_HOST = NCAA_HOST_TWO
+
         # Validate that a supported request type was given
-        target_url = f"{NCAA_HOST}/{route}"  #?api_key={self.api_key}"
+        target_url = f"{NCAA_HOST}/{route}"
         if request_type not in BaseClient.REQUEST_METHOD_WHITELIST:
             self.logger.error(
                 "unsupported request type given",

@@ -29,7 +29,7 @@ class NCAAAPI(BaseClient):
         matchups = []
         scheduleParsed = []
         route = f"cfb/scores/json/GamesByWeek/{year}/{week}"
-        response = self.assert_request(request_type="GET", route=route)
+        response = self.assert_request(request_type="GET", route=route, host_number=1)
         schedule = pydantic.parse_obj_as(ScheduleResponseModel, response.json())
 
         if scheduleSelections is not None:
@@ -44,7 +44,7 @@ class NCAAAPI(BaseClient):
             scheduleParsed = schedule.__root__
 
         route = f"cfb/scores/json/Teams"
-        response = self.assert_request(request_type="GET", route=route)
+        response = self.assert_request(request_type="GET", route=route, host_number=1)
         teamdata = pydantic.parse_obj_as(TeamInfoResponseModel, response.json())
         teamMap = {}
 
@@ -154,3 +154,10 @@ class NCAAAPI(BaseClient):
             "isClosed": game.IsClosed})
 
         return matchups
+
+    # Fetch the current season week to set default week settings on page
+    def get_current_week(self):
+        route = f'cfb/scores/json/CurrentSeasonDetails'
+        response = self.assert_request(request_type="GET", route=route, host_number=1)
+        apiWeek = str(json.loads(response.text)['ApiWeek'])
+        return apiWeek

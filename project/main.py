@@ -6,12 +6,13 @@ from datetime import datetime
 from . import db
 import requests
 import json
+import os
 
 main = Blueprint('main', __name__)
 
 ncaa_api_client = NCAAAPI()
 
-week = str(json.loads(requests.get("https://api.sportsdata.io/v3/cfb/scores/json/CurrentSeasonDetails?key=1cad9502a7fb41309dd027faa659317f").text)['ApiWeek'])
+week = ncaa_api_client.get_current_week()
 totalWeeks=13
 
 @main.route('/')

@@ -1,15 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login.login_manager import LoginManager
+import os
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-
-    app.config['SECRET_KEY'] = 'b5ebbe7e74565a661a0958ae9d122681'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://jonesr:x4p3m0nk3yx@rjscollegepickem.cluster-cctmcd2upnno.us-west-2.rds.amazonaws.com:3306/pickem'
+    db_username = os.environ['DB_USER']
+    db_password = os.environ['DB_PASSWORD']
+    db_host = os.environ['DB_HOST']
+    db_port = os.environ['DB_PORT']
+    db_name = os.environ['DB_NAME']
+    app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_name}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
