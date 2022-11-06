@@ -36,7 +36,7 @@ for user in users:
 for score in scores:
     scoreslist.append(dict(score))
 
-week = str(json.loads(requests.get("https://api.sportsdata.io/v3/cfb/scores/json/CurrentSeasonDetails?key=1cad9502a7fb41309dd027faa659317f").text)['ApiWeek'])
+week = str(json.loads(requests.get("https://api.sportsdata.io/v3/cfb/scores/json/CurrentSeasonDetails?key=169d1d38eced4347897c7da9b81214a1").text)['ApiWeek'])
 
 submittedUsers = []
 textList = []

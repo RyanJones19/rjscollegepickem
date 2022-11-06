@@ -1,7 +1,7 @@
 FROM python:3.7
 
 ENV DB_USER='YOUR_USERNAME' \
-    DB_PASSWORD='YOUR_PASWORD' \
+    DB_PASSWORD='YOUR_PASSWORD' \
     DB_HOST='YOUR_HOST' \
     DB_PORT='YOUR_PORT' \
     DB_NAME='YOUR_DB_NAME' \
@@ -21,4 +21,4 @@ ENV FLASK_APP=app
 
 WORKDIR /
 
-CMD ["flask","run","-h","0.0.0.0","-p","8000"]
+CMD ["flask","run","-h","0.0.0.0","-p","443","--cert=YOUR_CERT","--key=YOUR_KEY"]
