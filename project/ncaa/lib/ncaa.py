@@ -6,6 +6,7 @@ import re
 import sys
 import ast
 import requests
+import os
 from datetime import datetime
 from datetime import timedelta
 from .base_client import *
@@ -48,7 +49,9 @@ class NCAAAPI(BaseClient):
         teamdata = pydantic.parse_obj_as(TeamInfoResponseModel, response.json())
         teamMap = {}
 
-        correctScoresResponse = requests.get(f"https://api.sportradar.us/ncaafb/trial/v7/en/games/{year}/REG/{week}/schedule.json?api_key=ybq9wq8cgan9anqg5yhwyxj6")
+        sportsDataAPIKey = os.environ['SPORTS_RADAR_API_KEY']
+
+        correctScoresResponse = requests.get(f"https://api.sportradar.us/ncaafb/trial/v7/en/games/{year}/REG/{week}/schedule.json?api_key={sportsDataAPIKey}")
         correctScores = pydantic.parse_obj_as(CorrectScoresResponseModelList, correctScoresResponse.json())
 
 

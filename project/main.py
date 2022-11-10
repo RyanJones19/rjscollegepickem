@@ -114,7 +114,7 @@ def admin_select_user():
     userList = []
     for user in users:
         userList.append({user.name:user.id})
-    return render_template('adminadjust.html', name=current_user.name, userList=json.dumps(userList))
+    return render_template('adminadjust.html', name=current_user.name, userList=json.dumps(userList), week=week)
 
 
 @main.route('/admin_adjust/<week>/<user_id>', methods=['POST'])
@@ -248,7 +248,7 @@ def yearlyleaguestats():
             yearlyScore = yearlyScore + int(getattr(userScore.Scores, "week" + str(weekNum) + "score"))
         yearlyScoresDict[userScore.User.name] = yearlyScore
     yearlyScoresDict = dict(sorted(yearlyScoresDict.items(), key=lambda x: x[1], reverse=True))
-    return render_template('yearlyleaguestats.html', message="", yearlyScoresDict=json.dumps(yearlyScoresDict))
+    return render_template('yearlyleaguestats.html', message="", yearlyScoresDict=json.dumps(yearlyScoresDict), week=week)
 
 @main.route('/emailformsubmit')
 @login_required

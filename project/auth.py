@@ -9,7 +9,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login')
 def login():
     games = []
-    return render_template('login.html', games=games, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[],totalScore=0, week="", yearlyScoresDict={}, userList=[])
+    return render_template('login.html', week=1)
 
 @auth.route('/login', methods=['POST'])
 def login_post():
@@ -31,8 +31,7 @@ def login_post():
 
 @auth.route('/signup')
 def signup():
-    games = []
-    return render_template('signup.html', games=games, selections=[], selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week="", yearlyScoresDict={}, userList=[])
+    return render_template('signup.html', week=1)
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():

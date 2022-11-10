@@ -1,13 +1,13 @@
 FROM python:3.7
 
-ENV DB_USER='YOUR_USERNAME' \
-    DB_PASSWORD='YOUR_PASSWORD' \
-    DB_HOST='YOUR_HOST' \
-    DB_PORT='YOUR_PORT' \
+ENV DB_USER='YOUR_DB_USER' \
+    DB_PASSWORD='YOUR_DB_PASSWORD' \
+    DB_HOST='YOUR_DB_HOST' \
+    DB_PORT='YOUR_DB_PORT' \
     DB_NAME='YOUR_DB_NAME' \
     SECRET_KEY='YOUR_DB_SECRET' \
-    SPORTS_DATA_API_KEY='YOUR_API_KEY' \
-    SPORTS_RADAR_API_KEY='YOUR_API_KEY'
+    SPORTS_DATA_API_KEY='YOUR_SPORTS_DATA_API_KEY' \
+    SPORTS_RADAR_API_KEY='YOUR_SPORTS_RADAR_API_KEY'
 
 WORKDIR /app
 
@@ -21,4 +21,4 @@ ENV FLASK_APP=app
 
 WORKDIR /
 
-CMD ["flask","run","-h","0.0.0.0","-p","443","--cert=YOUR_CERT","--key=YOUR_KEY"]
+CMD ["flask","run","-h","0.0.0.0","-p","443","--cert=./app/certs/pickem.crt","--key=./app/certs/pickem.key"]

@@ -1,3 +1,4 @@
+// List of paths to team logos
 var teamLogos = {
     "ALA":"/static/images/ALA.jpg",
     "ARZ":"/static/images/ARZ.jpg",
@@ -118,9 +119,138 @@ var teamLogos = {
     "WASH":"/static/images/WASH.jpg",
     "PUR":"/static/images/PUR.jpg",
     "MARY":"/static/images/MARY.jpg",
-    "KAN":"/static/images/KAN.jpg"
+    "KAN":"/static/images/KAN.jpg",
+    "TULANE":"/static/images/TULANE.jpg"
 }
 
+var espnTeamLinkDict = {
+    "ALA":"https://www.espn.com/college-football/team/_/id/333/alabama-crimson-tide",
+    "ARZ":"https://www.espn.com/college-football/team/_/id/12/arizona-wildcats",
+    "MICH":"https://www.espn.com/college-football/team/_/id/130/michigan-wolverines",
+    "MST":"https://www.espn.com/college-football/team/_/id/127/michigan-state",
+    "ND":"https://www.espn.com/college-football/team/_/id/87/notredame-fighting-irish",
+    "RUTGER":"https://www.espn.com/college-football/team/_/id/164/rutgers-scarlet-knights",
+    "SYRA":"https://www.espn.com/college-football/team/_/id/183/syracuse-orange",
+    "USC":"https://www.espn.com/college-football/team/_/id/30/usc-trojans",
+    "MINNST":"https://www.espn.com/college-football/team/_/id/135/minnesota-golden-gophers",
+    "ILL":"https://www.espn.com/college-football/team/_/id/356/illinois-fighting-illini",
+    "NEBR":"https://www.espn.com/college-football/team/_/id/158/nebraska-cornhuskers",
+    "ARK":"https://www.espn.com/college-football/team/_/id/8/arkansas-razorbacks",
+    "AUBRN":"https://www.espn.com/college-football/team/_/id/2/auburn-tigers",
+    "OHIOST":"https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
+    "PENNST":"https://www.espn.com/college-football/team/_/id/213/penn-state-nittany-lions",
+    "NW":"https://www.espn.com/college-football/team/_/id/77/northwestern-wildcats",
+    "IOWA":"https://www.espn.com/college-football/team/_/id/2294/iowa-hawkeyes",
+    "OKST":"https://www.espn.com/college-football/team/_/id/197/oklahoma-state-cowboys",
+    "KANST":"https://www.espn.com/college-football/team/_/id/2306/kansas-state-wildcats",
+    "MISS":"https://www.espn.com/college-football/team/_/id/145/ole-miss-rebels",
+    "TXAM":"https://www.espn.com/college-football/team/_/id/245/texas-a",
+    "ORE":"https://www.espn.com/college-football/team/_/id/2483/oregon-ducks",
+    "CAH":"https://www.espn.com/college-football/team/_/id/25/california-golden-bears",
+    "MISSR":"https://www.espn.com/college-football/team/_/id/142/missouri-tigers",
+    "SC":"https://www.espn.com/college-football/team/_/id/2579/south-carolina-gamecocks",
+    "STAN":"https://www.espn.com/college-football/team/_/id/24/stanford-cardinal",
+    "UCLA":"https://www.espn.com/college-football/team/_/id/26/ucla-bruins",
+    "UK":"https://www.espn.com/college-football/team/_/id/96/kentucky-wildcats",
+    "TENN":"https://www.espn.com/college-football/team/_/id/2633/tennessee-volunteers",
+    "BAYL":"https://www.espn.com/college-football/team/_/id/239/baylor-bears",
+    "TXTECH":"https://www.espn.com/college-football/team/_/id/2641/texas-tech-red-raiders",
+    "UTAH":"https://www.espn.com/college-football/team/_/id/254/utah-utes",
+    "WASHST":"https://www.espn.com/college-football/team/_/id/265/washington-state-cougars",
+    "TCU":"https://www.espn.com/college-football/team/_/id/2628/tcu-horned-frogs",
+    "WVIR":"https://www.espn.com/college-football/team/_/id/277/west-virginia-mountaineers",
+    "ARZST":"https://www.espn.com/college-football/team/_/id/9/arizona-state-sun-devils",
+    "COL":"https://www.espn.com/college-football/team/_/id/38/colorado-buffaloes",
+    "BOSCOL":"https://www.espn.com/college-football/team/_/id/103/boston-college-eagles",
+    "UCONN":"https://www.espn.com/college-football/team/_/id/41/uconn-huskies",
+    "FL":"https://www.espn.com/college-football/team/_/id/57/florida-gators",
+    "GA":"https://www.espn.com/college-football/team/_/id/61/georgia-bulldogs",
+    "OKL":"https://www.espn.com/college-football/team/_/id/201/oklahoma-sooners",
+    "IOWAST":"https://www.espn.com/college-football/team/_/id/66/iowa-state-cyclones",
+    "NMXST":"https://www.espn.com/college-football/team/_/id/166/new-mexico-state-aggies",
+    "UMASS":"https://www.espn.com/college-football/team/_/id/113/umass-minutemen",
+    "VTECH":"https://www.espn.com/college-football/team/_/id/259/virginia-tech-hokies",
+    "NCST":"https://www.espn.com/college-football/team/_/id/152/nc-state-wolfpack",
+    "PITT":"https://www.espn.com/college-football/team/_/id/221",
+    "NCAR":"https://www.espn.com/college-football/team/_/id/153/north-carolina-tar-heels",
+    "MIA":"https://www.espn.com/college-football/team/_/id/2390/miami-hurricanes",
+    "VIR":"https://www.espn.com/college-football/team/_/id/258/virginia-cavaliers",
+    "GTECH":"https://www.espn.com/college-football/team/_/id/59/georgia-tech-yellow-jackets",
+    "FLST":"https://www.espn.com/college-football/team/_/id/52/florida-state-seminoles",
+    "WAKE":"https://www.espn.com/college-football/team/_/id/154/wake-forest-demon-deacons",
+    "LOU":"https://www.espn.com/college-football/team/_/id/97/louisville-cardinals",
+    "OLD":"https://www.espn.com/college-football/team/_/id/295/old-dominion-monarchs",
+    "FLATL":"https://www.espn.com/college-football/team/_/id/2226/florida-atlantic-owls",
+    "MTNST":"https://www.espn.com/college-football/team/_/id/2393/middle-tennessee-blue-raiders",
+    "FLINT":"https://www.espn.com/college-football/team/_/id/2229/florida-international-panthers",
+    "UTSA":"https://www.espn.com/college-football/team/_/id/2636/utsa-roadrunners",
+    "SOUMIS":"https://www.espn.com/college-football/team/_/id/2572/southern-miss-golden-eagles",
+    "CHARLT":"https://www.espn.com/college-football/team/_/id/2429/charlotte-49ers",
+    "MARSH":"https://www.espn.com/college-football/team/_/id/276/marshall-thundering-herd",
+    "NTX":"https://www.espn.com/college-football/team/_/id/249/north-texas-mean-green",
+    "UAB":"https://www.espn.com/college-football/team/_/id/5/uab-blazers",
+    "RICE":"https://www.espn.com/college-football/team/_/id/242/rice-owls",
+    "WKENT":"https://www.espn.com/college-football/team/_/id/98/western-kentucky-hilltoppers",
+    "NEVADA":"https://www.espn.com/college-football/team/_/id/2440/nevada-wolf-pack",
+    "SJST":"https://www.espn.com/college-football/team/_/id/23/san-jose-state-spartans",
+    "SDST":"https://www.espn.com/college-football/team/_/id/21/san-diego-state-aztecs",
+    "FREST":"https://www.espn.com/college-football/team/_/id/278/fresno-state-bulldogs",
+    "WYOM":"https://www.espn.com/college-football/team/_/id/2751/wyoming-cowboys",
+    "HAWAII":"https://www.espn.com/college-football/team/_/id/62/hawai'i-rainbow-warriors",
+    "COLST":"https://www.espn.com/college-football/team/_/id/36/colorado-state-rams",
+    "BOISE":"https://www.espn.com/college-football/team/_/id/68/boise-state-broncos",
+    "SMU":"https://www.espn.com/college-football/team/_/id/2567/smu-mustangs",
+    "TULSA":"https://www.espn.com/college-football/team/_/id/202/tulsa-golden-hurricane",
+    "CIN":"https://www.espn.com/college-football/team/_/id/2132/cincinnati-bearcats",
+    "UCF":"https://www.espn.com/college-football/team/_/id/2116/ucf-knights",
+    "TEMPL":"https://www.espn.com/college-football/team/_/id/218/temple-owls",
+    "NAVY":"https://www.espn.com/college-football/team/_/id/2426/navy-midshipmen",
+    "SFL":"https://www.espn.com/college-football/team/_/id/58/south-florida-bulls",
+    "HOU":"https://www.espn.com/college-football/team/_/id/248/houston-cougars",
+    "ECAR":"https://www.espn.com/college-football/team/_/id/151/east-carolina-pirates",
+    "BYU":"https://www.espn.com/college-football/team/_/id/252/byu-cougars",
+    "MIAOH":"https://www.espn.com/college-football/team/_/id/193/miami-(oh)-redhawks",
+    "AKRON":"https://www.espn.com/college-football/team/schedule/_/id/2006/akron-zips",
+    "TOLEDO":"https://www.espn.com/college-football/team/_/id/2649/toledo-rockets",
+    "EMICH":"https://www.espn.com/college-football/team/_/id/2199/eastern-michigan-eagles",
+    "ROBMS":"https://www.espn.com/college-football/team/_/id/2523/robert-morris-colonials",
+    "APPLST":"https://www.espn.com/college-football/team/_/id/2026/appalachian-state-mountaineers",
+    "SALA":"https://www.espn.com/college-football/team/_/id/6/south-alabama-jaguars",
+    "ARKST":"https://www.espn.com/college-football/team/_/id/2032/arkansas-state-red-wolves",
+    "GAST":"https://www.espn.com/college-football/team/_/id/2247/georgia-state-panthers",
+    "LOULAF":"https://www.espn.com/college-football/team/_/id/309/louisiana-ragin'-cajuns",
+    "COAST":"https://www.espn.com/college-football/team/_/id/324/coastal-carolina-chanticleers",
+    "LOUTCH":"https://www.espn.com/college-football/team/_/id/2348/louisiana-tech-bulldogs",
+    "UTEP":"https://www.espn.com/college-football/team/_/id/2638/utep-miners",
+    "OREGST":"https://www.espn.com/college-football/team/_/id/204/oregon-state-beavers",
+    "AIRF":"https://www.espn.com/college-football/team/schedule/_/id/2005/air-force-falcons",
+    "JMAD":"https://www.espn.com/college-football/team/_/id/256/james-madison-dukes",
+    "LSU":"https://www.espn.com/college-football/team/_/id/99/lsu-tigers",
+    "CLMSN":"https://www.espn.com/college-football/team/_/id/228/clemson-tigers",
+    "MSPST":"https://www.espn.com/college-football/team/_/id/344/mississippi-state-bulldogs",
+    "WMICH":"https://www.espn.com/college-football/team/_/id/2711/western-michigan-broncos",
+    "WISC":"https://www.espn.com/college-football/team/_/id/275/wisconsin-badgers",
+    "MPHS":"https://www.espn.com/college-football/team/_/id/235/memphis-tigers",
+    "IND":"https://www.espn.com/college-football/team/_/id/84/indiana-hoosiers",
+    "SDKST":"https://www.espn.com/college-football/team/_/id/2571/south-dakota-state-jackrabbits",
+    "SMHO":"https://www.espn.com/college-football/team/_/id/2534/sam-houston-bearkats",
+    "NIOWA":"https://www.espn.com/college-football/team/_/id/2460/northern-iowa-panthers",
+    "ARMY":"https://www.espn.com/college-football/team/_/id/349/army-black-knights",
+    "UTAHST":"https://www.espn.com/college-football/team/_/id/328/utah-state-aggies",
+    "TX":"https://www.espn.com/college-football/team/_/id/251/texas-longhorns",
+    "BALLST":"https://www.espn.com/college-football/team/_/id/2050",
+    "NILL":"https://www.espn.com/college-football/team/_/id/2459/northern-illinois-huskies",
+    "WASH":"https://www.espn.com/college-football/team/_/id/264/washington-huskies",
+    "PUR":"https://www.espn.com/college-football/team/_/id/2509/purdue-boilermakers",
+    "MARY":"https://www.espn.com/college-football/team/_/id/120/maryland-terrapins",
+    "KAN":"https://www.espn.com/college-football/team/_/id/2305/kansas-jayhawks",
+    "TULANE":"https://www.espn.com/college-football/team/_/id/2655/tulane-green-wave"
+}
+
+// Go through all dropdowns and update the option text for a selected value
+// For example, if someone chooses oregon state with 7 confidence, this will go to all 25 dropdowns
+// and update the initially static "7" to say "7 - Oregon State"
+// The filter() function iterates over all options in th dropdown and returns the values that match the passed in text to update them
 function updateDropdowns(optiontext, appendedText) {
     $('#confidencepoints1 option').filter(function() {
       return $(this).val().trim() == optiontext;
@@ -199,6 +329,7 @@ function updateDropdowns(optiontext, appendedText) {
     }).text(optiontext + appendedText);
 }
 
+// Set the first option back to NONE after a selection was made
 function resetDropdowns(games) {
     for (var i = 0; i < games.length; i++) {
         $('#confidencepoints1 option').filter(function () {
@@ -356,6 +487,9 @@ function resetDropdowns(games) {
     }
 }
 
+// When a selection is made populate all dropdowns with the value that was selected
+// Check if the newly selected value is already selected and if so alert the user to go make a new selection
+// Otherwise, update the dropdowns to contain the selected confidence value and the selected winner
 function populateDropdown(games, newSelectedValue, selectedList) {
     if(document.getElementById("home1").checked){
         if ($('#confidencepoints1 option:selected').val() == newSelectedValue && selectedList != "1"){
@@ -759,6 +893,7 @@ function populateDropdown(games, newSelectedValue, selectedList) {
     }
 }
 
+// Build the Admin page where the 25 games for the week to select are chosen by an admin
 function populateAdminPage(games,week){
     var gameSelection = document.getElementsByClassName("game-selection")[0];
     var gameSelectionList = document.createElement("form");
@@ -804,134 +939,13 @@ function populateAdminPage(games,week){
     gameSelection.appendChild(gameSelectionList);
 }
 
+// Populate the Make Picks Div -- This is the div that contains the list of 25 games to select from weekly as a user
+// Submits a POST form to the /submitpicks endpoints
+
 function populateDivs(games, userid, selections=null, week, isAdmin) {
     var gamesListParent = document.getElementsByClassName("games-list")[0];
     var gamesList = document.createElement("form");
     gamesList.id = "popdivsform";
-
-    var picks = "";
-    var espnTeamLinkDict = {
-        "ALA":"https://www.espn.com/college-football/team/_/id/333/alabama-crimson-tide",
-        "ARZ":"https://www.espn.com/college-football/team/_/id/12/arizona-wildcats",
-        "MICH":"https://www.espn.com/college-football/team/_/id/130/michigan-wolverines",
-        "MST":"https://www.espn.com/college-football/team/_/id/127/michigan-state",
-        "ND":"https://www.espn.com/college-football/team/_/id/87/notredame-fighting-irish",
-        "RUTGER":"https://www.espn.com/college-football/team/_/id/164/rutgers-scarlet-knights",
-        "SYRA":"https://www.espn.com/college-football/team/_/id/183/syracuse-orange",
-        "USC":"https://www.espn.com/college-football/team/_/id/30/usc-trojans",
-        "MINNST":"https://www.espn.com/college-football/team/_/id/135/minnesota-golden-gophers",
-        "ILL":"https://www.espn.com/college-football/team/_/id/356/illinois-fighting-illini",
-        "NEBR":"https://www.espn.com/college-football/team/_/id/158/nebraska-cornhuskers",
-        "ARK":"https://www.espn.com/college-football/team/_/id/8/arkansas-razorbacks",
-        "AUBRN":"https://www.espn.com/college-football/team/_/id/2/auburn-tigers",
-        "OHIOST":"https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes",
-        "PENNST":"https://www.espn.com/college-football/team/_/id/213/penn-state-nittany-lions",
-        "NW":"https://www.espn.com/college-football/team/_/id/77/northwestern-wildcats",
-        "IOWA":"https://www.espn.com/college-football/team/_/id/2294/iowa-hawkeyes",
-        "OKST":"https://www.espn.com/college-football/team/_/id/197/oklahoma-state-cowboys",
-        "KANST":"https://www.espn.com/college-football/team/_/id/2306/kansas-state-wildcats",
-        "MISS":"https://www.espn.com/college-football/team/_/id/145/ole-miss-rebels",
-        "TXAM":"https://www.espn.com/college-football/team/_/id/245/texas-a",
-        "ORE":"https://www.espn.com/college-football/team/_/id/2483/oregon-ducks",
-        "CAH":"https://www.espn.com/college-football/team/_/id/25/california-golden-bears",
-        "MISSR":"https://www.espn.com/college-football/team/_/id/142/missouri-tigers",
-        "SC":"https://www.espn.com/college-football/team/_/id/2579/south-carolina-gamecocks",
-        "STAN":"https://www.espn.com/college-football/team/_/id/24/stanford-cardinal",
-        "UCLA":"https://www.espn.com/college-football/team/_/id/26/ucla-bruins",
-        "UK":"https://www.espn.com/college-football/team/_/id/96/kentucky-wildcats",
-        "TENN":"https://www.espn.com/college-football/team/_/id/2633/tennessee-volunteers",
-        "BAYL":"https://www.espn.com/college-football/team/_/id/239/baylor-bears",
-        "TXTECH":"https://www.espn.com/college-football/team/_/id/2641/texas-tech-red-raiders",
-        "UTAH":"https://www.espn.com/college-football/team/_/id/254/utah-utes",
-        "WASHST":"https://www.espn.com/college-football/team/_/id/265/washington-state-cougars",
-        "TCU":"https://www.espn.com/college-football/team/_/id/2628/tcu-horned-frogs",
-        "WVIR":"https://www.espn.com/college-football/team/_/id/277/west-virginia-mountaineers",
-        "ARZST":"https://www.espn.com/college-football/team/_/id/9/arizona-state-sun-devils",
-        "COL":"https://www.espn.com/college-football/team/_/id/38/colorado-buffaloes",
-        "BOSCOL":"https://www.espn.com/college-football/team/_/id/103/boston-college-eagles",
-        "UCONN":"https://www.espn.com/college-football/team/_/id/41/uconn-huskies",
-        "FL":"https://www.espn.com/college-football/team/_/id/57/florida-gators",
-        "GA":"https://www.espn.com/college-football/team/_/id/61/georgia-bulldogs",
-        "OKL":"https://www.espn.com/college-football/team/_/id/201/oklahoma-sooners",
-        "IOWAST":"https://www.espn.com/college-football/team/_/id/66/iowa-state-cyclones",
-        "NMXST":"https://www.espn.com/college-football/team/_/id/166/new-mexico-state-aggies",
-        "UMASS":"https://www.espn.com/college-football/team/_/id/113/umass-minutemen",
-        "VTECH":"https://www.espn.com/college-football/team/_/id/259/virginia-tech-hokies",
-        "NCST":"https://www.espn.com/college-football/team/_/id/152/nc-state-wolfpack",
-        "PITT":"https://www.espn.com/college-football/team/_/id/221",
-        "NCAR":"https://www.espn.com/college-football/team/_/id/153/north-carolina-tar-heels",
-        "MIA":"https://www.espn.com/college-football/team/_/id/2390/miami-hurricanes",
-        "VIR":"https://www.espn.com/college-football/team/_/id/258/virginia-cavaliers",
-        "GTECH":"https://www.espn.com/college-football/team/_/id/59/georgia-tech-yellow-jackets",
-        "FLST":"https://www.espn.com/college-football/team/_/id/52/florida-state-seminoles",
-        "WAKE":"https://www.espn.com/college-football/team/_/id/154/wake-forest-demon-deacons",
-        "LOU":"https://www.espn.com/college-football/team/_/id/97/louisville-cardinals",
-        "OLD":"https://www.espn.com/college-football/team/_/id/295/old-dominion-monarchs",
-        "FLATL":"https://www.espn.com/college-football/team/_/id/2226/florida-atlantic-owls",
-        "MTNST":"https://www.espn.com/college-football/team/_/id/2393/middle-tennessee-blue-raiders",
-        "FLINT":"https://www.espn.com/college-football/team/_/id/2229/florida-international-panthers",
-        "UTSA":"https://www.espn.com/college-football/team/_/id/2636/utsa-roadrunners",
-        "SOUMIS":"https://www.espn.com/college-football/team/_/id/2572/southern-miss-golden-eagles",
-        "CHARLT":"https://www.espn.com/college-football/team/_/id/2429/charlotte-49ers",
-        "MARSH":"https://www.espn.com/college-football/team/_/id/276/marshall-thundering-herd",
-        "NTX":"https://www.espn.com/college-football/team/_/id/249/north-texas-mean-green",
-        "UAB":"https://www.espn.com/college-football/team/_/id/5/uab-blazers",
-        "RICE":"https://www.espn.com/college-football/team/_/id/242/rice-owls",
-        "WKENT":"https://www.espn.com/college-football/team/_/id/98/western-kentucky-hilltoppers",
-        "NEVADA":"https://www.espn.com/college-football/team/_/id/2440/nevada-wolf-pack",
-        "SJST":"https://www.espn.com/college-football/team/_/id/23/san-jose-state-spartans",
-        "SDST":"https://www.espn.com/college-football/team/_/id/21/san-diego-state-aztecs",
-        "FREST":"https://www.espn.com/college-football/team/_/id/278/fresno-state-bulldogs",
-        "WYOM":"https://www.espn.com/college-football/team/_/id/2751/wyoming-cowboys",
-        "HAWAII":"https://www.espn.com/college-football/team/_/id/62/hawai'i-rainbow-warriors",
-        "COLST":"https://www.espn.com/college-football/team/_/id/36/colorado-state-rams",
-        "BOISE":"https://www.espn.com/college-football/team/_/id/68/boise-state-broncos",
-        "SMU":"https://www.espn.com/college-football/team/_/id/2567/smu-mustangs",
-        "TULSA":"https://www.espn.com/college-football/team/_/id/202/tulsa-golden-hurricane",
-        "CIN":"https://www.espn.com/college-football/team/_/id/2132/cincinnati-bearcats",
-        "UCF":"https://www.espn.com/college-football/team/_/id/2116/ucf-knights",
-        "TEMPL":"https://www.espn.com/college-football/team/_/id/218/temple-owls",
-        "NAVY":"https://www.espn.com/college-football/team/_/id/2426/navy-midshipmen",
-        "SFL":"https://www.espn.com/college-football/team/_/id/58/south-florida-bulls",
-        "HOU":"https://www.espn.com/college-football/team/_/id/248/houston-cougars",
-        "ECAR":"https://www.espn.com/college-football/team/_/id/151/east-carolina-pirates",
-        "BYU":"https://www.espn.com/college-football/team/_/id/252/byu-cougars",
-        "MIAOH":"https://www.espn.com/college-football/team/_/id/193/miami-(oh)-redhawks",
-        "AKRON":"https://www.espn.com/college-football/team/schedule/_/id/2006/akron-zips",
-        "TOLEDO":"https://www.espn.com/college-football/team/_/id/2649/toledo-rockets",
-        "EMICH":"https://www.espn.com/college-football/team/_/id/2199/eastern-michigan-eagles",
-        "ROBMS":"https://www.espn.com/college-football/team/_/id/2523/robert-morris-colonials",
-        "APPLST":"https://www.espn.com/college-football/team/_/id/2026/appalachian-state-mountaineers",
-        "SALA":"https://www.espn.com/college-football/team/_/id/6/south-alabama-jaguars",
-        "ARKST":"https://www.espn.com/college-football/team/_/id/2032/arkansas-state-red-wolves",
-        "GAST":"https://www.espn.com/college-football/team/_/id/2247/georgia-state-panthers",
-        "LOULAF":"https://www.espn.com/college-football/team/_/id/309/louisiana-ragin'-cajuns",
-        "COAST":"https://www.espn.com/college-football/team/_/id/324/coastal-carolina-chanticleers",
-        "LOUTCH":"https://www.espn.com/college-football/team/_/id/2348/louisiana-tech-bulldogs",
-        "UTEP":"https://www.espn.com/college-football/team/_/id/2638/utep-miners",
-        "OREGST":"https://www.espn.com/college-football/team/_/id/204/oregon-state-beavers",
-        "AIRF":"https://www.espn.com/college-football/team/schedule/_/id/2005/air-force-falcons",
-        "JMAD":"https://www.espn.com/college-football/team/_/id/256/james-madison-dukes",
-        "LSU":"https://www.espn.com/college-football/team/_/id/99/lsu-tigers",
-        "CLMSN":"https://www.espn.com/college-football/team/_/id/228/clemson-tigers",
-        "MSPST":"https://www.espn.com/college-football/team/_/id/344/mississippi-state-bulldogs",
-        "WMICH":"https://www.espn.com/college-football/team/_/id/2711/western-michigan-broncos",
-        "WISC":"https://www.espn.com/college-football/team/_/id/275/wisconsin-badgers",
-        "MPHS":"https://www.espn.com/college-football/team/_/id/235/memphis-tigers",
-        "IND":"https://www.espn.com/college-football/team/_/id/84/indiana-hoosiers",
-        "SDKST":"https://www.espn.com/college-football/team/_/id/2571/south-dakota-state-jackrabbits",
-        "SMHO":"https://www.espn.com/college-football/team/_/id/2534/sam-houston-bearkats",
-        "NIOWA":"https://www.espn.com/college-football/team/_/id/2460/northern-iowa-panthers",
-        "ARMY":"https://www.espn.com/college-football/team/_/id/349/army-black-knights",
-        "UTAHST":"https://www.espn.com/college-football/team/_/id/328/utah-state-aggies",
-        "TX":"https://www.espn.com/college-football/team/_/id/251/texas-longhorns",
-        "BALLST":"https://www.espn.com/college-football/team/_/id/2050",
-        "NILL":"https://www.espn.com/college-football/team/_/id/2459/northern-illinois-huskies",
-        "WASH":"https://www.espn.com/college-football/team/_/id/264/washington-huskies",
-        "PUR":"https://www.espn.com/college-football/team/_/id/2509/purdue-boilermakers",
-        "MARY":"https://www.espn.com/college-football/team/_/id/120/maryland-terrapins",
-        "KAN":"https://www.espn.com/college-football/team/_/id/2305/kansas-jayhawks"
-    }
 
     var lockSelection = false;
     if(!(isAdmin == 1)) {
@@ -994,9 +1008,11 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
         var selectedOption = "";
         var selectedConfidence = "";
 
+        // if there are selections previously made, toggle the proper checkbox, if not set them both to false
         if(selections) {
             var selectionsJson = JSON.parse(selections);
             for(var game = 0; game < games.length; game++){
+                // parse through the games list to locate the id of the selected games
                 if(Object.keys(selectionsJson[game])[0] == games[i].game_id){
                     selectedOption = selectionsJson[game][games[i].game_id]["selection"];
                     selectedConfidence = selectionsJson[game][games[i].game_id]["confidence"];
@@ -1015,6 +1031,7 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             cb2.checked= false;
         }
 
+        // Build the checkboxes and dropdowns
         cb1.type = "radio";
         cb1.id = "home" + (i+1).toString();
         cb1.name = "radio" + (i+1).toString();
@@ -1080,8 +1097,6 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
 
 
             for (var j = 0; j< games.length; j++){
-
-
                 for(var game = 0; game < games.length; game++){
                     if(Object.keys(selectionsJson[game])[0] == games[j].game_id){
                         selectedOption = selectionsJson[game][games[j].game_id]["selection"];
@@ -1089,7 +1104,6 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
                         break;
                     }
                 }
-
 
                 var optionText = "";
                 var isSelected = false;
@@ -1244,20 +1258,20 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
     gamesList.appendChild(br);
     gamesList.appendChild(br);
 
-    $('input[type=radio][name=radio1]').change(function() {
-        var optiontext = $('#confidencepoints1 option:selected').val();
+    $(gamesList.elements["radio1"]).change(function () {
+        var optiontext = $(gamesList.elements["confidencepoints1"]).val();
         var appendedText = " - ";
-        if(document.getElementById("home1").checked){
+        if (document.getElementById("home1").checked) {
             appendedText = appendedText + games[0].home;
             updateDropdowns(optiontext, appendedText);
         }
-        if(document.getElementById("away1").checked){
+        if (document.getElementById("away1").checked) {
             appendedText = appendedText + games[0].away;
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio2]').change(function() {
-        var optiontext = $('#confidencepoints2 option:selected').val();
+    $(gamesList.elements["radio2"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints2"]).val();
         var appendedText = " - ";
         if(document.getElementById("home2").checked){
             appendedText = appendedText + games[1].home;
@@ -1268,8 +1282,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio3]').change(function() {
-        var optiontext = $('#confidencepoints3 option:selected').val();
+    $(gamesList.elements["radio3"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints3"]).val();
         var appendedText = " - ";
         if(document.getElementById("home3").checked){
             appendedText = appendedText + games[2].home;
@@ -1280,8 +1294,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio4]').change(function() {
-        var optiontext = $('#confidencepoints4 option:selected').val();
+    $(gamesList.elements["radio4"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints4"]).val();
         var appendedText = " - ";
         if(document.getElementById("home4").checked){
             appendedText = appendedText + games[3].home;
@@ -1292,8 +1306,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio5]').change(function() {
-        var optiontext = $('#confidencepoints5 option:selected').val();
+    $(gamesList.elements["radio5"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints5"]).val();
         var appendedText = " - ";
         if(document.getElementById("home5").checked){
             appendedText = appendedText + games[4].home;
@@ -1304,8 +1318,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio6]').change(function() {
-        var optiontext = $('#confidencepoints6 option:selected').val();
+    $(gamesList.elements["radio6"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints6"]).val();
         var appendedText = " - ";
         if(document.getElementById("home6").checked){
             appendedText = appendedText + games[5].home;
@@ -1316,8 +1330,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio7]').change(function() {
-        var optiontext = $('#confidencepoints7 option:selected').val();
+    $(gamesList.elements["radio7"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints7"]).val();
         var appendedText = " - ";
         if(document.getElementById("home7").checked){
             appendedText = appendedText + games[6].home;
@@ -1328,8 +1342,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio8]').change(function() {
-        var optiontext = $('#confidencepoints8 option:selected').val();
+    $(gamesList.elements["radio8"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints8"]).val();
         var appendedText = " - ";
         if(document.getElementById("home8").checked){
             appendedText = appendedText + games[7].home;
@@ -1340,8 +1354,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio9]').change(function() {
-        var optiontext = $('#confidencepoints9 option:selected').val();
+    $(gamesList.elements["radio9"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints9"]).val();
         var appendedText = " - ";
         if(document.getElementById("home9").checked){
             appendedText = appendedText + games[8].home;
@@ -1352,8 +1366,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio10]').change(function() {
-        var optiontext = $('#confidencepoints10 option:selected').val();
+    $(gamesList.elements["radio10"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints10"]).val();
         var appendedText = " - ";
         if(document.getElementById("home10").checked){
             appendedText = appendedText + games[9].home;
@@ -1364,8 +1378,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio11]').change(function() {
-        var optiontext = $('#confidencepoints11 option:selected').val();
+    $(gamesList.elements["radio11"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints11"]).val();
         var appendedText = " - ";
         if(document.getElementById("home11").checked){
             appendedText = appendedText + games[10].home;
@@ -1376,8 +1390,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio12]').change(function() {
-        var optiontext = $('#confidencepoints12 option:selected').val();
+    $(gamesList.elements["radio12"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints12"]).val();
         var appendedText = " - ";
         if(document.getElementById("home12").checked){
             appendedText = appendedText + games[11].home;
@@ -1388,8 +1402,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio13]').change(function() {
-        var optiontext = $('#confidencepoints13 option:selected').val();
+    $(gamesList.elements["radio13"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints13"]).val();
         var appendedText = " - ";
         if(document.getElementById("home13").checked){
             appendedText = appendedText + games[12].home;
@@ -1400,8 +1414,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio14]').change(function() {
-        var optiontext = $('#confidencepoints14 option:selected').val();
+    $(gamesList.elements["radio14"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints14"]).val();
         var appendedText = " - ";
         if(document.getElementById("home14").checked){
             appendedText = appendedText + games[13].home;
@@ -1412,8 +1426,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio15]').change(function() {
-        var optiontext = $('#confidencepoints15 option:selected').val();
+    $(gamesList.elements["radio15"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints15"]).val();
         var appendedText = " - ";
         if(document.getElementById("home15").checked){
             appendedText = appendedText + games[14].home;
@@ -1424,8 +1438,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio16]').change(function() {
-        var optiontext = $('#confidencepoints16 option:selected').val();
+    $(gamesList.elements["radio16"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints16"]).val();
         var appendedText = " - ";
         if(document.getElementById("home16").checked){
             appendedText = appendedText + games[15].home;
@@ -1436,8 +1450,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio17]').change(function() {
-        var optiontext = $('#confidencepoints17 option:selected').val();
+    $(gamesList.elements["radio17"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints17"]).val();
         var appendedText = " - ";
         if(document.getElementById("home17").checked){
             appendedText = appendedText + games[16].home;
@@ -1448,8 +1462,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio18]').change(function() {
-        var optiontext = $('#confidencepoints18 option:selected').val();
+    $(gamesList.elements["radio18"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints18"]).val();
         var appendedText = " - ";
         if(document.getElementById("home18").checked){
             appendedText = appendedText + games[17].home;
@@ -1460,8 +1474,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio19]').change(function() {
-        var optiontext = $('#confidencepoints19 option:selected').val();
+    $(gamesList.elements["radio19"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints19"]).val();
         var appendedText = " - ";
         if(document.getElementById("home19").checked){
             appendedText = appendedText + games[18].home;
@@ -1472,8 +1486,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio20]').change(function() {
-        var optiontext = $('#confidencepoints20 option:selected').val();
+    $(gamesList.elements["radio20"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints20"]).val();
         var appendedText = " - ";
         if(document.getElementById("home20").checked){
             appendedText = appendedText + games[19].home;
@@ -1484,8 +1498,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio21]').change(function() {
-        var optiontext = $('#confidencepoints21 option:selected').val();
+    $(gamesList.elements["radio21"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints21"]).val();
         var appendedText = " - ";
         if(document.getElementById("home21").checked){
             appendedText = appendedText + games[20].home;
@@ -1496,8 +1510,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio22]').change(function() {
-        var optiontext = $('#confidencepoints22 option:selected').val();
+    $(gamesList.elements["radio22"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints22"]).val();
         var appendedText = " - ";
         if(document.getElementById("home22").checked){
             appendedText = appendedText + games[21].home;
@@ -1508,8 +1522,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio23]').change(function() {
-        var optiontext = $('#confidencepoints23 option:selected').val();
+    $(gamesList.elements["radio23"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints23"]).val();
         var appendedText = " - ";
         if(document.getElementById("home23").checked){
             appendedText = appendedText + games[22].home;
@@ -1520,8 +1534,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio24]').change(function() {
-        var optiontext = $('#confidencepoints24 option:selected').val();
+    $(gamesList.elements["radio24"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints24"]).val();
         var appendedText = " - ";
         if(document.getElementById("home24").checked){
             appendedText = appendedText + games[23].home;
@@ -1532,8 +1546,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
             updateDropdowns(optiontext, appendedText);
         }
     });
-    $('input[type=radio][name=radio25]').change(function() {
-        var optiontext = $('#confidencepoints25 option:selected').val();
+    $(gamesList.elements["radio25"]).change(function() {
+        var optiontext = $(gamesList.elements["confidencepoints25"]).val();
         var appendedText = " - ";
         if(document.getElementById("home25").checked){
             appendedText = appendedText + games[24].home;
@@ -1545,128 +1559,134 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
         }
     });
 
-    $('#confidencepoints1').change(function() {
-        var newSelectedValue = $('#confidencepoints1 option:selected').val()
+    // Create functions for what happens when we change a dropdown
+    // 1. Have to grab the element from within the gamesList Form
+    // 2. Reset the dropdown back to None as the default option after a selection has been made
+    // 3. Populate the dropdown with the selected value (1-25)
+    // 4. TODO -- maybe a fancy way to iterate to do these instead of needing 25 individuals, but need a way to pass
+    //    TODO -- the numeric value of which dropdown was changed upon click as a function parameter, currently just the onclick event is sent
+    $(gamesList.elements["confidencepoints1"]).change(function () {
+        var newSelectedValue = $(gamesList.elements["confidencepoints1"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 1);
     });
-    $('#confidencepoints2').change(function() {
-        var newSelectedValue = $('#confidencepoints2 option:selected').val()
+    $(gamesList.elements["confidencepoints2"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints2"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 2);
     });
-    $('#confidencepoints3').change(function() {
-        var newSelectedValue = $('#confidencepoints3 option:selected').val()
+    $(gamesList.elements["confidencepoints3"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints3"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 3);
     });
-    $('#confidencepoints4').change(function() {
-        var newSelectedValue = $('#confidencepoints4 option:selected').val()
+    $(gamesList.elements["confidencepoints4"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints4"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 4);
     });
-    $('#confidencepoints5').change(function() {
-        var newSelectedValue = $('#confidencepoints5 option:selected').val()
+    $(gamesList.elements["confidencepoints5"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints5"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 5);
     });
-    $('#confidencepoints6').change(function() {
-        var newSelectedValue = $('#confidencepoints6 option:selected').val()
+    $(gamesList.elements["confidencepoints6"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints6"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 6);
     });
-    $('#confidencepoints7').change(function() {
-        var newSelectedValue = $('#confidencepoints7 option:selected').val()
+    $(gamesList.elements["confidencepoints7"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints7"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 7);
     });
-    $('#confidencepoints8').change(function() {
-        var newSelectedValue = $('#confidencepoints8 option:selected').val()
+    $(gamesList.elements["confidencepoints8"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints8"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 8);
     });
-    $('#confidencepoints9').change(function() {
-        var newSelectedValue = $('#confidencepoints9 option:selected').val()
+    $(gamesList.elements["confidencepoints9"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints9"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 9);
     });
-    $('#confidencepoints10').change(function() {
-        var newSelectedValue = $('#confidencepoints10 option:selected').val()
+    $(gamesList.elements["confidencepoints10"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints10"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 10);
     });
-    $('#confidencepoints11').change(function() {
-        var newSelectedValue = $('#confidencepoints11 option:selected').val()
+    $(gamesList.elements["confidencepoints11"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints11"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 11);
     });
-    $('#confidencepoints12').change(function() {
-        var newSelectedValue = $('#confidencepoints12 option:selected').val()
+    $(gamesList.elements["confidencepoints12"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints12"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 12);
     });
-    $('#confidencepoints13').change(function() {
-        var newSelectedValue = $('#confidencepoints13 option:selected').val()
+    $(gamesList.elements["confidencepoints13"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints13"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 13);
     });
-    $('#confidencepoints14').change(function() {
-        var newSelectedValue = $('#confidencepoints14 option:selected').val()
+    $(gamesList.elements["confidencepoints14"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints14"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 14);
     });
-    $('#confidencepoints15').change(function() {
-        var newSelectedValue = $('#confidencepoints15 option:selected').val()
+    $(gamesList.elements["confidencepoints15"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints15"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 15);
     });
-    $('#confidencepoints16').change(function() {
-        var newSelectedValue = $('#confidencepoints16 option:selected').val()
+    $(gamesList.elements["confidencepoints16"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints16"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 16);
     });
-    $('#confidencepoints17').change(function() {
-        var newSelectedValue = $('#confidencepoints17 option:selected').val()
+    $(gamesList.elements["confidencepoints17"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints17"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 17);
     });
-    $('#confidencepoints18').change(function() {
-        var newSelectedValue = $('#confidencepoints18 option:selected').val()
+    $(gamesList.elements["confidencepoints18"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints18"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 18);
     });
-    $('#confidencepoints19').change(function() {
-        var newSelectedValue = $('#confidencepoints19 option:selected').val()
+    $(gamesList.elements["confidencepoints19"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints19"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 19);
     });
-    $('#confidencepoints20').change(function() {
-        var newSelectedValue = $('#confidencepoints20 option:selected').val()
+    $(gamesList.elements["confidencepoints20"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints20"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 20);
     });
-    $('#confidencepoints21').change(function() {
-        var newSelectedValue = $('#confidencepoints21 option:selected').val()
+    $(gamesList.elements["confidencepoints21"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints21"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 21);
     });
-    $('#confidencepoints22').change(function() {
-        var newSelectedValue = $('#confidencepoints22 option:selected').val()
+    $(gamesList.elements["confidencepoints22"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints22"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 22);
     });
-    $('#confidencepoints23').change(function() {
-        var newSelectedValue = $('#confidencepoints23 option:selected').val()
+    $(gamesList.elements["confidencepoints23"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints23"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 23);
     });
-    $('#confidencepoints24').change(function() {
-        var newSelectedValue = $('#confidencepoints24 option:selected').val()
+    $(gamesList.elements["confidencepoints24"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints24"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 24);
     });
-    $('#confidencepoints25').change(function() {
-        var newSelectedValue = $('#confidencepoints25 option:selected').val()
+    $(gamesList.elements["confidencepoints25"]).change(function() {
+        var newSelectedValue = $(gamesList.elements["confidencepoints25"]).val();
         resetDropdowns(games);
         populateDropdown(games, newSelectedValue, 25);
     });
@@ -1674,6 +1694,8 @@ function populateDivs(games, userid, selections=null, week, isAdmin) {
     var button = document.createElement("BUTTON");
     button.innerHTML = "Submit Picks";
     button.onclick = function(){
+        // When the button to submit is clicked, we generate the JSON string for the pick selection and submit it via POST
+        // Also do some validation to make sure proper number of selections were made
         var confidenceValues = [];
         var selectionsMade = 0;
         var selectionString = "[";

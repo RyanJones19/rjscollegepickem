@@ -52,7 +52,7 @@ for user in userslist:
     if(user["phonenumber"] is not None):
         textList.append(user["phonenumber"])
 
-message_body_not_done = f"Our records indicate you have not yet submitted your picks for College Pickem Week {week} -- visit https://rjscollegepickem.com/schedule/{week} and login to make your selections, good luck!"
+message_body_not_done = f"Our records indicate you have not yet submitted your picks for College Pickem Week {week} -- visit https://rjspickem.com/schedule/{week} and login to make your selections, good luck!"
 
 
 message_body_done = f"Our records indicate you have already submitted your picks for College Pickem Week {week} -- thanks and good luck!"
@@ -67,10 +67,10 @@ for user in textList:
         messagetext=message_body_not_done
         message = client.messages \
             .create(
-	    body=messagetext,
-	    from_='+15034617975',
-	    to=f"+1{user}",
-	    )
+	            body=messagetext,
+	            from_='+15034617975',
+	            to=f"+1{user}",
+	        )
         print("Successfully sent message")
         print(user)
         print(message.sid)
