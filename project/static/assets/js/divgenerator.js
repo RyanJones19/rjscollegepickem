@@ -120,7 +120,8 @@ var teamLogos = {
     "PUR":"/static/images/PUR.jpg",
     "MARY":"/static/images/MARY.jpg",
     "KAN":"/static/images/KAN.jpg",
-    "TULANE":"/static/images/TULANE.jpg"
+    "TULANE":"/static/images/TULANE.jpg",
+    "DUKE":"/static/images/DUKE.jpg"
 }
 
 var espnTeamLinkDict = {
@@ -244,7 +245,8 @@ var espnTeamLinkDict = {
     "PUR":"https://www.espn.com/college-football/team/_/id/2509/purdue-boilermakers",
     "MARY":"https://www.espn.com/college-football/team/_/id/120/maryland-terrapins",
     "KAN":"https://www.espn.com/college-football/team/_/id/2305/kansas-jayhawks",
-    "TULANE":"https://www.espn.com/college-football/team/_/id/2655/tulane-green-wave"
+    "TULANE":"https://www.espn.com/college-football/team/_/id/2655/tulane-green-wave",
+    "DUKE":"https://www.espn.com/college-football/team/_/id/150/duke-blue-devils"
 }
 
 // Go through all dropdowns and update the option text for a selected value

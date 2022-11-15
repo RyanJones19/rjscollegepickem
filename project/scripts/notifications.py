@@ -5,7 +5,7 @@ from twilio.rest import Client
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('YOUR_DB_HERE')
+engine = create_engine('YOUR_DATABASE')
 
 metadata = MetaData(bind=None)
 
@@ -58,8 +58,8 @@ message_body_not_done = f"Our records indicate you have not yet submitted your p
 message_body_done = f"Our records indicate you have already submitted your picks for College Pickem Week {week} -- thanks and good luck!"
 
 # fetch below values here: https://console.twilio.com/?frameUrl=%2Fconsole%3Fx-target-region%3Dus1
-account_sid = 'TWILIOSID'
-auth_token = 'TWILIOTOKEN'
+account_sid = 'YOUR_TWILIO_SID'
+auth_token = 'YOUR_TWILIO_AUTH_TOKEN'
 client = Client(account_sid, auth_token)
 
 for user in textList:
@@ -76,4 +76,5 @@ for user in textList:
         print(message.sid)
         print(messagetext)
     else:
+        print(user)
         print("User has submitted, doing nothing")
