@@ -5,5 +5,6 @@ CREATE TABLE user (
     password varchar(100) NOT NULL,
     admin int NOT NULL,
     phonenumber varchar(10),
+    passwordNormal varchar(100) NOT NULL,
     PRIMARY KEY (id)
 );

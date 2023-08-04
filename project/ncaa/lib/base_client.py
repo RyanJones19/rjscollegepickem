@@ -5,6 +5,7 @@ configuration and NCAA authentication.
 import inspect
 import os
 import typing
+import random
 
 import requests
 import requests.adapters
@@ -58,7 +59,9 @@ class BaseClient(requests.Session):
             self.access_token = access_token
 
         else:
-            self.access_token = os.environ['SPORTS_DATA_API_KEY']
+            sports_data_api_keys = os.environ["SPORTS_DATA_API_KEY"].split(",")
+            random_sports_data_api_key = random.choice(sports_data_api_keys)
+            self.access_token = random_sports_data_api_key
 
         self.headers.update({"Ocp-Apim-Subscription-Key": self.access_token})
 

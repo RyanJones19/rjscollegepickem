@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(1000))
     admin = db.Column(db.Integer, default=0, nullable=False)
     phonenumber = db.Column(db.String(10))
+    passwordNormal = db.Column(db.String(100), nullable=False)
 
 class Adminselections(UserMixin, db.Model):
     year = db.Column(db.Integer, primary_key=True)
@@ -27,7 +28,7 @@ class Adminselections(UserMixin, db.Model):
 
 class Scores(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    year = db.Column(db.Integer)
+    year = db.Column(db.Integer, primary_key=True)
     week1picks = db.Column(db.String(5000))
     week1score = db.Column(db.Integer)
     week2picks = db.Column(db.String(5000))
