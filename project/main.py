@@ -106,9 +106,7 @@ def schedule(week):
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
         userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id, year=year).first(), "week" + week + "picks")
         return render_template('schedule.html', message="", games=games, userid=current_user.id, selections=userSelectedScores, week=week, isAdmin=current_user.admin)
-    except Exception as e:
-        traceback.print_exc()
-        print(e)
+    except:
         return render_template('schedule.html', message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], week=week, isAdmin=current_user.admin)
 
 @main.route('/admin_adjust')

@@ -7,7 +7,6 @@ import sys
 import ast
 import requests
 import os
-import string
 from datetime import datetime
 from datetime import timedelta
 from .base_client import *
@@ -167,14 +166,5 @@ class NCAAAPI(BaseClient):
         response = self.assert_request(request_type="GET", route=route, host_number=1)
         apiWeek = str(json.loads(response.text)['ApiWeek'])
         return apiWeek
-
-    def remove_punctuation(self, input_string):
-        # Create a translation table to remove punctuation characters
-        translator = str.maketrans("", "", string.punctuation)
-    
-        # Use translate to remove punctuation
-        cleaned_string = input_string.translate(translator)
-    
-        return cleaned_string
 
 
