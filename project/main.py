@@ -105,7 +105,6 @@ def schedule(week):
         data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
         userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
-        print
         return render_template('schedule.html', message="", games=games, userid=current_user.id, selections=userSelectedScores, week=week, isAdmin=current_user.admin)
     except:
         return render_template('schedule.html', message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], week=week, isAdmin=current_user.admin)
