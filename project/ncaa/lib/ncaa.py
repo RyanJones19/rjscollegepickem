@@ -7,6 +7,7 @@ import sys
 import ast
 import requests
 import os
+import string
 from datetime import datetime
 from datetime import timedelta
 from .base_client import *
@@ -44,6 +45,7 @@ class NCAAAPI(BaseClient):
         else:
             scheduleParsed = schedule.__root__
 
+
         route = f"cfb/scores/json/Teams"
         response = self.assert_request(request_type="GET", route=route, host_number=1)
         teamdata = pydantic.parse_obj_as(TeamInfoResponseModel, response.json())
@@ -72,13 +74,14 @@ class NCAAAPI(BaseClient):
 
             for correctScore in correctScores.week.games:
                 try:
-                    d1 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=5)
+                    d1 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=4)
+                    d11 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=5)
                     d2 = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S')
                 except:
                     d1 = None
                     d2 = None
 
-                if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and d1 == d2):
+                if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and ((d1 == d2) or (d11 == d2))):
                     if correctScore.scoring is not None and correctScore.scoring.home_points is not None:
                         # sometimes the two APIs flip flop which teams are Home and Away (seems only neutral venues)
                         if(game.HomeTeamName == correctScore.away.name):
@@ -164,3 +167,14 @@ class NCAAAPI(BaseClient):
         response = self.assert_request(request_type="GET", route=route, host_number=1)
         apiWeek = str(json.loads(response.text)['ApiWeek'])
         return apiWeek
+
+    def remove_punctuation(self, input_string):
+        # Create a translation table to remove punctuation characters
+        translator = str.maketrans("", "", string.punctuation)
+    
+        # Use translate to remove punctuation
+        cleaned_string = input_string.translate(translator)
+    
+        return cleaned_string
+
+
