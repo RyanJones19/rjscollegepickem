@@ -13,6 +13,7 @@ main = Blueprint('main', __name__)
 ncaa_api_client = NCAAAPI()
 
 week = ncaa_api_client.get_current_week()
+year = 2023
 totalWeeks=13
 
 @main.route('/')
@@ -23,7 +24,7 @@ def index():
 @main.route('/admin/<week>')
 @login_required
 def admin(week):
-    games=ncaa_api_client.get_weekly_matchups(2022, week)
+    games=ncaa_api_client.get_weekly_matchups(year, week)
     if current_user.admin == 0:
         return render_template('failedadmin.html', name=current_user.name)
     else:
@@ -40,11 +41,11 @@ def profile():
 @login_required
 def myscores(week):
     try:
-        data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
+        data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
     except:
         return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
     if data is not None:
-        games=ncaa_api_client.get_weekly_matchups(2022, week, data)
+        games=ncaa_api_client.get_weekly_matchups(year, week, data)
     else:
         return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
     picks=getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
@@ -100,11 +101,12 @@ def myscores(week):
 @login_required
 def schedule(week):
     try:
-        data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
-        games=ncaa_api_client.get_weekly_matchups(2022, week, data)
-        userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
+        data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
+        games=ncaa_api_client.get_weekly_matchups(year, week, data)
+        userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id, year=year).first(), "week" + week + "picks")
         return render_template('schedule.html', message="", games=games, userid=current_user.id, selections=userSelectedScores, week=week, isAdmin=current_user.admin)
-    except:
+    except Exception as e:
+        print(e)
         return render_template('schedule.html', message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], week=week, isAdmin=current_user.admin)
 
 @main.route('/admin_adjust')
@@ -124,8 +126,8 @@ def admin_adjust_picks(week, user_id):
         return render_template('failedadmin.html', name=current_user.name)
     else:
         try:
-            data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
-            games=ncaa_api_client.get_weekly_matchups(2022, week, data)
+            data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
+            games=ncaa_api_client.get_weekly_matchups(year, week, data)
             userSelectedScores = getattr(Scores.query.filter_by(id=user_id).first(), "week" + week + "picks")
             return render_template('schedule.html', message="", games=games, userid=user_id, selections=userSelectedScores, week=week, isAdmin=1)
         except:
@@ -148,7 +150,7 @@ def submit_picks(week, user_id):
 @login_required
 def select_games(week):
     args = request.args
-    adminSelections = Adminselections.query.filter_by(year=1).first()
+    adminSelections = Adminselections.query.filter_by(year=year).first()
     setattr(adminSelections, "week" + week, str(args.get("selections")))
     db.session.commit()
     return redirect(url_for('main.profile'))
@@ -157,11 +159,11 @@ def select_games(week):
 @login_required
 def weeklyleaguestats(week):
     try:
-        data =  getattr(Adminselections.query.filter_by(year=1).first(), "week" + week).split(',')
+        data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
     except:
         return render_template('weeklyleaguestats.html', message="An error occurred loading all other teams picks, please reachout to an admin", selectionDisplay=[], correctSelections=[], incorrectSelections=[], week=week)
     if data is not None:
-        games=ncaa_api_client.get_weekly_matchups(2022, week, data)
+        games=ncaa_api_client.get_weekly_matchups(year, week, data)
     else:
         return render_template('weeklyleaguestats.html', message="An error occurred loading all other teams picks, please reachout to an admin", selectionDisplay=[], correctSelections=[], incorrectSelections=[], week=week)
 

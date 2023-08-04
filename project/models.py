@@ -27,6 +27,7 @@ class Adminselections(UserMixin, db.Model):
 
 class Scores(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
     week1picks = db.Column(db.String(5000))
     week1score = db.Column(db.Integer)
     week2picks = db.Column(db.String(5000))

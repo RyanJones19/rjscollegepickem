@@ -65,9 +65,9 @@ class CorrectVenueResponseModel(pydantic.BaseModel):
     city: typing.Optional[str]
 
 class CorrectGamesResponseModel(pydantic.BaseModel):
-    home: CorrectTeamResponseModel
-    away: CorrectTeamResponseModel
-    scheduled: str
+    home: typing.Optional[CorrectTeamResponseModel]
+    away: typing.Optional[CorrectTeamResponseModel]
+    scheduled: typing.Optional[str]
     venue: typing.Optional[CorrectVenueResponseModel]
     scoring: typing.Optional[CorrectScoringResponseModel]
 
@@ -77,6 +77,7 @@ class CorrectWeekResponseModel(pydantic.BaseModel):
 class CorrectScoresResponseModel(pydantic.BaseModel):
     week: CorrectWeekResponseModel
 
-class CorrectScoresResponseModelList(pydantic.BaseModel):
-    __root__: CorrectScoresResponseModel
+# Data model appears to have changed from last year and does not return a list anymore
+#class CorrectScoresResponseModelList(pydantic.BaseModel):
+#    __root__: CorrectScoresResponseModel
 

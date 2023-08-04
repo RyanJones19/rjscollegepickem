@@ -13,7 +13,7 @@ from .base_client import *
 from .ncaamodels import (
     ScheduleResponseModel,
     TeamInfoResponseModel,
-    CorrectScoresResponseModelList
+    CorrectScoresResponseModel
 )
 
 class NCAAAPI(BaseClient):
@@ -52,8 +52,7 @@ class NCAAAPI(BaseClient):
         sportsDataAPIKey = os.environ['SPORTS_RADAR_API_KEY']
 
         correctScoresResponse = requests.get(f"https://api.sportradar.us/ncaafb/trial/v7/en/games/{year}/REG/{week}/schedule.json?api_key={sportsDataAPIKey}")
-        correctScores = pydantic.parse_obj_as(CorrectScoresResponseModelList, correctScoresResponse.json())
-
+        correctScores = pydantic.parse_obj_as(CorrectScoresResponseModel, correctScoresResponse.json())
 
         for team in teamdata.__root__:
             teamMap[team.TeamID] = team
@@ -71,7 +70,7 @@ class NCAAAPI(BaseClient):
                 else:
                     status = "Scheduled - Time TBD"
 
-            for correctScore in correctScores.__root__.week.games:
+            for correctScore in correctScores.week.games:
                 try:
                     d1 = datetime.strptime(correctScore.scheduled, '%Y-%m-%dT%H:%M:%S+00:00') - timedelta(hours=5)
                     d2 = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S')

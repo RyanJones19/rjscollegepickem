@@ -38,7 +38,6 @@ def main():
             structlog_log_renderer,
         ],
         wrapper_class=structlog.BoundLogger,
-        context_class=structlog.contextvars,
         logger_factory=structlog.stdlib.LoggerFactory(),
         cache_logger_on_first_use=False,
     )
