@@ -56,7 +56,7 @@ def signup_post():
 
     # create a new scores table for the newly added user
     user = User.query.filter_by(email=email).first()
-    new_score = Scores(id=user.id, week1picks=None, week1score=0, week2picks=None, week2score=0, week3picks=None, week3score=0, week4picks=None, week4score=0, week5picks=None, week5score=0, week6picks=None, week6score=0, week7picks=None, week7score=0, week8picks=None, week8score=0, week9picks=None, week9score=0, week10picks=None, week10score=0, week11picks=None, week11score=0, week12picks=None, week12score=0, week13picks=None, week13score=0, year=2023)
+    new_score = Scores(id=user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023)
     db.session.add(new_score)
     db.session.commit()
     return redirect(url_for('auth.login'))
