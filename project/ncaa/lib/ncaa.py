@@ -64,12 +64,10 @@ class NCAAAPI(BaseClient):
         for team in teamdata.__root__:
             teamMap[team.TeamID] = team
 
-        #collegeFootballApiKey = "4nCGywPTHwyReAH7fM+Sz2PIVeSw2kuKxR50JR11WzZ2Jm92pAHHGH0z58LS46/j"
-        #correctSpreadHeaders = {"accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {collegeFootballApiKey}"}
-        #correctSpreadResponse = requests.get(f"https://api.collegefootballdata.com/lines?year={year}&week={week}", headers=correctSpreadHeaders)
-        #correctSpreads = pydantic.parse_obj_as(CorrectSpreadResponseModelList, correctSpreadResponse.json())
-
-        #print(correctSpreads)
+        collegeFootballApiKey = "4nCGywPTHwyReAH7fM+Sz2PIVeSw2kuKxR50JR11WzZ2Jm92pAHHGH0z58LS46/j"
+        correctSpreadHeaders = {"accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {collegeFootballApiKey}"}
+        correctSpreadResponse = requests.get(f"https://api.collegefootballdata.com/lines?year={year}&week={week}", headers=correctSpreadHeaders)
+        correctSpreads = pydantic.parse_obj_as(CorrectSpreadResponseModelList, correctSpreadResponse.json())
 
         for game in scheduleParsed:
             game_id = game.GameID
@@ -77,9 +75,12 @@ class NCAAAPI(BaseClient):
             startTime = game.DateTime
             details = ""
 
-            #for gameSpread in correctSpreads.__root__:
-            #    if gameSpread.home_team == game.HomeTeamName and gameSpread.away_team == game.AwayTeamName:
-            #        game.PointSpread = gameSpread.lines[0].formattedSpread
+            for gameSpread in correctSpreads.__root__:
+                if ((gameSpread.homeTeam in game.HomeTeamName) and (gameSpread.awayTeam in game.AwayTeamName)) or ((game.HomeTeamName in gameSpread.homeTeam) and (game.AwayTeamName in gameSpread.awayTeam)):
+                    try:
+                        game.PointSpread = gameSpread.lines[0].formattedSpread
+                    except:
+                        continue
             if game.Status == "Scheduled":
                 if (game.DateTime is not None):
                     d = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S') - timedelta(hours=3)
@@ -133,8 +134,8 @@ class NCAAAPI(BaseClient):
                 awayTeamRank = " (#" + str(teamMap[game.AwayTeamID].ApRank) + ")"
             if game.PointSpread is not None:
                 if week == "1":
-                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (0 - 0)" + " | " + str(game.PointSpread)
-                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (0 - 0)" + " | " + str(-1 * game.PointSpread)
+                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (0 - 0)"
+                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (0 - 0)"
                 else:
                     home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")" + " | " + str(game.PointSpread)
                     away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")" + " | " + str(-1 * game.PointSpread)
@@ -172,6 +173,9 @@ class NCAAAPI(BaseClient):
                     details = details + game.Period
             if(game.Stadium.Name is not None and game.Stadium.City is not None and game.Stadium.State is not None):
                 details = details + " - " + str(game.Stadium.Name) + " - " + str(game.Stadium.City) + ", " + str(game.Stadium.State)
+
+            if game.PointSpread is not None:
+                details = details + " --- Spread: " +str(game.PointSpread)
 
             matchups.append({\
             "game_id": game_id, \

@@ -29,6 +29,6 @@
 
 {% block script %}
       <script type="text/javascript">
-        populateAdminPage({{games|tojson}}, {{week}})
+        populateAdminPage({{games|tojson}}, {{week}}, {{selectedGames|tojson}})
       </script>
 {% endblock %}
