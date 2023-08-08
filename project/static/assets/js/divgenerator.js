@@ -1498,7 +1498,8 @@ function populateDropdown(games, newSelectedValue, selectedList) {
 }
 
 // Build the Admin page where the 25 games for the week to select are chosen by an admin
-function populateAdminPage(games, week, selectedGames) {
+function populateAdminPage(games, week) {
+  //, selectedGames) {
   var gameSelection = document.getElementsByClassName("game-selection")[0];
   var gameSelectionList = document.createElement("form");
   gameSelectionList.id = "adminform";
@@ -1509,7 +1510,7 @@ function populateAdminPage(games, week, selectedGames) {
     cb1.id = "checkbox" + (i + 1).toString();
     cb1.name = "checkbox" + (i + 1).toString();
     cb1.value = "checkbox" + (i + 1).toString();
-    if (
+    /*if (
       selectedGames.some(
         (selectedGame) => selectedGame.game_id === games[i].game_id
       )
@@ -1517,7 +1518,9 @@ function populateAdminPage(games, week, selectedGames) {
       cb1.checked = true;
     } else {
       cb1.checked = false;
-    }
+    } */
+
+    cb1.checked = false;
 
     var cb1label = document.createElement("label");
     cb1label.htmlFor = "checkbox" + (i + 1).toString();
@@ -1558,9 +1561,14 @@ function populateAdminPage(games, week, selectedGames) {
 // Submits a POST form to the /submitpicks endpoints
 
 function populateDivs(games, userid, selections = null, week, isAdmin) {
+  console.log("testing");
   var gamesListParent = document.getElementsByClassName("games-list")[0];
   var gamesList = document.createElement("form");
   gamesList.id = "popdivsform";
+
+  //var ryanTest = document.createElement("h2");
+  //ryanTest.innerHTML = "Make Your Picks";
+  //gamesList.appendChild(ryanTest);
 
   var lockSelection = false;
   if (!(isAdmin == 1)) {
