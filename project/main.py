@@ -31,14 +31,14 @@ def admin(week):
         return render_template('failedadmin.html', name=current_user.name)
     else:
         data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
-        sortedGames = sorted(games, key=lambda x: x['kickoff'])
-        sorted_selected_games = []
-        if len(data) > 0:
-            for game in sortedGames:
-                if str(game['game_id']) in data:
-                    sorted_selected_games.append(game)
+        #sortedGames = sorted(games, key=lambda x: x['kickoff'])
+        #sorted_selected_games = []
+        #if len(data) > 0:
+        #    for game in sortedGames:
+        #        if str(game['game_id']) in data:
+        #            sorted_selected_games.append(game)
 
-        return render_template('admin.html', name=current_user.name, games=sortedGames, week=week, weekText="Game Options for week " + week, selectedGames=sorted_selected_games)
+        return render_template('admin.html', name=current_user.name, games=games, week=week, weekText="Game Options for week " + week) #, selectedGames=sorted_selected_games)
 
 
 @main.route('/profile')
@@ -54,7 +54,7 @@ def myscores(week):
         data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
     except:
         return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
-    if data is not None and data is not "":
+    if data is not None and data != "":
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
     else:
         return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
@@ -65,7 +65,7 @@ def myscores(week):
         orderedGameNames[game['home_team_details'].split(':')[0]] = game['kickoff']
         orderedGameNames[game['away_team_details'].split(':')[0]] = game['kickoff']
 
-    if picks is not None and picks is not "":
+    if picks is not None and picks != "":
         correctSelections=[]
         incorrectSelections=[]
         selectionDisplay={}
@@ -114,6 +114,10 @@ def schedule(week):
         data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
         userSelectedScores = getattr(Scores.query.filter_by(id=current_user.id).first(), "week" + week + "picks")
+        print(games)
+        print("====================================")
+        print(userSelectedScores)
+        print("trying to render schedule page")
         return render_template('schedule.html', message="", games=games, userid=current_user.id, selections=userSelectedScores, week=week, isAdmin=current_user.admin)
     except:
         return render_template('schedule.html', message="Game choices for week " + week + " have not been chosen by an admin yet, please check back later", games=[], userid=current_user.id, selections=[], week=week, isAdmin=current_user.admin)

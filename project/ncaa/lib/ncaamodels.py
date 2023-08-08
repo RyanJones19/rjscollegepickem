@@ -81,3 +81,28 @@ class CorrectScoresResponseModel(pydantic.BaseModel):
 #class CorrectScoresResponseModelList(pydantic.BaseModel):
 #    __root__: CorrectScoresResponseModel
 
+class LineResponseModel(pydantic.BaseModel):
+    provider: typing.Optional[str]
+    spread: typing.Optional[float]
+    formattedSpread: typing.Optional[str]
+    spreadOpen: typing.Optional[float]
+    overUnder: typing.Optional[float]
+    homeMoneyLine: typing.Optional[int]
+    awayMoneyLine: typing.Optional[int]
+
+class CorrectSpreadResponseModel(pydantic.BaseModel):
+    id: typing.Optional[int]
+    season: typing.Optional[int]
+    week: typing.Optional[int]
+    startDateTime: typing.Optional[str]
+    homeTeam: typing.Optional[str]
+    homeScore: typing.Optional[int]
+    awayTeam: typing.Optional[str]
+    awayScore: typing.Optional[int]
+    lines: typing.Optional[typing.List[LineResponseModel]]
+
+class CorrectSpreadResponseModelList(pydantic.BaseModel):
+    __root__: typing.List[CorrectSpreadResponseModel]
+
+
+

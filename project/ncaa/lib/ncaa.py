@@ -14,7 +14,8 @@ from .base_client import *
 from .ncaamodels import (
     ScheduleResponseModel,
     TeamInfoResponseModel,
-    CorrectScoresResponseModel
+    CorrectScoresResponseModel,
+    CorrectSpreadResponseModelList,
 )
 
 class NCAAAPI(BaseClient):
@@ -63,11 +64,22 @@ class NCAAAPI(BaseClient):
         for team in teamdata.__root__:
             teamMap[team.TeamID] = team
 
+        #collegeFootballApiKey = "4nCGywPTHwyReAH7fM+Sz2PIVeSw2kuKxR50JR11WzZ2Jm92pAHHGH0z58LS46/j"
+        #correctSpreadHeaders = {"accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {collegeFootballApiKey}"}
+        #correctSpreadResponse = requests.get(f"https://api.collegefootballdata.com/lines?year={year}&week={week}", headers=correctSpreadHeaders)
+        #correctSpreads = pydantic.parse_obj_as(CorrectSpreadResponseModelList, correctSpreadResponse.json())
+
+        #print(correctSpreads)
+
         for game in scheduleParsed:
             game_id = game.GameID
             status = game.Status
             startTime = game.DateTime
             details = ""
+
+            #for gameSpread in correctSpreads.__root__:
+            #    if gameSpread.home_team == game.HomeTeamName and gameSpread.away_team == game.AwayTeamName:
+            #        game.PointSpread = gameSpread.lines[0].formattedSpread
             if game.Status == "Scheduled":
                 if (game.DateTime is not None):
                     d = datetime.strptime(game.DateTime, '%Y-%m-%dT%H:%M:%S') - timedelta(hours=3)
@@ -120,11 +132,19 @@ class NCAAAPI(BaseClient):
             if teamMap[game.AwayTeamID].ApRank is not None:
                 awayTeamRank = " (#" + str(teamMap[game.AwayTeamID].ApRank) + ")"
             if game.PointSpread is not None:
-                home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")" + " | " + str(game.PointSpread)
-                away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")" + " | " + str(-1 * game.PointSpread)
+                if week == "1":
+                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (0 - 0)" + " | " + str(game.PointSpread)
+                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (0 - 0)" + " | " + str(-1 * game.PointSpread)
+                else:
+                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")" + " | " + str(game.PointSpread)
+                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")" + " | " + str(-1 * game.PointSpread)
             else:
-                home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")"
-                away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")"
+                if week == "1":
+                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (0 - 0)"
+                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (0 - 0)"
+                else:
+                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")"
+                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")"
 
             if(game.Period is not None and game.Period != "F" and game.TimeRemainingMinutes is not None and game.TimeRemainingSeconds is not None):
                 if game.TimeRemainingSeconds < 10:
