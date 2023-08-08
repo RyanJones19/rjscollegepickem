@@ -45,7 +45,7 @@ def myscores(week):
         data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
     except:
         return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
-    if data is not None:
+    if data is not None and data is not "":
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
     else:
         return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
@@ -56,7 +56,7 @@ def myscores(week):
         orderedGameNames[game['home_team_details'].split(':')[0]] = game['kickoff']
         orderedGameNames[game['away_team_details'].split(':')[0]] = game['kickoff']
 
-    if picks is not None:
+    if picks is not None and picks is not "":
         correctSelections=[]
         incorrectSelections=[]
         selectionDisplay={}
