@@ -26,10 +26,19 @@ def index():
 @login_required
 def admin(week):
     games=ncaa_api_client.get_weekly_matchups(year, week)
+    sorted_selected_games = []
     if current_user.admin == 0:
         return render_template('failedadmin.html', name=current_user.name)
     else:
-        return render_template('admin.html', name=current_user.name, games=games, week=week, weekText="Game Options for week " + week)
+        data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
+        sortedGames = sorted(games, key=lambda x: x['game_details'])
+        sorted_selected_games = []
+        if len(data) > 0:
+            for game in sortedGames:
+                if str(game['game_id']) in data:
+                    sorted_selected_games.append(game)
+
+        return render_template('admin.html', name=current_user.name, games=sortedGames, week=week, weekText="Game Options for week " + week, selectedGames=sorted_selected_games)
 
 
 @main.route('/profile')

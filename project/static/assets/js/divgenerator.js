@@ -131,6 +131,16 @@ var teamLogos = {
   CMICH: "/static/images/CMICH.jpg",
   LIBRTY: "/static/images/LIBRTY.jpg",
   BOWLGR: "/static/images/BOWLGR.jpg",
+  YNGST: "/static/images/YNGST.jpg",
+  DEL: "/static/images/DEL.jpg",
+  TROY: "/static/images/TROY.jpg",
+  CHSOU: "/static/images/CHSOU.jpg",
+  UNLV: "/static/images/UNLV.jpg",
+  AUSP: "/static/images/AUSP.jpg",
+  FURMAN: "/static/images/FURMAN.jpg",
+  GRMBST: "/static/images/GRMBST.jpg",
+  NICHLS: "/static/images/NICHLS.jpg",
+  UCDV: "/static/images/UCDV.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -311,6 +321,20 @@ var espnTeamLinkDict = {
   LIBRTY: "https://www.espn.com/college-football/team/_/id/2335/liberty-flames",
   BOWLGR:
     "https://www.espn.com/college-football/team/_/id/189/bowling-green-falcons",
+  YNGST:
+    "https://www.espn.com/college-football/team/_/id/2754/youngstown-state-penguins",
+  DEL: "https://www.espn.com/college-football/team/_/id/48/delaware-blue-hens",
+  TROY: "https://www.espn.com/college-football/team/_/id/2653/troy-trojans",
+  CHSOU:
+    "https://www.espn.com/college-football/team/_/id/2127/charleston-southern-buccaneers",
+  UNLV: "https://www.espn.com/college-football/team/_/id/2439/unlv-rebels",
+  AUSP: "https://www.espn.com/college-football/team/_/id/2046/austin-peay-governors",
+  FURMAN: "https://www.espn.com/college-football/team/_/id/231/furman-paladins",
+  GRMBST:
+    "https://www.espn.com/college-football/team/_/id/2755/grambling-tigers",
+  NICHLS:
+    "https://www.espn.com/college-football/team/_/id/2447/nicholls-colonels",
+  UCDV: "https://www.espn.com/college-football/team/_/id/302/uc-davis-aggies",
 };
 
 // Go through all dropdowns and update the option text for a selected value
@@ -1474,7 +1498,7 @@ function populateDropdown(games, newSelectedValue, selectedList) {
 }
 
 // Build the Admin page where the 25 games for the week to select are chosen by an admin
-function populateAdminPage(games, week) {
+function populateAdminPage(games, week, selectedGames) {
   var gameSelection = document.getElementsByClassName("game-selection")[0];
   var gameSelectionList = document.createElement("form");
   gameSelectionList.id = "adminform";
@@ -1485,7 +1509,15 @@ function populateAdminPage(games, week) {
     cb1.id = "checkbox" + (i + 1).toString();
     cb1.name = "checkbox" + (i + 1).toString();
     cb1.value = "checkbox" + (i + 1).toString();
-    cb1.checked = false;
+    if (
+      selectedGames.some(
+        (selectedGame) => selectedGame.game_id === games[i].game_id
+      )
+    ) {
+      cb1.checked = true;
+    } else {
+      cb1.checked = false;
+    }
 
     var cb1label = document.createElement("label");
     cb1label.htmlFor = "checkbox" + (i + 1).toString();
