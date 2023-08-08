@@ -31,7 +31,7 @@ def admin(week):
         return render_template('failedadmin.html', name=current_user.name)
     else:
         data =  getattr(Adminselections.query.filter_by(year=year).first(), "week" + week).split(',')
-        sortedGames = sorted(games, key=lambda x: x['game_details'])
+        sortedGames = sorted(games, key=lambda x: x['kickoff'])
         sorted_selected_games = []
         if len(data) > 0:
             for game in sortedGames:
