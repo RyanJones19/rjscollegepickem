@@ -8,6 +8,7 @@ import ast
 import requests
 import os
 import random
+from unidecode import unidecode
 from datetime import datetime
 from datetime import timedelta
 from .base_client import *
@@ -22,6 +23,11 @@ class NCAAAPI(BaseClient):
     def __init__(self, access_token: typing.Optional[str] = None, logger=None):
         super().__init__(access_token=access_token, logger=logger)
         self.logger.debug("NCAAAPI::__init__()")
+
+    def normalize_string(self, s):
+        s = unidecode(s) 
+        s = s.replace("'", "") 
+        return s.lower()
 
     def get_weekly_matchups(
         self,
@@ -76,7 +82,12 @@ class NCAAAPI(BaseClient):
             details = ""
 
             for gameSpread in correctSpreads.__root__:
-                if ((gameSpread.homeTeam in game.HomeTeamName) and (gameSpread.awayTeam in game.AwayTeamName)) or ((game.HomeTeamName in gameSpread.homeTeam) and (game.AwayTeamName in gameSpread.awayTeam)):
+                home_game_spread_normalized = self.normalize_string(gameSpread.homeTeam)
+                home_team_normalized = self.normalize_string(game.HomeTeamName)
+                away_game_spread_normalized = self.normalize_string(gameSpread.awayTeam)
+                away_team_normalized = self.normalize_string(game.AwayTeamName)
+
+                if ((home_game_spread_normalized in home_team_normalized) and (away_game_spread_normalized in away_team_normalized)) or ((home_team_normalized in home_game_spread_normalized) and (away_team_normalized in away_game_spread_normalized)):
                     try:
                         game.PointSpread = gameSpread.lines[0].formattedSpread
                     except:
