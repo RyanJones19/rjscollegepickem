@@ -142,6 +142,7 @@ var teamLogos = {
   NICHLS: "/static/images/NICHLS.jpg",
   UCDV: "/static/images/UCDV.jpg",
   LAMON: "/static/images/LAMON.jpg",
+  TENST: "/static/images/TENST.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -338,6 +339,8 @@ var espnTeamLinkDict = {
   UCDV: "https://www.espn.com/college-football/team/_/id/302/uc-davis-aggies",
   LAMON:
     "https://www.espn.com/college-football/team/_/id/2433/ul-monroe-warhawks",
+  TENST:
+    "https://www.espn.com/college-football/team/_/id/2634/tennessee-state-tigers",
 };
 
 // Go through all dropdowns and update the option text for a selected value
@@ -1525,8 +1528,34 @@ function populateAdminPage(games, week, selectedGames) {
     var cb1label = document.createElement("label");
     cb1label.htmlFor = "checkbox" + (i + 1).toString();
     cb1label.innerHTML = games[i].home + "<b> - VS - </b>" + games[i].away;
+    var h2spread = document.createElement("h5");
+    h2spread.innerHTML = "Spread: " + games[i].spread;
+
+    var kickoffString = games[i].kickoff;
+    var kickoffDate = new Date(kickoffString);
+    var pstOffset = -3;
+    var pstTime = new Date(kickoffDate.getTime() - pstOffset * 60 * 60 * 1000);
+
+    var options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZoneName: "short",
+    };
+
+    var formattedTime = pstTime.toLocaleDateString("en-US", options);
+
+    var h2kickoff = document.createElement("h5");
+    h2kickoff.innerHTML = "Kickoff: " + formattedTime;
+
+    var br = document.createElement("br");
     gameSelectionList.appendChild(cb1);
     gameSelectionList.appendChild(cb1label);
+    gameSelectionList.appendChild(br);
+    gameSelectionList.appendChild(h2spread);
+    gameSelectionList.appendChild(h2kickoff);
     var br = document.createElement("br");
     gameSelectionList.appendChild(br);
   }

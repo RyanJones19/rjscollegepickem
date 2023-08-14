@@ -80,6 +80,7 @@ class NCAAAPI(BaseClient):
             status = game.Status
             startTime = game.DateTime
             details = ""
+            pointSpread = ""
 
             for gameSpread in correctSpreads.__root__:
                 home_game_spread_normalized = self.normalize_string(gameSpread.homeTeam)
@@ -197,6 +198,8 @@ class NCAAAPI(BaseClient):
             if game.PointSpread is not None:
                 details = details + " --- Spread: " +str(game.PointSpread)
 
+            if game.PointSpread is None:
+                game.PointSpread = "No Spread Data Available"
             matchups.append({\
             "game_id": game_id, \
             "home_team_details": home_team, \
@@ -205,7 +208,8 @@ class NCAAAPI(BaseClient):
             "home": home_details,\
             "away":  away_details,\
             "kickoff": startTime, \
-            "isClosed": game.IsClosed})
+            "isClosed": game.IsClosed, \
+            "spread": game.PointSpread})
 
         return matchups
 
