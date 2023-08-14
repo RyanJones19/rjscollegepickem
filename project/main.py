@@ -33,7 +33,6 @@ def getLeagueKeys():
     leagueKeys = []
     for league in Scores.query.filter_by(year=year, id=current_user.id).all():
         leagueKeys.append(league.leagueKey)
-    print(leagueKeys)
     return leagueKeys
 
 @main.route('/setLeagueKey/<passedLeagueKey>')
@@ -82,7 +81,6 @@ def myscores(week):
         except:
             return render_template('myscores.html', name=str(current_user.name), message="You are not in any leagues, please join or create one then try again", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
 
-    print(data)
     if data is not None and data != "":
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
     else:
