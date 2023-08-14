@@ -141,6 +141,7 @@ var teamLogos = {
   GRMBST: "/static/images/GRMBST.jpg",
   NICHLS: "/static/images/NICHLS.jpg",
   UCDV: "/static/images/UCDV.jpg",
+  LAMON: "/static/images/LAMON.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -335,6 +336,8 @@ var espnTeamLinkDict = {
   NICHLS:
     "https://www.espn.com/college-football/team/_/id/2447/nicholls-colonels",
   UCDV: "https://www.espn.com/college-football/team/_/id/302/uc-davis-aggies",
+  LAMON:
+    "https://www.espn.com/college-football/team/_/id/2433/ul-monroe-warhawks",
 };
 
 // Go through all dropdowns and update the option text for a selected value
