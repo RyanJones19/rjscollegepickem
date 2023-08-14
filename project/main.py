@@ -117,7 +117,10 @@ def myscores(week):
     if data is not None and data != "":
         games=ncaa_api_client.get_weekly_matchups(year, week, data)
     else:
-        return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, leagueKeys=leagueKeys, leagueKey=leagueKey)
+        try:
+            return render_template('myscores.html', name=str(current_user.name), message="You have not made any picks yet for week " + week + " please go make your selections", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week, leagueKeys=leagueKeys, leagueKey=leagueKey)
+        except:
+            return render_template('myscores.html', name=str(current_user.name), message="You are not in any leagues, please join or create one then try again", selectionDisplay=[], correctSelections=[], incorrectSelections=[], totalScore=0, week=week)
     picks=getattr(Scores.query.filter_by(id=current_user.id, year=year, leagueKey=leagueKey).first(), "week" + week + "picks")
 
     orderedGameNames = {}
