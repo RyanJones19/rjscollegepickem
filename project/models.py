@@ -25,6 +25,7 @@ class Adminselections(UserMixin, db.Model):
     week11 = db.Column(db.String(255))
     week12 = db.Column(db.String(255))
     week13 = db.Column(db.String(255))
+    leagueKey = db.Column(db.String(100), primary_key=True)
 
 class Scores(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,3 +56,4 @@ class Scores(UserMixin, db.Model):
     week12score = db.Column(db.Integer)
     week13picks = db.Column(db.String(5000))
     week13score = db.Column(db.Integer)
+    leagueKey = db.Column(db.String(100), primary_key=True)

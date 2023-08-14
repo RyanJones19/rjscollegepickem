@@ -27,7 +27,7 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+    return redirect(url_for('main.index'))
 
 @auth.route('/signup')
 def signup():
@@ -56,9 +56,9 @@ def signup_post():
 
     # create a new scores table for the newly added user
     user = User.query.filter_by(email=email).first()
-    new_score = Scores(id=user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023)
-    db.session.add(new_score)
-    db.session.commit()
+    #new_score = Scores(id=user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023)
+    #db.session.add(new_score)
+    #db.session.commit()
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
