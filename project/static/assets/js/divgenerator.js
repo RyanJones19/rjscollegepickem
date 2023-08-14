@@ -1533,7 +1533,7 @@ function populateAdminPage(games, week, selectedGames) {
 
     var kickoffString = games[i].kickoff;
     var kickoffDate = new Date(kickoffString);
-    var pstOffset = -3;
+    var pstOffset = 3;
     var pstTime = new Date(kickoffDate.getTime() - pstOffset * 60 * 60 * 1000);
 
     var options = {
