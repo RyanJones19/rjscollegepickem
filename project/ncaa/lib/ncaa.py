@@ -87,7 +87,11 @@ class NCAAAPI(BaseClient):
                 away_game_spread_normalized = self.normalize_string(gameSpread.awayTeam)
                 away_team_normalized = self.normalize_string(game.AwayTeamName)
 
-                if ((home_game_spread_normalized in home_team_normalized) and (away_game_spread_normalized in away_team_normalized)) or ((home_team_normalized in home_game_spread_normalized) and (away_team_normalized in away_game_spread_normalized)):
+                successfulConditional = False
+                if (home_team_normalized == "utsa roadrunners" and home_game_spread_normalized == "ut san antonio") or (away_team_normalized == "utsa roadrunners" and away_game_spread_normalized == "ut san antonio") or (home_team_normalized == "ul monroe warhawks" and home_game_spread_normalized == "louisiana monroe") or (away_team_normalized == "ul monroe warhawks" and away_game_spread_normalized == "louisiana monroe"):
+                    successfulConditional = True
+
+                if ((home_game_spread_normalized in home_team_normalized) and (away_game_spread_normalized in away_team_normalized)) or ((home_team_normalized in home_game_spread_normalized) and (away_team_normalized in away_game_spread_normalized)) or successfulConditional:
                     try:
                         game.PointSpread = gameSpread.lines[0].formattedSpread
                     except:
