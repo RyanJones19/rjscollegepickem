@@ -35,12 +35,45 @@ def getLeagueKeys():
         leagueKeys.append(league.leagueKey)
     return leagueKeys
 
+def getAllLeagueKeys():
+    leagueKeys = []
+    for league in Scores.query.filter_by(year=year).all():
+        leagueKeys.append(league.leagueKey)
+    return leagueKeys
+
 @main.route('/setLeagueKey/<passedLeagueKey>')
 @login_required
 def setLeagueKey(passedLeagueKey):
     global leagueKey
     leagueKey = passedLeagueKey
     return redirect(url_for('main.profile'))
+
+@main.route('/joinLeague/<leagueKey>', methods=['POST'])
+@login_required
+def joinLeague(leagueKey):
+    if leagueKey in getAllLeagueKeys():
+        new_league_score = Scores(id=current_user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023, leagueKey=leagueKey)
+        db.session.add(new_league_score)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    else:
+        try:
+            new_admin_selections = Adminselections(week1="", week2="", week3="", week4="", week5="", week6="", week7="", week8="", week9="", week10="", week11="", week12="", week13="", year=2023, leagueKey=leagueKey)
+            new_league_score = Scores(id=current_user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023, leagueKey=leagueKey)
+            db.session.add(new_admin_selections)
+            db.session.add(new_league_score)
+            db.session.commit()
+            return redirect(url_for('main.index'))
+        except:
+            return render_template('failedJoinLeague.html', name=current_user.name, week=week, leagueKeys=leagueKeys, leagueKey=leagueKey)
+
+@main.route('/joinLeaguePage')
+@login_required
+def joinLeaguePage():
+    try:
+        return render_template('joinLeague.html', name=current_user.name, week=week, leagueKeys=leagueKeys, leagueKey=leagueKey)
+    except:
+        return render_template('joinLeague.html', name=current_user.name, week=week)
 
 @main.route('/admin/<week>')
 @login_required

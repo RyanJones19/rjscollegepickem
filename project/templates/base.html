@@ -60,6 +60,11 @@
           <li><a href="{{ url_for('main.index') }}">Home</a></li>
           {% if current_user.is_authenticated %}
           <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+          <li>
+            <a href="{{ url_for('main.joinLeaguePage') }}"
+              >Join or Create League</a
+            >
+          </li>
           {% endif %} {% if not current_user.is_authenticated %}
           <li><a href="{{ url_for('auth.login') }}">Login</a></li>
           <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>

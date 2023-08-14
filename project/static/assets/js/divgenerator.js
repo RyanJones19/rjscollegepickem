@@ -2368,6 +2368,30 @@ function populateDivs(games, userid, selections = null, week, isAdmin) {
   gamesListParent.appendChild(gamesList);
 }
 
+function populateJoinLeagueDiv() {
+  var leagueJoiner = document.getElementsByClassName("league-joiner")[0];
+  var leagueJoinerForm = document.createElement("form");
+  leagueJoinerForm.id = "popJoinLeagueDiv";
+
+  var leagueKeyInput = document.createElement("input");
+  leagueKeyInput.type = "text";
+  leagueKeyInput.placeholder = "Enter a league name";
+  leagueKeyInput.id = "leagueKeyInput";
+
+  var button = document.createElement("BUTTON");
+  button.innerHTML = "Join League";
+  button.onclick = function () {
+    var leagueKey = document.getElementById("leagueKeyInput").value;
+    if (leagueKey) {
+      leagueJoinerForm.setAttribute("method", "post");
+      leagueJoinerForm.setAttribute("action", `/joinLeague/${leagueKey}`);
+    }
+  };
+  leagueJoinerForm.appendChild(leagueKeyInput);
+  leagueJoinerForm.appendChild(button);
+  leagueJoiner.appendChild(leagueJoinerForm);
+}
+
 function profileScores(
   selectionDisplay,
   correctSelections,
