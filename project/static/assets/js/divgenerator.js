@@ -143,6 +143,18 @@ var teamLogos = {
   UCDV: "/static/images/UCDV.jpg",
   LAMON: "/static/images/LAMON.jpg",
   TENST: "/static/images/TENST.jpg",
+  JAXST: "/static/images/JAXST.jpg",
+  OHIO: "/static/images/OHIO.jpg",
+  ELON: "/static/images/ELON.jpg",
+  KENTST: "/static/images/KENTST.jpg",
+  RI: "/static/images/RI.jpg",
+  STFPA: "/static/images/STFPA.jpg",
+  SDAK: "/static/images/SDAK.jpg",
+  ARPB: "/static/images/ARPB.jpg",
+  NCAT: "/static/images/NCAT.jpg",
+  SUTAH: "/static/images/SUTAH.jpg",
+  HOWRD: "/static/images/HOWRD.jpg",
+  MSRST: "/static/images/MSRST.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -341,6 +353,23 @@ var espnTeamLinkDict = {
     "https://www.espn.com/college-football/team/_/id/2433/ul-monroe-warhawks",
   TENST:
     "https://www.espn.com/college-football/team/_/id/2634/tennessee-state-tigers",
+  JAXST:
+    "https://www.espn.com/college-football/team/_/id/55/jacksonville-state-gamecocks",
+  OHIO: "https://www.espn.com/college-football/team/_/id/195/ohio-bobcats",
+  ELON: "https://www.espn.com/college-football/team/_/id/2210/elon-phoenix",
+  KENTST:
+    "https://www.espn.com/college-football/team/_/id/2309/kent-state-golden-flashes",
+  RI: "https://www.espn.com/college-football/team/_/id/227/rhode-island-rams",
+  STFPA:
+    "https://www.espn.com/college-football/team/_/id/2598/st.-francis-(pa)-red-flash",
+  SDAK: "https://www.espn.com/college-football/team/_/id/233/south-dakota-coyotes",
+  ARPB: "https://www.espn.com/college-football/team/_/id/2029/arkansas-pine-bluff-golden-lions",
+  NCAT: "https://www.espn.com/college-football/team/_/id/2448",
+  SUTAH:
+    "https://www.espn.com/college-football/team/_/id/253/southern-utah-thunderbirds",
+  HOWRD: "https://www.espn.com/college-football/team/_/id/47/howard-bison",
+  MSRST:
+    "https://www.espn.com/college-football/team/_/id/2623/missouri-state-bears",
 };
 
 // Go through all dropdowns and update the option text for a selected value
@@ -348,6 +377,9 @@ var espnTeamLinkDict = {
 // and update the initially static "7" to say "7 - Oregon State"
 // The filter() function iterates over all options in th dropdown and returns the values that match the passed in text to update them
 function updateDropdowns(optiontext, appendedText) {
+  if (optiontext == "None") {
+    return;
+  }
   $("#confidencepoints1 option")
     .filter(function () {
       return $(this).val().trim() == optiontext;

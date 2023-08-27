@@ -119,7 +119,11 @@ class NCAAAPI(BaseClient):
                     d1 = None
                     d2 = None
 
-                if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and ((d1 == d2) or (d11 == d2))):
+                home_team_score_normalized = self.normalize_string(correctScore.home.name)
+                away_team_score_normalized = self.normalize_string(correctScore.away.name)
+
+                if ((home_team_score_normalized in home_team_normalized) and (away_team_score_normalized in away_team_normalized)) or ((home_team_normalized in home_team_score_normalized) and (away_team_normalized in away_team_score_normalized)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) or correctScore.venue.city == game.Stadium.City): # and ((d1 == d2) or (d11 == d2))):
+                #if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and ((d1 == d2) or (d11 == d2))):
                     if correctScore.scoring is not None and correctScore.scoring.home_points is not None:
                         # sometimes the two APIs flip flop which teams are Home and Away (seems only neutral venues)
                         if(game.HomeTeamName == correctScore.away.name):
