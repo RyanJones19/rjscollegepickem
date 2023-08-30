@@ -2,6 +2,35 @@
 <html>
   <head>
     <title>College Pick'Em by Ryan Jones</title>
+    <style>
+      /* Styling for the banner */
+      .app-banner {
+        background-color: #d73f09; /* Orange background color */
+        color: white; /* Text color */
+        text-align: center;
+        padding: 10px;
+      }
+
+      .app-banner p {
+        margin-top: 10px; /* Added margin to the top of the text */
+      }
+
+      .app-banner a {
+        display: inline-block;
+        background-color: #ffffff; /* White button background color */
+        color: #ff6600; /* Button text color */
+        text-decoration: none;
+        font-weight: bold;
+        padding: 15px 16px;
+        border-radius: 10px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .app-banner a:hover {
+        background-color: #ff6600; /* Orange background on hover */
+        color: white; /* Text color on hover */
+      }
+    </style>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -17,6 +46,17 @@
     <div id="wrapper">
       <!-- Header -->
       <header id="header">
+        <div class="app-banner">
+          <p>
+            Download the RJs Pickem App from the App Store for the best
+            experience!
+          </p>
+          <a
+            href="https://apps.apple.com/us/app/rjs-pickem/id6462481434"
+            target="_blank"
+            >Download Now</a
+          >
+        </div>
         <div class="inner">
           <!-- Logo -->
           <a href="/myscores/{{week}}" class="logo">
