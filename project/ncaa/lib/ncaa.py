@@ -97,9 +97,14 @@ class NCAAAPI(BaseClient):
 
                 if ((home_game_spread_normalized in home_team_normalized) and (away_game_spread_normalized in away_team_normalized)) or ((home_team_normalized in home_game_spread_normalized) and (away_team_normalized in away_game_spread_normalized)) or successfulConditional:
                     try:
-                        game.PointSpread = gameSpread.lines[0].formattedSpread
-                        if "null" in game.PointSpread:
-                            game.PointSpread = "No Spread Data Available"
+                        for line in gameSpread.lines:
+                            if line.provider == "Bovada":
+                                game.PointSpread = line.formattedSpread
+                                if "null" in game.PointSpread:
+                                    game.PointSpread = "No Spread Data Available"
+                        #game.PointSpread = gameSpread.lines[0].formattedSpread
+                        #if "null" in game.PointSpread:
+                        #    game.PointSpread = "No Spread Data Available"
                     except:
                         continue
             if game.Status == "Scheduled":
