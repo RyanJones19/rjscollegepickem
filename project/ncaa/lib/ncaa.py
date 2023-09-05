@@ -177,8 +177,8 @@ class NCAAAPI(BaseClient):
                     home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (0 - 0)"
                     away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (0 - 0)"
                 else:
-                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")" + " | " + str(game.PointSpread)
-                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")" + " | " + str(-1 * game.PointSpread)
+                    home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (" + str(teamMap[game.HomeTeamID].Wins) + "-" + str(teamMap[game.HomeTeamID].Losses) + ")"# + " | " + str(game.PointSpread)
+                    away_details = "AWAY: " + game.AwayTeamName + awayTeamRank + " (" + str(teamMap[game.AwayTeamID].Wins) + "-" + str(teamMap[game.AwayTeamID].Losses) + ")"# + " | " + str(-1 * game.PointSpread)
             else:
                 if week == "1":
                     home_details = "HOME: " + game.HomeTeamName + homeTeamRank +  " (0 - 0)"

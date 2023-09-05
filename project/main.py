@@ -41,6 +41,18 @@ def getAllLeagueKeys():
         leagueKeys.append(league.leagueKey)
     return leagueKeys
 
+@main.route('/sportsRadar/apikeys')
+def sportsRadarApiKeys():
+    return json.dumps(os.environ['SPORTS_RADAR_API_KEY'].split(','))
+
+@main.route('/sportsData/apikeys')
+def sportsDataApiKeys():
+    return json.dumps(os.environ['SPORTS_DATA_API_KEY'].split(','))
+
+@main.route('/cfbData/apikeys')
+def cfbDataApiKeys():
+    return json.dumps(os.environ['CFB_DATA_API_KEY'].split(','))
+
 @main.route('/setLeagueKey/<passedLeagueKey>')
 @login_required
 def setLeagueKey(passedLeagueKey):

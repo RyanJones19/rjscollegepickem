@@ -155,6 +155,7 @@ var teamLogos = {
   SUTAH: "/static/images/SUTAH.jpg",
   HOWRD: "/static/images/HOWRD.jpg",
   MSRST: "/static/images/MSRST.jpg",
+  TXST: "/static/images/TXST.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -370,6 +371,7 @@ var espnTeamLinkDict = {
   HOWRD: "https://www.espn.com/college-football/team/_/id/47/howard-bison",
   MSRST:
     "https://www.espn.com/college-football/team/_/id/2623/missouri-state-bears",
+  TXST: "https://www.espn.com/college-football/team/_/id/326/texas-state-bobcats",
 };
 
 // Go through all dropdowns and update the option text for a selected value
