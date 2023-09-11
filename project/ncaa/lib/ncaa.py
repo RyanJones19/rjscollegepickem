@@ -88,11 +88,33 @@ class NCAAAPI(BaseClient):
                 away_game_spread_normalized = self.normalize_string(gameSpread.awayTeam)
                 away_team_normalized = self.normalize_string(game.AwayTeamName)
 
+                # handle NC state data mismatch
+                if home_team_normalized == "north carolina state wolfpack":
+                    home_team_normalized = "nc state"
+                if away_team_normalized == "north carolina state wolfpack":
+                    away_team_normalized = "nc state"
+
+                # handle uconn data mismatch
+                if home_team_normalized == "uconn huskies":
+                    home_team_normalized = "connecticut"
+                if away_team_normalized == "uconn huskies":
+                    away_team_normalized = "connecticut"
+
+                # handle southern miss data mismatch
+                if home_team_normalized == "southern miss golden eagles":
+                    home_team_normalized = "southern mississippi"
+                if away_team_normalized == "southern miss golden eagles":
+                    away_team_normalized = "southern mississippi"
+
                 successfulConditional = False
                 if (home_team_normalized == "utsa roadrunners" and home_game_spread_normalized == "ut san antonio") or (away_team_normalized == "utsa roadrunners" and away_game_spread_normalized == "ut san antonio") or (home_team_normalized == "ul monroe warhawks" and home_game_spread_normalized == "louisiana monroe") or (away_team_normalized == "ul monroe warhawks" and away_game_spread_normalized == "louisiana monroe"):
                     successfulConditional = True
 
                 if (home_game_spread_normalized == "tennessee" and away_team_normalized == "tennessee volunteers") and (away_game_spread_normalized == "virginia" and home_team_normalized == "virginia cavaliers"):
+                    successfulConditional = True
+
+                # For neutral sites sometimes the home/away are flipped
+                if ((home_game_spread_normalized in away_team_normalized) and (away_game_spread_normalized in home_team_normalized)) or ((home_team_normalized in away_game_spread_normalized) and (away_team_normalized in home_game_spread_normalized)):
                     successfulConditional = True
 
                 if ((home_game_spread_normalized in home_team_normalized) and (away_game_spread_normalized in away_team_normalized)) or ((home_team_normalized in home_game_spread_normalized) and (away_team_normalized in away_game_spread_normalized)) or successfulConditional:
@@ -136,6 +158,12 @@ class NCAAAPI(BaseClient):
                     home_team_score_normalized = "hawaii rainbow warriors"
                 if away_team_score_normalized == "hawaii warriors":
                     away_team_score_normalized = "hawaii rainbow warriors"
+
+                # handle uconn data mismatch
+                if home_team_score_normalized == "uconn huskies":
+                    home_team_score_normalized = "connecticut"
+                if away_team_score_normalized == "uconn huskies":
+                    away_team_score_normalized = "connecticut"
 
                 if ((home_team_score_normalized in home_team_normalized) and (away_team_score_normalized in away_team_normalized)) or ((home_team_normalized in home_team_score_normalized) and (away_team_normalized in away_team_score_normalized)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and ((d1 == d2) or (d11 == d2))):
                 #if ((correctScore.home.name in game.HomeTeamName or game.HomeTeamName in correctScore.home.name) and (correctScore.away.name in game.AwayTeamName or game.AwayTeamName in correctScore.away.name)) or (correctScore.venue.name is not None and (correctScore.venue.name in game.Stadium.Name or game.Stadium.Name in correctScore.venue.name) and correctScore.venue.city == game.Stadium.City and ((d1 == d2) or (d11 == d2))):

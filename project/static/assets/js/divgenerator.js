@@ -156,6 +156,12 @@ var teamLogos = {
   HOWRD: "/static/images/HOWRD.jpg",
   MSRST: "/static/images/MSRST.jpg",
   TXST: "/static/images/TXST.jpg",
+  NMX: "/static/images/NMX.jpg",
+  WEBST: "/static/images/WEBST.jpg",
+  IDAHO: "/static/images/IDAHO.jpg",
+  NCC: "/static/images/NCC.jpg",
+  NCOL: "/static/images/NCOL.jpg",
+  SACST: "/static/images/SACST.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -372,6 +378,12 @@ var espnTeamLinkDict = {
   MSRST:
     "https://www.espn.com/college-football/team/_/id/2623/missouri-state-bears",
   TXST: "https://www.espn.com/college-football/team/_/id/326/texas-state-bobcats",
+  NMX: "https://www.espn.com/college-football/team/_/id/167/new-mexico-lobos",
+  WEBST: "https://www.espn.com/college-football/team/_/id/2692/weber-state-wildcats",
+  IDAHO: "https://www.espn.com/college-football/team/schedule/_/id/70/idaho-vandals",
+  NCC: "https://www.espn.com/college-football/team/_/id/2428/north-carolina-central-eagles",
+  NCOL: "https://www.espn.com/college-football/team/_/id/2458/northern-colorado-bears",
+  SACST: "https://www.espn.com/college-football/team/_/id/16/sacramento-state-hornets",
 };
 
 // Go through all dropdowns and update the option text for a selected value
