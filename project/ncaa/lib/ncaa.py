@@ -116,6 +116,11 @@ class NCAAAPI(BaseClient):
                 # For neutral sites sometimes the home/away are flipped
                 if ((home_game_spread_normalized in away_team_normalized) and (away_game_spread_normalized in home_team_normalized)) or ((home_team_normalized in away_game_spread_normalized) and (away_team_normalized in home_game_spread_normalized)):
                     successfulConditional = True
+                    correctHomeTeam = away_team_normalized
+                    correctAwayTeam = home_team_normalized
+
+                    home_team_normalized = correctHomeTeam
+                    away_team_normalized = correctAwayTeam
 
                 if ((home_game_spread_normalized in home_team_normalized) and (away_game_spread_normalized in away_team_normalized)) or ((home_team_normalized in home_game_spread_normalized) and (away_team_normalized in away_game_spread_normalized)) or successfulConditional:
                     try:
@@ -170,14 +175,14 @@ class NCAAAPI(BaseClient):
                     if correctScore.scoring is not None and correctScore.scoring.home_points is not None:
                         # sometimes the two APIs flip flop which teams are Home and Away (seems only neutral venues)
                         if(game.HomeTeamName == correctScore.away.name):
-                            home_team = game.HomeTeam + ": " + str(correctScore.scoring.away_points)
+                            home_team = game.AwayTeam + ": " + str(correctScore.scoring.home_points)
                         else:
                             home_team = game.HomeTeam + ": " + str(correctScore.scoring.home_points)
                     else:
                         home_team = game.HomeTeam + ": 0"
                     if correctScore.scoring is not None and correctScore.scoring.away_points is not None:
                         if(game.AwayTeamName == correctScore.home.name):
-                            away_team = game.AwayTeam + ": " + str(correctScore.scoring.home_points)
+                            away_team = game.HomeTeam + ": " + str(correctScore.scoring.home_points)
                         else:
                             away_team = game.AwayTeam + ": " + str(correctScore.scoring.away_points)
                     else:

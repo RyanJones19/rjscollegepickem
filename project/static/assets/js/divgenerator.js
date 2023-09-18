@@ -162,6 +162,7 @@ var teamLogos = {
   NCC: "/static/images/NCC.jpg",
   NCOL: "/static/images/NCOL.jpg",
   SACST: "/static/images/SACST.jpg",
+  GAS: "/static/images/GAS.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -384,6 +385,7 @@ var espnTeamLinkDict = {
   NCC: "https://www.espn.com/college-football/team/_/id/2428/north-carolina-central-eagles",
   NCOL: "https://www.espn.com/college-football/team/_/id/2458/northern-colorado-bears",
   SACST: "https://www.espn.com/college-football/team/_/id/16/sacramento-state-hornets",
+  GAS: "https://www.espn.com/college-football/team/_/id/290/georgia-southern-eagles",
 };
 
 // Go through all dropdowns and update the option text for a selected value
