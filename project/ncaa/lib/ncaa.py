@@ -176,13 +176,17 @@ class NCAAAPI(BaseClient):
                         # sometimes the two APIs flip flop which teams are Home and Away (seems only neutral venues)
                         if(game.HomeTeamName == correctScore.away.name):
                             home_team = game.AwayTeam + ": " + str(correctScore.scoring.home_points)
+                            home_team_name = game.AwayTeamName
+                            away_team_name = game.HomeTeamName
+                            game.HomeTeamName = home_team_name
                         else:
                             home_team = game.HomeTeam + ": " + str(correctScore.scoring.home_points)
                     else:
                         home_team = game.HomeTeam + ": 0"
                     if correctScore.scoring is not None and correctScore.scoring.away_points is not None:
                         if(game.AwayTeamName == correctScore.home.name):
-                            away_team = game.HomeTeam + ": " + str(correctScore.scoring.home_points)
+                            away_team = game.HomeTeam + ": " + str(correctScore.scoring.away_points)
+                            game.AwayTeamName = away_team_name
                         else:
                             away_team = game.AwayTeam + ": " + str(correctScore.scoring.away_points)
                     else:
