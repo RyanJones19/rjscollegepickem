@@ -276,4 +276,3 @@ class NCAAAPI(BaseClient):
         apiWeek = str(json.loads(response.text)['ApiWeek'])
         return apiWeek
 
-
