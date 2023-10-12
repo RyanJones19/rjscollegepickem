@@ -106,6 +106,11 @@ class NCAAAPI(BaseClient):
                 if away_team_normalized == "southern miss golden eagles":
                     away_team_normalized = "southern mississippi"
 
+                if home_team_normalized == "miami hurricanes":
+                    home_team_normalized = "miami (fl) hurricanes"
+                if away_team_normalized == "miami hurricanes":
+                    away_team_normalized = "miami (fl) hurricanes"
+
                 successfulConditional = False
                 if (home_team_normalized == "utsa roadrunners" and home_game_spread_normalized == "ut san antonio") or (away_team_normalized == "utsa roadrunners" and away_game_spread_normalized == "ut san antonio") or (home_team_normalized == "ul monroe warhawks" and home_game_spread_normalized == "louisiana monroe") or (away_team_normalized == "ul monroe warhawks" and away_game_spread_normalized == "louisiana monroe"):
                     successfulConditional = True
