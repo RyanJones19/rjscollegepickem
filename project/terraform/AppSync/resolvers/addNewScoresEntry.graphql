@@ -1,0 +1,18 @@
+# REQUEST
+{
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "sql": "INSERT INTO scores (id, week1picks, week1score, week2picks, week2score, week3picks, week3score, week4picks, week4score, week5picks, week5score, week6picks, week6score, week7picks, week7score, week8picks, week8score, week9picks, week9score, week10picks, week10score, week11picks, week11score, week12picks, week12score, week13picks, week13score, year, leagueKey) VALUES (:id, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, '', 0, :year, :leagueKey)",
+    "variableMapping": {
+      ":id": "$context.args.id",
+      ":leagueKey": "$context.args.leagueKey",
+      ":year": "$context.args.year"
+    },
+    "responseSQL": "SELECT * FROM scores WHERE leagueKey = :leagueKey AND year = :year AND id = :id"
+  }
+}
+
+# RESPONSE
+
+$util.toJson($context.result[0])
