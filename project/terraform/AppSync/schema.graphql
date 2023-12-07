@@ -1,0 +1,99 @@
+type adminselections {
+	year: Int
+	week1: String
+	week2: String
+	week3: String
+	week4: String
+	week5: String
+	week6: String
+	week7: String
+	week8: String
+	week9: String
+	week10: String
+	week11: String
+	week12: String
+	week13: String
+	leagueKey: String
+}
+
+type user {
+	id: Int
+	email: String
+	name: String
+	password: String
+	admin: Int
+	phonenumber: String
+	passwordNormal: String
+}
+
+type userscore {
+	id: Int
+	week1picks: String
+	week1score: Int
+	week2picks: String
+	week2score: Int
+	week3picks: String
+	week3score: Int
+	week4picks: String
+	week4score: Int
+	week5picks: String
+	week5score: Int
+	week6picks: String
+	week6score: Int
+	week7picks: String
+	week7score: Int
+	week8picks: String
+	week8score: Int
+	week9picks: String
+	week9score: Int
+	week10picks: String
+	week10score: Int
+	week11picks: String
+	week11score: Int
+	week12picks: String
+	week12score: Int
+	week13picks: String
+	week13score: Int
+	year: Int
+	leagueKey: String
+}
+
+type yearModel {
+	year: Int
+}
+
+type Mutation {
+	updateUser(id: Int!, phonenumber: String!): user
+	updateScore(
+		id: Int!,
+		year: Int!,
+		updateField: String!,
+		updateValue: String!,
+		leagueKey: String!
+	): userscore
+	updateScoreTwo(
+		id: Int!,
+		year: Int!,
+		updateField: String!,
+		updateValue: Int!,
+		leagueKey: String!
+	): userscore
+	addNewAdminSelection(leagueKey: String!, year: Int!): adminselections
+	addNewScoresEntry(id: Int!, leagueKey: String!, year: Int!): userscore
+}
+
+type Query {
+	getUser(id: Int!): user
+	getUserByEmail(email: String!): user
+	getUserScores(id: Int!, leagueKey: String!): userscore
+	getAdminSelections(year: Int!, leagueKey: String!): adminselections
+	getAllUserScores(year: Int!, leagueKey: String!): [userscore]
+	getManyUsers(ids: [Int!]!): [user]
+	getLeaguesByUser(id: Int!): [String]
+	getLeagues(leagueKey: String!): yearModel
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}
