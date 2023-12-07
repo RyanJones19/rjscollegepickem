@@ -1,0 +1,16 @@
+# REQUEST
+
+{
+    "version" : "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+      "sql":"SELECT leagueKey FROM scores WHERE id = :id",
+      "variableMapping": {
+        ":id" : "$context.arguments.id"
+      }
+    }
+}
+
+# RESPONSE
+
+$util.toJson($context.result)
