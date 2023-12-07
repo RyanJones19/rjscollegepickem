@@ -1,0 +1,15 @@
+# REQUEST
+{
+    "version" : "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+      "sql":"SELECT * FROM user WHERE email = :email",
+      "variableMapping": {
+        ":email" : "$context.arguments.email"
+      }
+    }
+}
+
+# RESPONSE
+
+$util.toJson($context.result[0])
