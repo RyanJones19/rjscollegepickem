@@ -1,0 +1,21 @@
+# REQUEST
+
+{
+  "version": "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "sql": "UPDATE scores SET $context.arguments.updateField = :updateValue WHERE id = :id AND year = :year AND leagueKey = :leagueKey",
+    "variableMapping": {
+      ":id": "$context.arguments.id",
+      ":year": "$context.arguments.year",
+      ":updateValue": "$context.arguments.updateValue",
+      ":leagueKey": "$context.args.leagueKey"
+    },
+    "responseSQL": "SELECT * FROM scores WHERE id = :id AND year = :year AND leagueKey = :leagueKey"
+  }
+}
+
+
+# RESPONSE 
+
+$util.toJson($context.result[0])
