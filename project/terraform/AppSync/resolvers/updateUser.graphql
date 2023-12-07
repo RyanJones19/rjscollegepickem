@@ -1,0 +1,18 @@
+# REQUEST
+
+{
+    "version" : "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+      "sql":"UPDATE user SET phonenumber = :phonenumber WHERE id = :id",
+      "variableMapping": {
+        ":id" : "$context.arguments.id",
+        ":phonenumber": "$context.arguments.phonenumber"
+      },
+      "responseSQL": "SELECT * FROM user WHERE id = :id"
+    }
+}
+
+# RESPONSE
+
+$util.toJson($context.result[0])
