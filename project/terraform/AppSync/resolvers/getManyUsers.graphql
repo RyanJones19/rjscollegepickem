@@ -1,0 +1,24 @@
+# REQUEST
+
+#set($commaSeparatedIds = "")
+#foreach($id in $ctx.args.ids)
+    #if($commaSeparatedIds.length() > 0)
+        #set($commaSeparatedIds = "${commaSeparatedIds},${id}")
+    #else
+        #set($commaSeparatedIds = "${id}")
+    #end
+#end
+
+{
+    "version": "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+        "sql": "SELECT * FROM user WHERE id IN ($commaSeparatedIds)",
+        "variableMapping": {}
+    }
+}
+
+
+# RESPONSE
+
+$util.toJson($context.result)
