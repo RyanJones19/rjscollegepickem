@@ -14,7 +14,7 @@ import structlog
 import urllib3.util.retry
 
 NCAA_HOST_ONE = "https://api.sportsdata.io/v3"
-NCAA_HOST_TWO = "https://api.sportradar.us/ncaafb/trial/v7/en/games"
+NCAA_HOST_TWO = "https://api.sportradar.com/ncaafb/trial/v7/en/games"
 
 class BaseClient(requests.Session):
     REQUEST_RETRIES = 5

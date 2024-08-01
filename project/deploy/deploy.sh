@@ -41,4 +41,4 @@ rm -rf ./terraformplan.out
 rm -rf ./providers.tf
 
 # uncomment deploy to destroy the resources
-#terraform destroy -var-file=../environment/vars.tfvars -auto-approve -lock=true
+# terraform destroy -var-file=../environment/vars.tfvars -auto-approve -lock=true

@@ -64,7 +64,7 @@ class NCAAAPI(BaseClient):
 
         #sportsDataAPIKey = os.environ['SPORTS_RADAR_API_KEY']
 
-        correctScoresResponse = requests.get(f"https://api.sportradar.us/ncaafb/trial/v7/en/games/{year}/REG/{week}/schedule.json?api_key={random_sports_radar_api_key}")
+        correctScoresResponse = requests.get(f"https://api.sportradar.com/ncaafb/trial/v7/en/games/{year}/REG/{week}/schedule.json?api_key={random_sports_radar_api_key}")
         correctScores = pydantic.parse_obj_as(CorrectScoresResponseModel, correctScoresResponse.json())
 
         for team in teamdata.__root__:

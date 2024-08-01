@@ -9,9 +9,9 @@ vpc_cidr               = "172.31.0.0/16"
 domain_name            = "rjspickem.com"
 
 # Dockerhub details
-dockerhub_username     = "your_dockerhub_username"
-dockerhub_password     = "your_dockerhub_password"
-container_name         = "rjscollegepickem"
-container_tag          = "45"
+dockerhub_username     = "ryanaj9393"
+dockerhub_password     = "31011223RyTyDi!?"
+container_name         = "rjspickem"
+container_tag          = "2024-4"
 
 
