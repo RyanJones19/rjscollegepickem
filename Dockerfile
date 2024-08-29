@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM --platform=linux/amd64 python:3.7
 
 ENV DB_USER='YOUR_DB_USER' \
     DB_PASSWORD='YOUR_DB_PASSWORD' \
