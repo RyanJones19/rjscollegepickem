@@ -12,6 +12,6 @@ domain_name            = "rjspickem.com"
 dockerhub_username     = "YOUR_USERNAME"
 dockerhub_password     = "YOUR_PASSWORD"
 container_name         = "rjspickem"
-container_tag          = "2024-6"
+container_tag          = "2024-7"
 
 
