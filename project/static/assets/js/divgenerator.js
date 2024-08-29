@@ -163,6 +163,23 @@ var teamLogos = {
   NCOL: "/static/images/NCOL.jpg",
   SACST: "/static/images/SACST.jpg",
   GAS: "/static/images/GAS.jpg",
+  MONST: "/static/images/MONST.jpg",
+  DELST: "/static/images/DELST.jpg",
+  NHAMP: "/static/images/NHAMP.jpg",
+  WCAR: "/static/images/WCAR.jpg",
+  JACKST: "/static/images/JACKST.jpg",
+  FORDM: "/static/images/FORDM.jpg",
+  LAFAY: "/static/images/LAFAY.jpg",
+  CENCON: "/static/images/CENCON.jpg",
+  DUQ: "/static/images/DUQ.jpg",
+  MURST: "/static/images/MURST.jpg",
+  NDKST: "/static/images/NDKST.jpg",
+  JAC: "/static/images/JAC.jpg",
+  NWST: "/static/images/NWST.jpg",
+  SELOU: "/static/images/SELOU.jpg",
+  ALCST: "/static/images/ALCST.jpg",
+  EILL: "/static/images/EILL.jpg",
+  KENEST: "/static/images/KENEST.jpg",
 };
 
 var espnTeamLinkDict = {
@@ -380,12 +397,43 @@ var espnTeamLinkDict = {
     "https://www.espn.com/college-football/team/_/id/2623/missouri-state-bears",
   TXST: "https://www.espn.com/college-football/team/_/id/326/texas-state-bobcats",
   NMX: "https://www.espn.com/college-football/team/_/id/167/new-mexico-lobos",
-  WEBST: "https://www.espn.com/college-football/team/_/id/2692/weber-state-wildcats",
-  IDAHO: "https://www.espn.com/college-football/team/schedule/_/id/70/idaho-vandals",
+  WEBST:
+    "https://www.espn.com/college-football/team/_/id/2692/weber-state-wildcats",
+  IDAHO:
+    "https://www.espn.com/college-football/team/schedule/_/id/70/idaho-vandals",
   NCC: "https://www.espn.com/college-football/team/_/id/2428/north-carolina-central-eagles",
   NCOL: "https://www.espn.com/college-football/team/_/id/2458/northern-colorado-bears",
-  SACST: "https://www.espn.com/college-football/team/_/id/16/sacramento-state-hornets",
+  SACST:
+    "https://www.espn.com/college-football/team/_/id/16/sacramento-state-hornets",
   GAS: "https://www.espn.com/college-football/team/_/id/290/georgia-southern-eagles",
+  MONST:
+    "https://www.espn.com/college-football/team/_/id/147/montana-state-bobcats",
+  DELST:
+    "https://www.espn.com/college-football/team/_/id/2169/delaware-state-hornets",
+  NHAMP:
+    "https://www.espn.com/college-football/team/_/id/160/new-hampshire-wildcats",
+  WCAR: "https://www.espn.com/college-football/team/_/id/2717/western-carolina-catamounts",
+  JACKST:
+    "https://www.espn.com/college-football/team/_/id/2296/jackson-state-tigers",
+  FORDM: "https://www.espn.com/college-football/team/_/id/2230/fordham-rams",
+  LAFAY:
+    "https://www.espn.com/college-football/team/_/id/322/lafayette-leopards",
+  CENCON:
+    "https://www.espn.com/college-football/team/_/id/2115/central-connecticut-blue-devils",
+  DUQ: "https://www.espn.com/college-football/team/_/id/2184/duquesne-dukes",
+  MURST:
+    "https://www.espn.com/college-football/team/_/id/93/murray-state-racers",
+  NDKST:
+    "https://www.espn.com/college-football/team/_/id/2449/north-dakota-state-bison",
+  JAC: "https://www.espn.com/college-football/team/_/id/2815/lindenwood-lions",
+  NWST: "https://www.espn.com/college-football/team/_/id/2466/northwestern-state-demons",
+  SELOU:
+    "https://www.espn.com/college-football/team/_/id/2545/se-louisiana-lions",
+  ALCST:
+    "https://www.espn.com/college-football/team/schedule/_/id/2016/alcorn-state-braves",
+  EILL: "https://www.espn.com/college-football/team/_/id/2197/eastern-illinois-panthers",
+  KENEST:
+    "https://www.espn.com/college-football/team/_/id/338/kennesaw-state-owls",
 };
 
 // Go through all dropdowns and update the option text for a selected value

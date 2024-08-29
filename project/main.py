@@ -14,7 +14,7 @@ main = Blueprint('main', __name__)
 ncaa_api_client = NCAAAPI()
 
 week = ncaa_api_client.get_current_week()
-year = 2023
+year = 2024
 totalWeeks=13
 
 @main.route('/')
@@ -64,14 +64,14 @@ def setLeagueKey(passedLeagueKey):
 @login_required
 def joinLeague(leagueKey):
     if leagueKey in getAllLeagueKeys():
-        new_league_score = Scores(id=current_user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023, leagueKey=leagueKey)
+        new_league_score = Scores(id=current_user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=year, leagueKey=leagueKey)
         db.session.add(new_league_score)
         db.session.commit()
         return redirect(url_for('main.index'))
     else:
         try:
-            new_admin_selections = Adminselections(week1="", week2="", week3="", week4="", week5="", week6="", week7="", week8="", week9="", week10="", week11="", week12="", week13="", year=2023, leagueKey=leagueKey)
-            new_league_score = Scores(id=current_user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=2023, leagueKey=leagueKey)
+            new_admin_selections = Adminselections(week1="", week2="", week3="", week4="", week5="", week6="", week7="", week8="", week9="", week10="", week11="", week12="", week13="", year=year, leagueKey=leagueKey)
+            new_league_score = Scores(id=current_user.id, week1picks="", week1score=0, week2picks="", week2score=0, week3picks="", week3score=0, week4picks="", week4score=0, week5picks="", week5score=0, week6picks="", week6score=0, week7picks="", week7score=0, week8picks="", week8score=0, week9picks="", week9score=0, week10picks="", week10score=0, week11picks="", week11score=0, week12picks="", week12score=0, week13picks="", week13score=0, year=year, leagueKey=leagueKey)
             db.session.add(new_admin_selections)
             db.session.add(new_league_score)
             db.session.commit()
@@ -95,7 +95,12 @@ def admin(week):
     if current_user.admin == 0:
         return render_template('failedadmin.html', name=current_user.name)
     else:
-        data =  getattr(Adminselections.query.filter_by(year=year, leagueKey=leagueKey).first(), "week" + week).split(',')
+        data = getattr(Adminselections.query.filter_by(year=year, leagueKey=leagueKey).first(), "week" + week)#.split(',')
+        if data is not None:
+            data = data.split(',')
+        else:
+            data = []
+        games = [game for game in games if game['kickoff'] is not None]
         sortedGames = sorted(games, key=lambda x: x['kickoff'])
         sorted_selected_games = []
         if len(data) > 0:
